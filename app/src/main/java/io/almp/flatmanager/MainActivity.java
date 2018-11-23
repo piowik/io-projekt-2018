@@ -1,5 +1,6 @@
 package io.almp.flatmanager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -18,6 +19,9 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private LinearLayout chatLayout;
+    private LinearLayout dutiesLayout;
+    private LinearLayout rentLayout;
+    private LinearLayout shoppingLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,22 +29,39 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
        // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
     //    setSupportActionBar(toolbar);
-
-
-
       //  DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
      //   ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
      //           this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
      //   drawer.addDrawerListener(toggle);
      //<   toggle.syncState();
 
+
+
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         chatLayout = findViewById(R.id.chat);
-        chatLayout.setOnClickListener(v->{
-            Toast.makeText(this,"Chat", Toast.LENGTH_LONG).show();
+        dutiesLayout = findViewById(R.id.duties);
+        rentLayout = findViewById(R.id.rent);
+        shoppingLayout = findViewById(R.id.shopping);
 
+        chatLayout.setOnClickListener(v->{
+            Intent intent = new Intent(this, ChatActivity.class);
+            startActivity(intent);
         });
+        dutiesLayout.setOnClickListener(v->{
+            Intent intent = new Intent(this, DutiesActivity.class);
+            startActivity(intent);
+        });
+
+        rentLayout.setOnClickListener(v->{
+            Intent intent = new Intent(this, RentActivity.class);
+            startActivity(intent);
+        });
+        shoppingLayout.setOnClickListener(v->{
+            Intent intent = new Intent(this, ShoppingActivity.class);
+            startActivity(intent);
+        });
+
 
     }
 

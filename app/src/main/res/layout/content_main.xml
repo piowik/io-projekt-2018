@@ -26,6 +26,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
                 <ImageView
+                    android:contentDescription="@string/action_settings"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:src="@mipmap/ic_launcher"
@@ -82,8 +83,10 @@
             android:background="@android:color/white"
             android:padding="0dp"
             android:clickable="true"
+            android:focusable="true"
             android:id="@+id/chat">
             <ImageView
+                android:contentDescription="@string/chat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_chat_black_128dp"
@@ -119,8 +122,10 @@
             android:background="@android:color/white"
             android:padding="0dp"
             android:clickable="true"
+            android:focusable="true"
             android:id="@+id/rent">
             <ImageView
+                android:contentDescription="@string/rent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_attach_money_black_24dp"
@@ -155,8 +160,10 @@
             android:background="@android:color/white"
             android:padding="0dp"
             android:clickable="true"
+            android:focusable="true"
             android:id="@+id/shopping">
             <ImageView
+                android:contentDescription="@string/shopping"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_shopping_cart_black_24dp"
@@ -191,11 +198,13 @@
             android:background="@android:color/white"
             android:padding="0dp"
             android:clickable="true"
+            android:focusable="true"
             android:id="@+id/duties">
             <ImageView
+                android:contentDescription="@string/duties"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_kitchen_black_24dp"
+                android:src="@drawable/swipe"
                 android:layout_weight="2"
                 />
             <TextView
