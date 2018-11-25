@@ -20,5 +20,6 @@
     <string name="last_name">Last name</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="write_a_message">Napisz wiadomość...</string>
 
 </resources>
