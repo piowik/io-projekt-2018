@@ -84,6 +84,8 @@ public class ShoppingMainFragment extends Fragment {
         BalancesAdapter balancesAdapter = new BalancesAdapter(this.getActivity(), userBalancesList);
         mUserBalances.setAdapter(balancesAdapter);
 
+        //TODO adapter for recent shopping history
+
         return rootView;
     }
 

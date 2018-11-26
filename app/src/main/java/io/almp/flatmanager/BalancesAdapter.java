@@ -51,7 +51,11 @@ public class BalancesAdapter extends BaseAdapter {
         TextView userNameTextView = convertView.findViewById(R.id.user_name_text_view);
         userNameTextView.setText(mUserBalances.get(position).getUserName());
         TextView userBalanceTextView = convertView.findViewById(R.id.user_balance_text_view);
-        userBalanceTextView.setText(String.valueOf(mUserBalances.get(position).getBalance()));
+        double balance = mUserBalances.get(position).getBalance();
+        userBalanceTextView.setText(String.valueOf(balance));
+        if(balance >= 0){
+            userBalanceTextView.setTextColor(convertView.getResources().getColor(R.color.green));
+        } else userBalanceTextView.setTextColor(convertView.getResources().getColor(R.color.red));
 
         return convertView;
     }

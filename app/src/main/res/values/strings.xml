@@ -21,5 +21,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="write_a_message">Napisz wiadomość...</string>
+    <string name="add_item">Add item</string>
+    <string name="actual_balance">Actual balance</string>
+    <string name="recent_shopping_items">Recent history</string>
 
 </resources>
