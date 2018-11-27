@@ -5,17 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="10dp"
-    android:layout_margin="20dp">
+    android:padding="5dp"
+    android:layout_margin="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
         android:id="@+id/shopping_history_element_layout">
         <TextView
             android:id="@+id/s_item_name_text_view"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_gravity="top|start"
             android:layout_margin="5dp"
@@ -23,17 +26,21 @@
             />
         <TextView
             android:id="@+id/s_price_text_view"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:textSize="18sp"
+            android:textAlignment="center"
             />
         <TextView
             android:id="@+id/s_buyer_text_view"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:textSize="18sp"
+            android:textAlignment="viewEnd"
             />
     </LinearLayout>
 </LinearLayout>

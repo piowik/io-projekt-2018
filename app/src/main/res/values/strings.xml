@@ -24,5 +24,7 @@
     <string name="add_item">Add item</string>
     <string name="actual_balance">Actual balance</string>
     <string name="recent_shopping_items">Recent history</string>
-
+    <string name="price">Price</string>
+    <string name="item_name">Item name</string>
+    <string name="buyer">Buyer</string>
 </resources>

@@ -2,6 +2,7 @@ package io.almp.flatmanager.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +53,7 @@ public class BalancesAdapter extends BaseAdapter {
 
         TextView userNameTextView = convertView.findViewById(R.id.user_name_text_view);
         userNameTextView.setText(mUserBalances.get(position).getUserName());
+        userNameTextView.setTextColor(convertView.getResources().getColor(R.color.black));
         TextView userBalanceTextView = convertView.findViewById(R.id.user_balance_text_view);
         double balance = mUserBalances.get(position).getBalance();
         if(balance >= 0){

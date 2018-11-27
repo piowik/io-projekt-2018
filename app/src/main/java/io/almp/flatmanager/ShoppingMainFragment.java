@@ -2,10 +2,13 @@ package io.almp.flatmanager;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.LinkedList;
@@ -33,6 +36,7 @@ public class ShoppingMainFragment extends Fragment {
     private ListView mShoppingHistories;
     private List<UserBalance> userBalancesList;
     private List<ShoppingHistoryEntity> shoppingHistoryEntitiesList;
+    private FloatingActionButton addShoppingItemButton;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -100,6 +104,14 @@ public class ShoppingMainFragment extends Fragment {
         mShoppingHistories = rootView.findViewById(R.id.shopping_history_list_view);
         ShoppingHistoryAdapter shoppingAdapter = new ShoppingHistoryAdapter(this.getActivity(), shoppingHistoryEntitiesList);
         mShoppingHistories.setAdapter(shoppingAdapter);
+
+        addShoppingItemButton = rootView.findViewById(R.id.add_shopping_item_button);
+        addShoppingItemButton.setOnClickListener(v->{
+            AddShoppingItemFragment addShoppingItemFragment = new AddShoppingItemFragment();
+            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.shopping_fragment_container, addShoppingItemFragment);
+            fragmentTransaction.commit();
+        });
 
 
         return rootView;
