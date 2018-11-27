@@ -24,5 +24,8 @@
     <string name="add_item">Add item</string>
     <string name="actual_balance">Actual balance</string>
     <string name="recent_shopping_items">Recent history</string>
+    <string name="Kanal">channel_name</string>
+    <string name="channel_name">Kanal</string>
+    <string name="channel_description">Opis</string>
 
 </resources>
