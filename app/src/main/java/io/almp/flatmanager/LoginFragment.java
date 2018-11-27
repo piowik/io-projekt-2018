@@ -87,6 +87,8 @@ public class LoginFragment extends Fragment {
         signIn = rootView.findViewById(R.id.sign_in);
         signIn.setOnClickListener(v->{
             //TODO everything to login
+            Intent mainActivityIntent = new Intent(getContext(), MainActivity.class);
+            startActivity(mainActivityIntent);
         });
         return rootView;
     }
