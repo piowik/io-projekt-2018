@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/balances_list_item_layout"
+    android:id="@+id/shopping_history_list_item_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -12,11 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:id="@+id/balances_element_layout"
-        android:paddingEnd="20dp"
-        android:paddingStart="20dp">
+        android:id="@+id/shopping_history_element_layout">
         <TextView
-            android:id="@+id/user_name_text_view"
+            android:id="@+id/s_item_name_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="top|start"
@@ -24,13 +22,18 @@
             android:textSize="18sp"
             />
         <TextView
-            android:id="@+id/user_balance_text_view"
-            android:layout_width="match_parent"
+            android:id="@+id/s_price_text_view"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAlignment="viewEnd"
             android:layout_margin="5dp"
             android:textSize="18sp"
             />
-
+        <TextView
+            android:id="@+id/s_buyer_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:textSize="18sp"
+            />
     </LinearLayout>
 </LinearLayout>

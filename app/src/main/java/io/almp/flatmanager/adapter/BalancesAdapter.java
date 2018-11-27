@@ -1,8 +1,7 @@
-package io.almp.flatmanager;
+package io.almp.flatmanager.adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +9,9 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.List;
+
+import io.almp.flatmanager.R;
+import io.almp.flatmanager.model.UserBalance;
 
 public class BalancesAdapter extends BaseAdapter {
     private Activity mActivity;
@@ -52,10 +54,13 @@ public class BalancesAdapter extends BaseAdapter {
         userNameTextView.setText(mUserBalances.get(position).getUserName());
         TextView userBalanceTextView = convertView.findViewById(R.id.user_balance_text_view);
         double balance = mUserBalances.get(position).getBalance();
-        userBalanceTextView.setText(String.valueOf(balance));
         if(balance >= 0){
+            userBalanceTextView.setText(new StringBuilder().append("+").append(String.valueOf(balance)).toString());
             userBalanceTextView.setTextColor(convertView.getResources().getColor(R.color.green));
-        } else userBalanceTextView.setTextColor(convertView.getResources().getColor(R.color.red));
+        } else {
+            userBalanceTextView.setText(String.valueOf(balance));
+            userBalanceTextView.setTextColor(convertView.getResources().getColor(R.color.red));
+        }
 
         return convertView;
     }

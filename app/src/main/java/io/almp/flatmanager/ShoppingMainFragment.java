@@ -1,17 +1,20 @@
 package io.almp.flatmanager;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ListView;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import io.almp.flatmanager.adapter.BalancesAdapter;
+import io.almp.flatmanager.adapter.ShoppingHistoryAdapter;
+import io.almp.flatmanager.model.ShoppingHistoryEntity;
+import io.almp.flatmanager.model.UserBalance;
 
 
 /**
@@ -27,7 +30,9 @@ public class ShoppingMainFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
     private ListView mUserBalances;
+    private ListView mShoppingHistories;
     private List<UserBalance> userBalancesList;
+    private List<ShoppingHistoryEntity> shoppingHistoryEntitiesList;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -78,13 +83,24 @@ public class ShoppingMainFragment extends Fragment {
         userBalancesList.add(new UserBalance("4", "Laura", -13.3));
 
         //TODO real data needed from server
+        shoppingHistoryEntitiesList = new LinkedList<>();
+        shoppingHistoryEntitiesList.add(new ShoppingHistoryEntity("mydło", 5.20, "Piotr"));
+        shoppingHistoryEntitiesList.add(new ShoppingHistoryEntity("mydło", 5.20, "Piotr"));
+        shoppingHistoryEntitiesList.add(new ShoppingHistoryEntity("mydło", 5.20, "Piotr"));
+        shoppingHistoryEntitiesList.add(new ShoppingHistoryEntity("mydło", 5.20, "Piotr"));
+        shoppingHistoryEntitiesList.add(new ShoppingHistoryEntity("mydło", 5.20, "Piotr"));
+        shoppingHistoryEntitiesList.add(new ShoppingHistoryEntity("mydło", 5.20, "Piotr"));
+        shoppingHistoryEntitiesList.add(new ShoppingHistoryEntity("mydło", 5.20, "Piotr"));
 
         View rootView = inflater.inflate(R.layout.fragment_shopping_main, container, false);
         mUserBalances = rootView.findViewById(R.id.all_flatmates_balances);
         BalancesAdapter balancesAdapter = new BalancesAdapter(this.getActivity(), userBalancesList);
         mUserBalances.setAdapter(balancesAdapter);
 
-        //TODO adapter for recent shopping history
+        mShoppingHistories = rootView.findViewById(R.id.shopping_history_list_view);
+        ShoppingHistoryAdapter shoppingAdapter = new ShoppingHistoryAdapter(this.getActivity(), shoppingHistoryEntitiesList);
+        mShoppingHistories.setAdapter(shoppingAdapter);
+
 
         return rootView;
     }

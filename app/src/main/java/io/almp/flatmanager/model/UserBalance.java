@@ -1,6 +1,6 @@
-package io.almp.flatmanager;
+package io.almp.flatmanager.model;
 
-class UserBalance {
+public class UserBalance {
     private String userId;
     private String userName;
     private double balance;
