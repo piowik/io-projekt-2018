@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -26,9 +26,24 @@
         <activity android:name=".RentActivity" />
         <activity android:name=".ShoppingActivity" />
         <activity android:name=".DutiesActivity" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".MainActivity">
 
         </activity>
+        <service
+            android:name=".service.FirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <meta-data
+            android:name="firebase_messaging_auto_init_enabled"
+            android:value="false" />
+        <meta-data
+            android:name="firebase_analytics_collection_enabled"
+            android:value="false" />
+
     </application>
+
+
 
 </manifest>

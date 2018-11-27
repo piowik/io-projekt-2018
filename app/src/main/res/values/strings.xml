@@ -27,4 +27,8 @@
     <string name="price">Price</string>
     <string name="item_name">Item name</string>
     <string name="buyer">Buyer</string>
+    <string name="Kanal">channel_name</string>
+    <string name="channel_name">Kanal</string>
+    <string name="channel_description">Opis</string>
+
 </resources>
