@@ -3,6 +3,7 @@ package io.almp.flatmanager.service;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
@@ -31,8 +32,9 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
     @Override
     public void onNewToken(String token) {
-        Log.d(TAG, "Refreshed token: " + token);
-
+        super.onNewToken(token);
+        Log.e("newToken", token);
+        getSharedPreferences("_", MODE_PRIVATE).edit().putString("fb", token).apply();
         // If you want to send messages to this application instance or
         // manage this apps subscriptions on the server side, send the
         // Instance ID token to your app server.
@@ -75,6 +77,10 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
+    }
+
+    public static String getToken(Context context) {
+        return context.getSharedPreferences("_", MODE_PRIVATE).getString("fb", "empty");
     }
 
 }

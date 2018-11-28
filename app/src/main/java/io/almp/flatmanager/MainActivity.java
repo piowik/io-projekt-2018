@@ -2,19 +2,13 @@ package io.almp.flatmanager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.google.firebase.messaging.FirebaseMessaging;
 
@@ -30,15 +24,13 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         FirebaseMessaging.getInstance().setAutoInitEnabled(true);
-       // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-    //    setSupportActionBar(toolbar);
-      //  DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-     //   ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-     //           this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-     //   drawer.addDrawerListener(toggle);
-     //<   toggle.syncState();
-
-
+        // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //    setSupportActionBar(toolbar);
+        //  DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        //   ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        //           this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        //   drawer.addDrawerListener(toggle);
+        //<   toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -47,20 +39,20 @@ public class MainActivity extends AppCompatActivity
         rentLayout = findViewById(R.id.rent);
         shoppingLayout = findViewById(R.id.shopping);
 
-        chatLayout.setOnClickListener(v->{
+        chatLayout.setOnClickListener(v -> {
             Intent intent = new Intent(this, ChatActivity.class);
             startActivity(intent);
         });
-        dutiesLayout.setOnClickListener(v->{
+        dutiesLayout.setOnClickListener(v -> {
             Intent intent = new Intent(this, DutiesActivity.class);
             startActivity(intent);
         });
 
-        rentLayout.setOnClickListener(v->{
+        rentLayout.setOnClickListener(v -> {
             Intent intent = new Intent(this, RentActivity.class);
             startActivity(intent);
         });
-        shoppingLayout.setOnClickListener(v->{
+        shoppingLayout.setOnClickListener(v -> {
             Intent intent = new Intent(this, ShoppingActivity.class);
             startActivity(intent);
         });
