@@ -22,7 +22,6 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import io.almp.flatmanager.ChatActivity;
 import io.almp.flatmanager.R;
 import io.almp.flatmanager.RentActivity;
 
@@ -41,7 +40,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
             String body = remoteMessage.getData().get("message");
             String imageUrl = remoteMessage.getData().get("image");
             if (!TextUtils.isEmpty(imageUrl)) {
-                Log.e("Image not empty","not");
+                Log.e("Image not empty", "not");
                 if (imageUrl != null && imageUrl.length() > 4 && Patterns.WEB_URL.matcher(imageUrl).matches()) {
                     Bitmap bitmap = getBitmapFromURL(imageUrl);
                     if (bitmap != null)
@@ -49,14 +48,11 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                     else
                         showNotification(title, body);
                 }
-            }
-            else
+            } else
                 showNotification(title, body);
-
             Log.e("DataTitle", title);
-
         }
-        if (remoteMessage.getNotification() != null) {
+        else if (remoteMessage.getNotification() != null) {
             Log.e("NotificationTitle", "T:" + remoteMessage.getNotification().getTitle());
             String title = remoteMessage.getNotification().getTitle();
             String body = remoteMessage.getNotification().getBody();

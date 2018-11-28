@@ -20,7 +20,7 @@ import android.widget.EditText;
  * create an instance of this fragment.
  */
 public class SignUpFragment extends Fragment {
-    private EditText email;
+    private EditText login;
     private EditText password;
     private OnFragmentInteractionListener mListener;
     private Button signUp;
@@ -60,8 +60,8 @@ public class SignUpFragment extends Fragment {
         String emailS = getArguments().getString("email");
         String passwordS = getArguments().getString("password");
         System.out.println(emailS + ", " + passwordS);
-        email = rootView.findViewById(R.id.email_2);
-        email.setText(emailS);
+        login = rootView.findViewById(R.id.login_2);
+        login.setText(emailS);
         password = rootView.findViewById(R.id.password_2);
         password.setText(passwordS);
 

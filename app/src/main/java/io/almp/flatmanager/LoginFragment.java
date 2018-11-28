@@ -1,17 +1,26 @@
 package io.almp.flatmanager;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import io.almp.flatmanager.model.api.LoginAnswer;
+import io.almp.flatmanager.rest.ApiInterface;
+import io.almp.flatmanager.rest.ApiUtils;
+import io.almp.flatmanager.service.FirebaseMessagingService;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -27,9 +36,10 @@ public class LoginFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private Button signUp;
     private Button signIn;
-    private TextView email;
+    private TextView login;
+    private int skipCounter = 0;
     private TextView password;
-
+    private ApiInterface mAPIService;
 
     private OnFragmentInteractionListener mListener;
 
@@ -62,13 +72,15 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_login, container, false);
-        email = rootView.findViewById(R.id.email);
+        mAPIService = ApiUtils.getAPIService();
+
+        login = rootView.findViewById(R.id.login);
         password = rootView.findViewById(R.id.password);
         signUp = rootView.findViewById(R.id.sign_up);
-        signUp.setOnClickListener(v->{
+        signUp.setOnClickListener(v -> {
             String emailS;
             String passwordS;
-            emailS = email.getText().toString();
+            emailS = login.getText().toString();
             passwordS = password.getText().toString();
 
             Bundle bundle = new Bundle();
@@ -85,10 +97,25 @@ public class LoginFragment extends Fragment {
 
         });
         signIn = rootView.findViewById(R.id.sign_in);
-        signIn.setOnClickListener(v->{
-            //TODO everything to login
-            Intent mainActivityIntent = new Intent(getContext(), MainActivity.class);
-            startActivity(mainActivityIntent);
+        signIn.setOnClickListener(v -> {
+            if (TextUtils.isEmpty(login.getText().toString()) || TextUtils.isEmpty(password.getText().toString())) {
+                if (skipCounter < 3) {
+                    Toast toast = Toast.makeText(getContext(), "Kliknij 3 razy", Toast.LENGTH_SHORT);
+                    toast.show();
+                    skipCounter++;
+                }
+                else {
+                    Intent intent = new Intent(getContext(), MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                }
+                return;
+            }
+            signIn.setEnabled(false);
+            String fbToken = FirebaseMessagingService.getToken(getContext());
+            sendPost(login.getText().toString(), password.getText().toString(),fbToken);
+//            Intent mainActivityIntent = new Intent(getContext(), MainActivity.class);
+//            startActivity(mainActivityIntent);
         });
         return rootView;
     }
@@ -98,6 +125,39 @@ public class LoginFragment extends Fragment {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
+    }
+
+    public void sendPost(String loginStr, String passwordStr, String fbTokenStr) {
+        mAPIService.loginData(loginStr, passwordStr, fbTokenStr).enqueue(new Callback<LoginAnswer>() {
+            @Override
+            public void onResponse(Call<LoginAnswer> call, Response<LoginAnswer> response) {
+                Log.e("RespMsg", response.message() + "!");
+                Log.e("RespBody", response.toString() + "!");
+                if (response.isSuccessful()) {
+                    if (!response.body().isError()) {
+                        Log.e("POST", "Post submitted to API");
+//                    SaveData(response.body().getId(),response.body().getToken());
+                        Intent intent = new Intent(getContext(), MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                    } else {
+                        Toast toast = Toast.makeText(getContext(), "Zly login lub haslo", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+                }
+                else {
+                    Toast toast = Toast.makeText(getContext(), "Chujwie", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+                signIn.setEnabled(true);
+            }
+
+            @Override
+            public void onFailure(Call<LoginAnswer> call, Throwable t) {
+                Log.e("POST", "Unable to submit post to API.");
+                signIn.setEnabled(true);
+            }
+        });
     }
 
 

@@ -31,5 +31,6 @@
     <string name="channel_name_rent">Czynsz</string>
     <string name="channel_rent_description">Powiadomienia o wysokości czynszu</string>
     <string name="channel_id_rent">CzynszChannel</string>
+    <string name="login">Login</string>
 
 </resources>
