@@ -32,6 +32,7 @@ public class RentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rent);
+        long uid = getSharedPreferences("_", MODE_PRIVATE).getLong("user_id", 0L);
         mApiInterface = ApiUtils.getAPIService();
         ArrayList<RentHistory> mRentHistoryList = new ArrayList<>();
         EditText rentValueEditText = findViewById(R.id.rentValueEditText);
@@ -40,7 +41,7 @@ public class RentActivity extends AppCompatActivity {
         sendRentButton.setOnClickListener(view -> {
             float rentValue = Float.valueOf(rentValueEditText.getText().toString());
             RentHistory newRentItem = new RentHistory("dzisiaj", rentValue);
-            sendPost(10, rentValue);
+            sendPost(uid,0, rentValue);
             mRentHistoryList.add(newRentItem);
             rentValueEditText.setText("");
             adapter.notifyDataSetChanged();
@@ -52,8 +53,8 @@ public class RentActivity extends AppCompatActivity {
 
     }
 
-    public void sendPost(int flat, float value) {
-        mApiInterface.rentData(flat, value).enqueue(new Callback<SimpleErrorAnswer>() {
+    public void sendPost(long uid, int flat, float value) {
+        mApiInterface.rentData(uid, flat, value).enqueue(new Callback<SimpleErrorAnswer>() {
             @Override
             public void onResponse(Call<SimpleErrorAnswer> call, Response<SimpleErrorAnswer> response) {
                 Log.e("RespMsg", response.message() + "!");

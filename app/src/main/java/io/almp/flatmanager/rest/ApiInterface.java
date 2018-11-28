@@ -17,6 +17,7 @@ public interface ApiInterface {
 
     @POST("/v1/flat/rent")
     @FormUrlEncoded
-    Call<SimpleErrorAnswer> rentData(@Field("flat") Integer flat,
+    Call<SimpleErrorAnswer> rentData(@Field("uid") Long uid,
+                                     @Field("flat") Integer flat,
                                      @Field("value") float value);
 }
