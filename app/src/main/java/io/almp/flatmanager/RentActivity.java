@@ -11,7 +11,10 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import io.almp.flatmanager.adapter.RentHistoryAdapter;
+import io.almp.flatmanager.model.RentHistory;
 import io.almp.flatmanager.model.api.SimpleErrorAnswer;
 import io.almp.flatmanager.rest.ApiInterface;
 import io.almp.flatmanager.rest.ApiUtils;
@@ -20,32 +23,31 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RentActivity extends AppCompatActivity {
-    private ArrayAdapter<String> adapter;
+    private RentHistoryAdapter adapter;
     private ApiInterface mApiInterface;
     private ImageButton sendRentButton;
+    private List<RentHistory> mRentHistoryList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rent);
         mApiInterface = ApiUtils.getAPIService();
-        ArrayList<String> rentHistoryList = new ArrayList<>();
-        rentHistoryList.add("10/2018 2460zł");
-        rentHistoryList.add("11/2018 2510,50zł");
+        ArrayList<RentHistory> mRentHistoryList = new ArrayList<>();
         EditText rentValueEditText = findViewById(R.id.rentValueEditText);
         ListView renthistoryListView = findViewById(R.id.rentHistoryListview);
         sendRentButton = findViewById(R.id.sendRentButton);
         sendRentButton.setOnClickListener(view -> {
-            // TODO
-            rentHistoryList.add(rentValueEditText.getText().toString());
-            sendPost(10, Float.valueOf(rentValueEditText.getText().toString()));
-
+            float rentValue = Float.valueOf(rentValueEditText.getText().toString());
+            RentHistory newRentItem = new RentHistory("dzisiaj", rentValue);
+            sendPost(10, rentValue);
+            mRentHistoryList.add(newRentItem);
             rentValueEditText.setText("");
             adapter.notifyDataSetChanged();
             sendRentButton.setEnabled(false);
             Toast.makeText(RentActivity.this, "Send", Toast.LENGTH_SHORT).show();
         });
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, rentHistoryList);
+        adapter = new RentHistoryAdapter(this, mRentHistoryList);
         renthistoryListView.setAdapter(adapter);
 
     }
@@ -59,10 +61,7 @@ public class RentActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     if (!response.body().isError()) {
                         Log.e("POST", "Post submitted to API");
-//                    SaveData(response.body().getId(),response.body().getToken());
-                        Intent intent = new Intent(RentActivity.this, RentActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
+
                     } else {
                         Toast toast = Toast.makeText(RentActivity.this, "Error", Toast.LENGTH_SHORT);
                         toast.show();
