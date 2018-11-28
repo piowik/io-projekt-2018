@@ -6,6 +6,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
@@ -24,6 +25,9 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         FirebaseMessaging.getInstance().setAutoInitEnabled(true);
+
+        Log.e("Uid", " " + getSharedPreferences("_", MODE_PRIVATE).getString("user_token", "empty")); // TODO: debugging only
+        Log.e("Uid", " " + getSharedPreferences("_", MODE_PRIVATE).getLong("user_id", 0L));
         // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //    setSupportActionBar(toolbar);
         //  DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
