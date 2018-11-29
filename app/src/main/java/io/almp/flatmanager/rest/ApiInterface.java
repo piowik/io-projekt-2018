@@ -1,6 +1,9 @@
 package io.almp.flatmanager.rest;
 
 
+import java.util.List;
+
+import io.almp.flatmanager.model.RentHistoryItem;
 import io.almp.flatmanager.model.api.LoginAnswer;
 import io.almp.flatmanager.model.api.SimpleErrorAnswer;
 import retrofit2.Call;
@@ -17,7 +20,11 @@ public interface ApiInterface {
 
     @POST("/v1/flat/rent")
     @FormUrlEncoded
-    Call<SimpleErrorAnswer> rentData(@Field("uid") Long uid,
-                                     @Field("flat") Integer flat,
-                                     @Field("value") float value);
+    Call<SimpleErrorAnswer> sendRentData(@Field("uid") Long uid,
+                                         @Field("flat") Integer flat,
+                                         @Field("value") float value);
+
+    @POST("/v1/flat/rents")
+    @FormUrlEncoded
+    Call<List<RentHistoryItem>> getRents(@Field("flat") Integer flat);
 }
