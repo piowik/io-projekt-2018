@@ -32,5 +32,10 @@
     <string name="channel_rent_description">Powiadomienia o wysokości czynszu</string>
     <string name="channel_id_rent">CzynszChannel</string>
     <string name="login">Login</string>
+    <string name="buyer_s">Buyer(s)</string>
+    <string name="divide_on">Divide on:</string>
+    <string name="divie_into">Divie into:</string>
+    <string name="pick_date">Pick date</string>
+    <string name="save">save</string>
 
 </resources>

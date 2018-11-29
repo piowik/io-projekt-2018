@@ -8,10 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -85,6 +88,17 @@ public class AddShoppingItemFragment extends Fragment {
         ListView usersCheckboxesListView = rootView.findViewById(R.id.users_checkboxes_list_view);
         UsersChceckboxesAdapter usersChceckboxesAdapter = new UsersChceckboxesAdapter(this.getActivity(), usersList);
         usersCheckboxesListView.setAdapter(usersChceckboxesAdapter);
+
+        Button pickDateButton = rootView.findViewById(R.id.pick_date_button);
+        pickDateButton.setOnClickListener(v->{
+            DatePicker datePicker = rootView.findViewById(R.id.shopping_date_picker);
+            int isVisivble = datePicker.getVisibility();
+            if(isVisivble == View.INVISIBLE){
+                datePicker.setVisibility(View.VISIBLE);
+            } else if(isVisivble ==View.VISIBLE){
+                datePicker.setVisibility(View.INVISIBLE);
+            }
+        });
         return rootView;
     }
 

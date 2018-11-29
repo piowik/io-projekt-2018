@@ -5,26 +5,82 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AddShoppingItemFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="25dp">
 
-    <EditText
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/item_name"
-        android:id="@+id/new_item_name_id"/>
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="10dp">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/item_name"
+                android:id="@+id/new_item_name_id"
+                android:inputType="text"/>
 
-    <EditText
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/price"
+                android:id="@+id/new_item_price_id"
+                android:inputType="numberDecimal"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/pick_date"
+                android:id="@+id/pick_date_button"
+                android:background="@color/colorAccent"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="10dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/divie_into"/>
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/users_checkboxes_list_view">
+
+            </ListView>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+    <DatePicker
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/price"
-        android:id="@+id/new_item_price_id"/>
+        android:datePickerMode="spinner"
+        android:calendarViewShown="false"
+        android:textAlignment="center"
+        android:visibility="invisible"
+        android:id="@+id/shopping_date_picker"
+        >
 
-    <ListView
-        android:layout_width="match_parent"
+    </DatePicker>
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <Button
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/users_checkboxes_list_view">
-
-    </ListView>
+        android:layout_gravity="end|bottom"
+        android:text="@string/save"
+        android:background="@color/colorAccent"/>
+</FrameLayout>
 
 
 
