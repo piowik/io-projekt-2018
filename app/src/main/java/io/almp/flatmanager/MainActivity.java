@@ -9,8 +9,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MainActivity extends AppCompatActivity
@@ -19,6 +21,7 @@ public class MainActivity extends AppCompatActivity
     private LinearLayout dutiesLayout;
     private LinearLayout rentLayout;
     private LinearLayout shoppingLayout;
+    private final String BASE_URL = "http://lamp.harryweb.pl/images/flats/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,13 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        ImageView mainImageView = findViewById(R.id.image_view_main);
+        int flatId = 0; // TODO: hardcoded
+        String imageUrl = BASE_URL + flatId + ".png";
+        GlideApp.with(this)
+                .load(imageUrl)
+                .apply(RequestOptions.circleCropTransform())
+                .into(mainImageView);
         chatLayout = findViewById(R.id.chat);
         dutiesLayout = findViewById(R.id.duties);
         rentLayout = findViewById(R.id.rent);
