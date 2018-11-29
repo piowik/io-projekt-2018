@@ -22,6 +22,8 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import io.almp.flatmanager.ChatActivity;
+import io.almp.flatmanager.MainActivity;
 import io.almp.flatmanager.R;
 import io.almp.flatmanager.RentActivity;
 
@@ -34,29 +36,44 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
 
+        Class openClass = MainActivity.class;
+        int photo=R.drawable.common_google_signin_btn_icon_dark;
         if (remoteMessage.getData().size() > 0) {
             Log.e("Got data:", remoteMessage.getData().toString() + "");
             String title = remoteMessage.getData().get("title");
             String body = remoteMessage.getData().get("message");
             String imageUrl = remoteMessage.getData().get("image");
+            String channel = remoteMessage.getData().get("chann_id");
+            ;
+            if (channel.equals("1")){
+                channel = getString(R.string.channel_id_chat);
+                openClass = ChatActivity.class;
+                photo = R.drawable.ic_chat_black_128dp;
+
+
+            }else if(channel.equals("2")){
+                channel = getString(R.string.channel_id_rent);
+                openClass = RentActivity.class;
+                photo = R.drawable.ic_attach_money_black_24dp;
+            }
             if (!TextUtils.isEmpty(imageUrl)) {
                 Log.e("Image not empty", "not");
                 if (imageUrl != null && imageUrl.length() > 4 && Patterns.WEB_URL.matcher(imageUrl).matches()) {
                     Bitmap bitmap = getBitmapFromURL(imageUrl);
                     if (bitmap != null)
-                        showImageNotification(bitmap, title, body);
+                        showImageNotification(bitmap, title, body,channel,openClass,photo);
                     else
-                        showNotification(title, body);
+                        showNotification(title, body,channel,openClass,photo);
                 }
             } else
-                showNotification(title, body);
+                showNotification(title, body,channel,openClass,photo);
             Log.e("DataTitle", title);
         }
         else if (remoteMessage.getNotification() != null) {
             Log.e("NotificationTitle", "T:" + remoteMessage.getNotification().getTitle());
             String title = remoteMessage.getNotification().getTitle();
             String body = remoteMessage.getNotification().getBody();
-            showNotification(title, body);
+            showNotification(title, body,"",openClass,photo);
         }
         //getting the title and the body
 
@@ -67,37 +84,34 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         super.onNewToken(token);
         Log.e("newToken", token);
         getSharedPreferences("_", MODE_PRIVATE).edit().putString("fbtoken", token).apply();
-        // If you want to send messages to this application instance or
-        // manage this apps subscriptions on the server side, send the
-        // Instance ID token to your app server.
-        // sendRegistrationToServer(token);
+
     }
 
-    private void showNotification(String title, String message) {
+    private void showNotification(String title, String message, String channel, Class openClass, int photo) {
         createNotificationChannel();
-        Intent i = new Intent(this, RentActivity.class);
+        Intent i = new Intent(this, openClass);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, getString(R.string.channel_id_rent))
-                .setSmallIcon(R.drawable.common_google_signin_btn_icon_dark)
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, channel)
+                .setSmallIcon(photo)
                 .setContentTitle(title)
                 .setContentText(message)
                 .setContentIntent(pendingIntent)
 //                .setStyle(new NotificationCompat.BigTextStyle()
 //                        .bigText("Much longer text that cannot fit one line..."))
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setChannelId("Chat");
+                .setChannelId(channel);
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
 
 // notificationId is a unique int for each notification that you must define
         notificationManager.notify(0, mBuilder.build());
     }
 
-    private void showImageNotification(Bitmap bitmap, String title, String message) {
+    private void showImageNotification(Bitmap bitmap, String title, String message, String channel, Class classToOpen, int photo) {
         createNotificationChannel();
-        Intent i = new Intent(this, RentActivity.class);
+        Intent i = new Intent(this, classToOpen);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -105,14 +119,14 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         bigPictureStyle.setBigContentTitle(title);
         bigPictureStyle.setSummaryText(Html.fromHtml(message).toString());
         bigPictureStyle.bigPicture(bitmap);
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, getString(R.string.channel_id_rent))
-                .setSmallIcon(R.drawable.common_google_signin_btn_icon_dark)
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, channel)
+                .setSmallIcon(photo)
                 .setContentTitle(title)
                 .setContentText(message)
                 .setStyle(bigPictureStyle)
                 .setContentIntent(pendingIntent)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setChannelId("Chat");
+                .setChannelId(channel);
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
 
 // notificationId is a unique int for each notification that you must define
