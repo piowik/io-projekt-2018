@@ -5,6 +5,7 @@ import java.util.List;
 
 import io.almp.flatmanager.model.RentHistoryItem;
 import io.almp.flatmanager.model.api.LoginAnswer;
+import io.almp.flatmanager.model.api.MessagesAnswer;
 import io.almp.flatmanager.model.api.SimpleErrorAnswer;
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -27,4 +28,15 @@ public interface ApiInterface {
     @POST("/v1/flat/rents")
     @FormUrlEncoded
     Call<List<RentHistoryItem>> getRents(@Field("flat") Integer flat);
+
+    @POST("/v1/chat/add_message")
+    @FormUrlEncoded
+    Call<List<SimpleErrorAnswer>> getRents(@Field("id") Integer id,
+                                         @Field("token") String token,
+                                         @Field("message") String message);
+
+    @POST("/v1/chat/get_messages")
+    @FormUrlEncoded
+    Call<List<MessagesAnswer>> getRents(@Field("id") Integer id,
+                                        @Field("token") String token);
 }
