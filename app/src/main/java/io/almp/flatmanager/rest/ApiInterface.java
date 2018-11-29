@@ -3,6 +3,7 @@ package io.almp.flatmanager.rest;
 
 import java.util.List;
 
+import io.almp.flatmanager.model.Message;
 import io.almp.flatmanager.model.RentHistoryItem;
 import io.almp.flatmanager.model.api.LoginAnswer;
 import io.almp.flatmanager.model.api.MessagesAnswer;
@@ -31,12 +32,12 @@ public interface ApiInterface {
 
     @POST("/v1/chat/add_message")
     @FormUrlEncoded
-    Call<List<SimpleErrorAnswer>> getRents(@Field("id") Integer id,
+    Call<SimpleErrorAnswer> addMessage(@Field("id") Long id,
                                          @Field("token") String token,
                                          @Field("message") String message);
 
     @POST("/v1/chat/get_messages")
     @FormUrlEncoded
-    Call<List<MessagesAnswer>> getRents(@Field("id") Integer id,
-                                        @Field("token") String token);
+    Call<List<Message>> getMessages(@Field("id") Long id,
+                                    @Field("token") String token);
 }

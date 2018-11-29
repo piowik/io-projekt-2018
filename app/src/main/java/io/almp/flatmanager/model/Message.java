@@ -10,14 +10,27 @@ public class Message {
     @SerializedName("sender_id")
     @Expose
     private long mSenderId;
+
+    public String getSenderName() {
+        return mSenderName;
+    }
+
+    public void setSenderName(String senderName) {
+        mSenderName = senderName;
+    }
+
+    @SerializedName("sender_name")
+    @Expose
+    private String mSenderName;
     @SerializedName("date")
     @Expose
     private String mDate;
 
-    public Message(long senderId, String date, String message) {
+    public Message(long senderId, String date, String message,String name) {
         mSenderId = senderId;
         mDate = date;
         mMessage = message;
+        mSenderName=name;
     }
 
     public long getSenderId() {
@@ -45,7 +58,6 @@ public class Message {
     }
 
     @SerializedName("message")
-
     @Expose
     private String mMessage;
 }
