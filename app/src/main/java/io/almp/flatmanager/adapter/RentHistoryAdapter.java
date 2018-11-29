@@ -8,18 +8,17 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import io.almp.flatmanager.R;
-import io.almp.flatmanager.model.RentHistory;
+import io.almp.flatmanager.model.RentHistoryItem;
 
 public class RentHistoryAdapter extends BaseAdapter {
     private Activity mActivity;
-    private List<RentHistory> mItems;
+    private List<RentHistoryItem> mItems;
     private LayoutInflater mInflater;
 
-    public RentHistoryAdapter(Activity activity, List<RentHistory> items) {
+    public RentHistoryAdapter(Activity activity, List<RentHistoryItem> items) {
         this.mActivity = activity;
         this.mItems = items;
     }
@@ -48,13 +47,15 @@ public class RentHistoryAdapter extends BaseAdapter {
         if (convertView == null)
             convertView = mInflater.inflate(R.layout.rent_list_item, parent, false);
 
-        RentHistory rentItem = mItems.get(position);
+        RentHistoryItem rentItem = mItems.get(position);
 
         TextView dateTextView = convertView.findViewById(R.id.rent_date_text_view);
         dateTextView.setText(rentItem.getDate());
 
-        TextView valueTextView = convertView.findViewById(R.id.rent_value_text_view);
-        valueTextView.setText(String.valueOf(rentItem.getValue()));
+        TextView totalValueTextView = convertView.findViewById(R.id.rent_total_value_text_view);
+        totalValueTextView.setText(String.valueOf(rentItem.getTotalValue()) + " złotych polskich");
+        TextView valuePerPersonTextView = convertView.findViewById(R.id.rent_value_per_person_text_view);
+        valuePerPersonTextView.setText(String.valueOf(rentItem.getValuePerPerson()) + " na głowę");
 
         return convertView;
     }

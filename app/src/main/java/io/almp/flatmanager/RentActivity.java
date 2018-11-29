@@ -1,10 +1,9 @@
 package io.almp.flatmanager;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -14,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.almp.flatmanager.adapter.RentHistoryAdapter;
-import io.almp.flatmanager.model.RentHistory;
+import io.almp.flatmanager.model.RentHistoryItem;
 import io.almp.flatmanager.model.api.SimpleErrorAnswer;
 import io.almp.flatmanager.rest.ApiInterface;
 import io.almp.flatmanager.rest.ApiUtils;
@@ -23,10 +22,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class RentActivity extends AppCompatActivity {
-    private RentHistoryAdapter adapter;
+    private RentHistoryAdapter mRentHistoryAdapter;
     private ApiInterface mApiInterface;
     private ImageButton sendRentButton;
-    private List<RentHistory> mRentHistoryList;
+    private List<RentHistoryItem> mRentHistoryItemList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,27 +33,27 @@ public class RentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_rent);
         long uid = getSharedPreferences("_", MODE_PRIVATE).getLong("user_id", 0L);
         mApiInterface = ApiUtils.getAPIService();
-        ArrayList<RentHistory> mRentHistoryList = new ArrayList<>();
+        mRentHistoryItemList = new ArrayList<>();
         EditText rentValueEditText = findViewById(R.id.rentValueEditText);
         ListView renthistoryListView = findViewById(R.id.rentHistoryListview);
         sendRentButton = findViewById(R.id.sendRentButton);
-        sendRentButton.setOnClickListener(view -> {
-            float rentValue = Float.valueOf(rentValueEditText.getText().toString());
-            RentHistory newRentItem = new RentHistory("dzisiaj", rentValue);
-            sendPost(uid,0, rentValue);
-            mRentHistoryList.add(newRentItem);
-            rentValueEditText.setText("");
-            adapter.notifyDataSetChanged();
-            sendRentButton.setEnabled(false);
-            Toast.makeText(RentActivity.this, "Send", Toast.LENGTH_SHORT).show();
-        });
-        adapter = new RentHistoryAdapter(this, mRentHistoryList);
-        renthistoryListView.setAdapter(adapter);
+        loadRents(0); // TODO: hardcoded
 
+        sendRentButton.setOnClickListener(view -> {
+            if (TextUtils.isEmpty(rentValueEditText.getText().toString()))
+                return;
+            float rentValue = Float.valueOf(rentValueEditText.getText().toString());
+            sendPost(uid,0, rentValue); // TODO: hardcoded flat id
+            rentValueEditText.setText("");
+            sendRentButton.setEnabled(false);
+            loadRents(0); // TODO: hardcoded
+        });
+        mRentHistoryAdapter = new RentHistoryAdapter(this, mRentHistoryItemList);
+        renthistoryListView.setAdapter(mRentHistoryAdapter);
     }
 
     public void sendPost(long uid, int flat, float value) {
-        mApiInterface.rentData(uid, flat, value).enqueue(new Callback<SimpleErrorAnswer>() {
+        mApiInterface.sendRentData(uid, flat, value).enqueue(new Callback<SimpleErrorAnswer>() {
             @Override
             public void onResponse(Call<SimpleErrorAnswer> call, Response<SimpleErrorAnswer> response) {
                 Log.e("RespMsg", response.message() + "!");
@@ -77,6 +76,37 @@ public class RentActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<SimpleErrorAnswer> call, Throwable t) {
+                Log.e("POST", "Unable to submit post to API.");
+                sendRentButton.setEnabled(true);
+            }
+        });
+    }
+
+    public void updateRents(List<RentHistoryItem> list) {
+        mRentHistoryItemList.clear();
+        mRentHistoryItemList.addAll(list);
+        mRentHistoryAdapter.notifyDataSetChanged();
+    }
+
+    public void loadRents(int flat) {
+        mApiInterface.getRents(flat).enqueue(new Callback<List<RentHistoryItem>>() {
+            @Override
+            public void onResponse(Call<List<RentHistoryItem>> call, Response<List<RentHistoryItem>> response) {
+                Log.e("RespMsg", response.message() + "!");
+                Log.e("RespBody", response.toString() + "!");
+                if (response.isSuccessful()) {
+                    List<RentHistoryItem> returnedList  = response.body();
+                    updateRents(returnedList);
+                }
+                else {
+                    Toast toast = Toast.makeText(RentActivity.this, "Chujwie", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+                sendRentButton.setEnabled(true);
+            }
+
+            @Override
+            public void onFailure(Call<List<RentHistoryItem>> call, Throwable t) {
                 Log.e("POST", "Unable to submit post to API.");
                 sendRentButton.setEnabled(true);
             }
