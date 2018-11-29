@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.LinkedList;
@@ -17,7 +16,7 @@ import java.util.List;
 import io.almp.flatmanager.adapter.BalancesAdapter;
 import io.almp.flatmanager.adapter.ShoppingHistoryAdapter;
 import io.almp.flatmanager.model.ShoppingHistoryEntity;
-import io.almp.flatmanager.model.UserBalance;
+import io.almp.flatmanager.model.User;
 
 
 /**
@@ -34,7 +33,7 @@ public class ShoppingMainFragment extends Fragment {
 
     private ListView mUserBalances;
     private ListView mShoppingHistories;
-    private List<UserBalance> userBalancesList;
+    private List<User> usersList;
     private List<ShoppingHistoryEntity> shoppingHistoryEntitiesList;
     private FloatingActionButton addShoppingItemButton;
     private static final String ARG_PARAM1 = "param1";
@@ -80,11 +79,12 @@ public class ShoppingMainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        userBalancesList = new LinkedList<>();
-        userBalancesList.add(new UserBalance("1", "Artur", 20));
-        userBalancesList.add(new UserBalance("2", "Piotr", -20));
-        userBalancesList.add(new UserBalance("3", "Mati", 15.4));
-        userBalancesList.add(new UserBalance("4", "Laura", -13.3));
+        usersList = new LinkedList<>();
+        usersList.add(new User(12, 10, "artur", "Artur", "artur@mail.com", 112.6));
+        usersList.add(new User(12, 10, "artur", "Artur", "artur@mail.com", 112.6));
+        usersList.add(new User(12, 10, "artur", "Artur", "artur@mail.com", 112.6));
+        usersList.add(new User(12, 10, "artur", "Artur", "artur@mail.com", 112.6));
+        usersList.add(new User(12, 10, "artur", "Artur", "artur@mail.com", 112.6));
 
         //TODO real data needed from server
         shoppingHistoryEntitiesList = new LinkedList<>();
@@ -98,7 +98,7 @@ public class ShoppingMainFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_shopping_main, container, false);
         mUserBalances = rootView.findViewById(R.id.all_flatmates_balances);
-        BalancesAdapter balancesAdapter = new BalancesAdapter(this.getActivity(), userBalancesList);
+        BalancesAdapter balancesAdapter = new BalancesAdapter(this.getActivity(), usersList);
         mUserBalances.setAdapter(balancesAdapter);
 
         mShoppingHistories = rootView.findViewById(R.id.shopping_history_list_view);

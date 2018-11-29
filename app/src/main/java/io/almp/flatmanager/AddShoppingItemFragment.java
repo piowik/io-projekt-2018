@@ -7,6 +7,17 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Objects;
+
+import io.almp.flatmanager.adapter.UsersChceckboxesAdapter;
+import io.almp.flatmanager.model.User;
 
 
 /**
@@ -18,8 +29,7 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class AddShoppingItemFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private List<User> usersList;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -63,8 +73,19 @@ public class AddShoppingItemFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_shopping_item, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_add_shopping_item, container, false);
+
+        usersList = new LinkedList<>();
+        usersList.add(new User(12, 10, "artur", "Artur", "artur@mail.com", 112.6));
+        usersList.add(new User(12, 10, "artur", "Artur", "artur@mail.com", 112.6));
+        usersList.add(new User(12, 10, "artur", "Artur", "artur@mail.com", 112.6));
+        usersList.add(new User(12, 10, "artur", "Artur", "artur@mail.com", 112.6));
+        usersList.add(new User(12, 10, "artur", "Artur", "artur@mail.com", 112.6));
+
+        ListView usersCheckboxesListView = rootView.findViewById(R.id.users_checkboxes_list_view);
+        UsersChceckboxesAdapter usersChceckboxesAdapter = new UsersChceckboxesAdapter(this.getActivity(), usersList);
+        usersCheckboxesListView.setAdapter(usersChceckboxesAdapter);
+        return rootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -73,7 +94,7 @@ public class AddShoppingItemFragment extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
-    
+
 
     /**
      * This interface must be implemented by activities that contain this
