@@ -49,8 +49,6 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                 channel = getString(R.string.channel_id_chat);
                 openClass = ChatActivity.class;
                 photo = R.drawable.ic_chat_black_128dp;
-
-
             }else if(channel.equals("2")){
                 channel = getString(R.string.channel_id_rent);
                 openClass = RentActivity.class;
@@ -75,7 +73,6 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
             String body = remoteMessage.getNotification().getBody();
             showNotification(title, body,"",openClass,photo);
         }
-        //getting the title and the body
 
     }
 
@@ -99,13 +96,9 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                 .setContentTitle(title)
                 .setContentText(message)
                 .setContentIntent(pendingIntent)
-//                .setStyle(new NotificationCompat.BigTextStyle()
-//                        .bigText("Much longer text that cannot fit one line..."))
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setChannelId(channel);
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-
-// notificationId is a unique int for each notification that you must define
         notificationManager.notify(0, mBuilder.build());
     }
 
@@ -129,22 +122,17 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                 .setChannelId(channel);
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
 
-// notificationId is a unique int for each notification that you must define
         notificationManager.notify(0, mBuilder.build());
     }
 
 
     private void createNotificationChannel() {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = getString(R.string.channel_name_rent);
             String description = getString(R.string.channel_rent_description);
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
             NotificationChannel channel = new NotificationChannel(getString(R.string.channel_id_rent), name, importance);
             channel.setDescription(description);
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
