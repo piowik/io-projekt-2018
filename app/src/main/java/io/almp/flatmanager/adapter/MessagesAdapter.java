@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -23,11 +24,18 @@ public class MessagesAdapter extends BaseAdapter {
 
     private Activity mActivity;
     private List<Message> mMessagesList;
-    private LayoutInflater inflater;
+    private LayoutInflater mInflater;
 
     public MessagesAdapter(Activity activity, List<Message> messagesList) {
         mActivity = activity;
         mMessagesList = messagesList;
+    }
+
+    public void setMessagesList(List<Message> messagesList){
+        mMessagesList= messagesList;
+    }
+    public void addMessage(Message message){
+        mMessagesList.add(message);
     }
 
     @Override
@@ -50,38 +58,24 @@ public class MessagesAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent){
-        if(inflater == null){
-            inflater = (LayoutInflater) mActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        if(mInflater == null)
+            mInflater = (LayoutInflater) mActivity
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+
+        if(mMessagesList.get(position).getSenderId()==mActivity.getSharedPreferences("_", MODE_PRIVATE).getLong("user_id", 0L)) {
+            convertView = mInflater.inflate(R.layout.message_item_a, parent, false);
+            TextView message = convertView.findViewById(R.id.message_a_textview);
+            message.setText(String.valueOf(mMessagesList.get(position).getMessage()));
+        }else {
+            convertView = mInflater.inflate(R.layout.message_item_b, parent, false);
+            TextView message = convertView.findViewById(R.id.message_b_textview);
+            message.setText(String.valueOf(mMessagesList.get(position).getMessage()));
+            TextView senderLabel = convertView.findViewById(R.id.message_b_sender_name_textview);
+            senderLabel.setText(mMessagesList.get(position).getSenderName());
         }
-        Long myId = mActivity.getSharedPreferences("_", MODE_PRIVATE).getLong("user_id", 0L);
-        TextView message;
-        if(convertView == null){
-            if(mMessagesList.get(position).getSenderId()==myId) {
-                convertView = inflater.inflate(R.layout.message_item_a, parent, false);
-                message = convertView.findViewById(R.id.message_a_textview);
-            }else {
-                convertView = inflater.inflate(R.layout.message_item_b, parent, false);
-                message = convertView.findViewById(R.id.message_b_textview);
-                TextView senderLabel = convertView.findViewById(R.id.message_b_sender_name_textview);
-                senderLabel.setText(mMessagesList.get(position).getSenderName());
-            }
-            message.setText(mMessagesList.get(position).getMessage());
-        }
 
 
-
-//        TextView userNameTextView = convertView.findViewById(R.id.user_name_text_view);
-//        userNameTextView.setText(mMessagesList.get(position).getName());
-//        userNameTextView.setTextColor(convertView.getResources().getColor(R.color.black));
-//        TextView userBalanceTextView = convertView.findViewById(R.id.user_balance_text_view);
-//        double balance = mMessagesList.get(position).getBalance();
-//        if(balance >= 0){
-//            userBalanceTextView.setText(new StringBuilder().append("+").append(String.valueOf(balance)).toString());
-//            userBalanceTextView.setTextColor(convertView.getResources().getColor(R.color.green));
-//        } else {
-//            userBalanceTextView.setText(String.valueOf(balance));
-//            userBalanceTextView.setTextColor(convertView.getResources().getColor(R.color.red));
-//        }
 
         return convertView;
     }
