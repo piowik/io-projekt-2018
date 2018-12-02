@@ -49,11 +49,11 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
             String body = remoteMessage.getData().get("message");
             String imageUrl = remoteMessage.getData().get("image");
             String channel = remoteMessage.getData().get("chann_id");
-            ;
             if (channel.equals("1")) {
                 channel = getString(R.string.channel_id_chat);
                 openClass = ChatActivity.class;
                 photo = R.drawable.ic_chat_black_128dp;
+
                 Intent bIntent = new Intent("reload_message_list");
                 bIntent.putExtra("newMessage", "1");
                 LocalBroadcastManager.getInstance(this).sendBroadcast(bIntent);
@@ -96,7 +96,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
     }
 
     private void showNotification(String title, String message, String channel, Class openClass, int photo) {
-        createNotificationChannel();
+        createNotificationChannel(channel);
         Intent i = new Intent(this, openClass);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
@@ -114,7 +114,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
     }
 
     private void showImageNotification(Bitmap bitmap, String title, String message, String channel, Class classToOpen, int photo) {
-        createNotificationChannel();
+        createNotificationChannel(channel);
         Intent i = new Intent(this, classToOpen);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
@@ -137,12 +137,12 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
     }
 
 
-    private void createNotificationChannel() {
+    private void createNotificationChannel(String channel_) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = getString(R.string.channel_name_rent);
             String description = getString(R.string.channel_rent_description);
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel(getString(R.string.channel_id_rent), name, importance);
+            NotificationChannel channel = new NotificationChannel(channel_, name, importance);
             channel.setDescription(description);
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
