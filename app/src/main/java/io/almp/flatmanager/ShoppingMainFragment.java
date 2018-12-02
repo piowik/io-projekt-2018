@@ -5,10 +5,13 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -17,6 +20,11 @@ import io.almp.flatmanager.adapter.BalancesAdapter;
 import io.almp.flatmanager.adapter.ShoppingHistoryAdapter;
 import io.almp.flatmanager.model.ShoppingHistoryEntity;
 import io.almp.flatmanager.model.User;
+import io.almp.flatmanager.rest.ApiInterface;
+import io.almp.flatmanager.rest.ApiUtils;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -30,12 +38,13 @@ import io.almp.flatmanager.model.User;
 public class ShoppingMainFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-
+    private ApiInterface mApiInterface;
     private ListView mUserBalances;
     private ListView mShoppingHistories;
     private List<User> usersList;
     private List<ShoppingHistoryEntity> shoppingHistoryEntitiesList;
-    private FloatingActionButton addShoppingItemButton;
+    private Button addShoppingItemButton;
+    private Button payDebtButton;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -76,15 +85,42 @@ public class ShoppingMainFragment extends Fragment {
         }
     }
 
+
+    public void loadUsers(int flatId){
+        mApiInterface.getUserByFlatId(flatId).enqueue(new Callback<List<User>>() {
+            @Override
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                Toast t = Toast.makeText(ShoppingMainFragment.this.getContext(), "o chuj chodzi", Toast.LENGTH_LONG);
+                Log.e("RespMsg", response.message() + "!");
+                Log.e("RespBody", response.toString() + "!");
+                if(response.isSuccessful()){
+                    usersList = response.body();
+                    BalancesAdapter balancesAdapter = new BalancesAdapter(ShoppingMainFragment.this.getActivity(), usersList);
+                    mUserBalances.setAdapter(balancesAdapter);
+                } else {
+                    Toast toast = Toast.makeText(ShoppingMainFragment.this.getContext(), "Chujwie", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<User>> call, Throwable t) {
+                Log.e("POST", "Unable to submit post to API.");
+            }
+        });
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_shopping_main, container, false);
+        mUserBalances = rootView.findViewById(R.id.all_flatmates_balances);
+
+
+        mApiInterface = ApiUtils.getAPIService();
         usersList = new LinkedList<>();
-        usersList.add(new User(12, 10, "artur", "Artur", "artur@mail.com", 112.6));
-        usersList.add(new User(12, 10, "artur", "Artur", "artur@mail.com", 112.6));
-        usersList.add(new User(12, 10, "artur", "Artur", "artur@mail.com", 112.6));
-        usersList.add(new User(12, 10, "artur", "Artur", "artur@mail.com", 112.6));
-        usersList.add(new User(12, 10, "artur", "Artur", "artur@mail.com", 112.6));
+        int flatId = 0;
+        loadUsers(flatId);
 
         //TODO real data needed from server
         shoppingHistoryEntitiesList = new LinkedList<>();
@@ -96,10 +132,7 @@ public class ShoppingMainFragment extends Fragment {
         shoppingHistoryEntitiesList.add(new ShoppingHistoryEntity("mydło", 5.20, "Piotr"));
         shoppingHistoryEntitiesList.add(new ShoppingHistoryEntity("mydło", 5.20, "Piotr"));
 
-        View rootView = inflater.inflate(R.layout.fragment_shopping_main, container, false);
-        mUserBalances = rootView.findViewById(R.id.all_flatmates_balances);
-        BalancesAdapter balancesAdapter = new BalancesAdapter(this.getActivity(), usersList);
-        mUserBalances.setAdapter(balancesAdapter);
+
 
         mShoppingHistories = rootView.findViewById(R.id.shopping_history_list_view);
         ShoppingHistoryAdapter shoppingAdapter = new ShoppingHistoryAdapter(this.getActivity(), shoppingHistoryEntitiesList);
@@ -110,6 +143,14 @@ public class ShoppingMainFragment extends Fragment {
             AddShoppingItemFragment addShoppingItemFragment = new AddShoppingItemFragment();
             FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.shopping_fragment_container, addShoppingItemFragment);
+            fragmentTransaction.commit();
+        });
+
+        payDebtButton = rootView.findViewById(R.id.pay_debt);
+        payDebtButton.setOnClickListener(v->{
+            PayDebtFragment payDebtFragment = new PayDebtFragment();
+            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.shopping_fragment_container, payDebtFragment);
             fragmentTransaction.commit();
         });
 

@@ -40,5 +40,10 @@
     <string name="save">save</string>
     <string name="me">Ja</string>
     <string name="logout">Wyloguj</string>
+    <string name="add_purchase">Add purhcase</string>
+    <string name="pay_debt">Pay debt</string>
+    <string name="to_whom">To whom?</string>
+    <string name="how_much">How much?</string>
+    <string name="pln">PLN</string>
 
 </resources>

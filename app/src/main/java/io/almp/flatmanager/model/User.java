@@ -1,36 +1,38 @@
 package io.almp.flatmanager.model;
 
 public class User {
-    private long id;
-    private long flat_id;
+    private Integer user_id;
+    private Integer flat_id ;
     private String login;
     private String name;
     private String email;
     private double balance;
 
-    public User(long id, long flat_id, String login, String name, String email, double balance) {
-        this.id = id;
-        this.flat_id = flat_id;
+    public User(){}
+
+    public User(Integer id, Integer flatId, String login, String name, String email, double balance) {
+        this.user_id = id;
+        this.flat_id = flatId;
         this.login = login;
         this.name = name;
         this.email = email;
         this.balance = balance;
     }
 
-    public long getId() {
-        return id;
+    public Integer getId() {
+        return user_id;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setId(Integer id) {
+        this.user_id = id;
     }
 
-    public long getFlat_id() {
+    public Integer getFlatId() {
         return flat_id;
     }
 
-    public void setFlat_id(long flat_id) {
-        this.flat_id = flat_id;
+    public void setFlatId(Integer flatId) {
+        this.flat_id = flatId;
     }
 
     public String getLogin() {

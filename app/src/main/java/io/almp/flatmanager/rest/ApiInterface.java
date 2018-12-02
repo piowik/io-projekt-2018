@@ -5,6 +5,7 @@ import java.util.List;
 
 import io.almp.flatmanager.model.Message;
 import io.almp.flatmanager.model.RentHistoryItem;
+import io.almp.flatmanager.model.User;
 import io.almp.flatmanager.model.api.LoginAnswer;
 import io.almp.flatmanager.model.api.MessagesAnswer;
 import io.almp.flatmanager.model.api.SimpleErrorAnswer;
@@ -40,4 +41,8 @@ public interface ApiInterface {
     @FormUrlEncoded
     Call<List<Message>> getMessages(@Field("id") Long id,
                                     @Field("token") String token);
+
+    @POST("/v1/flat/get_users")
+    @FormUrlEncoded
+    Call<List<User>> getUserByFlatId(@Field("flat_id") Integer flatId);
 }
