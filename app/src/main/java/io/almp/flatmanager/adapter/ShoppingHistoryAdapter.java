@@ -51,15 +51,15 @@ public class ShoppingHistoryAdapter extends BaseAdapter {
         }
 
         TextView itemNameTextView = convertView.findViewById(R.id.s_item_name_text_view);
-        String itemName = mHistories.get(position).getName();
+        String itemName = mHistories.get(position).getItem_name();
         itemNameTextView.setText(itemName);
         TextView itemPriceTextView = convertView.findViewById(R.id.s_price_text_view);
-        double cost = mHistories.get(position).getCost();
+        double cost = mHistories.get(position).getPrice();
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(cost).append("zł");
         itemPriceTextView.setText(stringBuilder);
         TextView buyerTextView = convertView.findViewById(R.id.s_buyer_text_view);
-        buyerTextView.setText(mHistories.get(position).getBuyer());
+        buyerTextView.setText(mHistories.get(position).getName());
 
         return convertView;
     }

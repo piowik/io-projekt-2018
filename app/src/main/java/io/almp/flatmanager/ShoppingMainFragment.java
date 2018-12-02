@@ -90,7 +90,6 @@ public class ShoppingMainFragment extends Fragment {
         mApiInterface.getUserByFlatId(flatId).enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
-                Toast t = Toast.makeText(ShoppingMainFragment.this.getContext(), "o chuj chodzi", Toast.LENGTH_LONG);
                 Log.e("RespMsg", response.message() + "!");
                 Log.e("RespBody", response.toString() + "!");
                 if(response.isSuccessful()){
@@ -110,33 +109,42 @@ public class ShoppingMainFragment extends Fragment {
         });
     }
 
+    public void loadShoppingHistory(int flatId){
+        mApiInterface.getShoppingHistoryByFlatId(flatId).enqueue(new Callback<List<ShoppingHistoryEntity>>() {
+            @Override
+            public void onResponse(Call<List<ShoppingHistoryEntity>> call, Response<List<ShoppingHistoryEntity>> response) {
+                Log.e("RespMsg", response.message() + "!");
+                Log.e("RespBody", response.toString() + "!");
+                if(response.isSuccessful()){
+                    shoppingHistoryEntitiesList = response.body();
+                    ShoppingHistoryAdapter shoppingAdapter = new ShoppingHistoryAdapter(ShoppingMainFragment.this.getActivity(), shoppingHistoryEntitiesList);
+                    mShoppingHistories.setAdapter(shoppingAdapter);
+                } else {
+                    Toast toast = Toast.makeText(ShoppingMainFragment.this.getContext(), "Chujwie", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ShoppingHistoryEntity>> call, Throwable t) {
+                Log.e("POST", "Unable to submit post to API.");
+            }
+        });
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_shopping_main, container, false);
         mUserBalances = rootView.findViewById(R.id.all_flatmates_balances);
-
+        mShoppingHistories = rootView.findViewById(R.id.shopping_history_list_view);
 
         mApiInterface = ApiUtils.getAPIService();
         usersList = new LinkedList<>();
+        shoppingHistoryEntitiesList = new LinkedList<>();
         int flatId = 0;
         loadUsers(flatId);
-
-        //TODO real data needed from server
-        shoppingHistoryEntitiesList = new LinkedList<>();
-        shoppingHistoryEntitiesList.add(new ShoppingHistoryEntity("mydło", 5.20, "Piotr"));
-        shoppingHistoryEntitiesList.add(new ShoppingHistoryEntity("mydło", 5.20, "Piotr"));
-        shoppingHistoryEntitiesList.add(new ShoppingHistoryEntity("mydło", 5.20, "Piotr"));
-        shoppingHistoryEntitiesList.add(new ShoppingHistoryEntity("mydło", 5.20, "Piotr"));
-        shoppingHistoryEntitiesList.add(new ShoppingHistoryEntity("mydło", 5.20, "Piotr"));
-        shoppingHistoryEntitiesList.add(new ShoppingHistoryEntity("mydło", 5.20, "Piotr"));
-        shoppingHistoryEntitiesList.add(new ShoppingHistoryEntity("mydło", 5.20, "Piotr"));
-
-
-
-        mShoppingHistories = rootView.findViewById(R.id.shopping_history_list_view);
-        ShoppingHistoryAdapter shoppingAdapter = new ShoppingHistoryAdapter(this.getActivity(), shoppingHistoryEntitiesList);
-        mShoppingHistories.setAdapter(shoppingAdapter);
+        loadShoppingHistory(flatId);
 
         addShoppingItemButton = rootView.findViewById(R.id.add_shopping_item_button);
         addShoppingItemButton.setOnClickListener(v->{

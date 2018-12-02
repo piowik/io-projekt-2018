@@ -5,6 +5,7 @@ import java.util.List;
 
 import io.almp.flatmanager.model.Message;
 import io.almp.flatmanager.model.RentHistoryItem;
+import io.almp.flatmanager.model.ShoppingHistoryEntity;
 import io.almp.flatmanager.model.User;
 import io.almp.flatmanager.model.api.LoginAnswer;
 import io.almp.flatmanager.model.api.MessagesAnswer;
@@ -45,4 +46,8 @@ public interface ApiInterface {
     @POST("/v1/flat/get_users")
     @FormUrlEncoded
     Call<List<User>> getUserByFlatId(@Field("flat_id") Integer flatId);
+
+    @POST("v1/flat/get_shoppings")
+    @FormUrlEncoded
+    Call<List<ShoppingHistoryEntity>> getShoppingHistoryByFlatId(@Field("flat_id") Integer flatId);
 }
