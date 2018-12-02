@@ -27,18 +27,22 @@ import io.almp.flatmanager.ChatActivity;
 import io.almp.flatmanager.MainActivity;
 import io.almp.flatmanager.R;
 import io.almp.flatmanager.RentActivity;
+import io.almp.flatmanager.model.api.SimpleErrorAnswer;
+import io.almp.flatmanager.rest.ApiInterface;
+import io.almp.flatmanager.rest.ApiUtils;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by Mateusz Zaremba on 27.11.2018.
  */
 public class FirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
-
-
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
 
         Class openClass = MainActivity.class;
-        int photo=R.drawable.common_google_signin_btn_icon_dark;
+        int photo = R.drawable.common_google_signin_btn_icon_dark;
         if (remoteMessage.getData().size() > 0) {
             Log.e("Got data:", remoteMessage.getData().toString() + "");
             String title = remoteMessage.getData().get("title");
@@ -46,7 +50,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
             String imageUrl = remoteMessage.getData().get("image");
             String channel = remoteMessage.getData().get("chann_id");
             ;
-            if (channel.equals("1")){
+            if (channel.equals("1")) {
                 channel = getString(R.string.channel_id_chat);
                 openClass = ChatActivity.class;
                 photo = R.drawable.ic_chat_black_128dp;
@@ -54,7 +58,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                 bIntent.putExtra("newMessage", "1");
                 LocalBroadcastManager.getInstance(this).sendBroadcast(bIntent);
 
-            }else if(channel.equals("2")){
+            } else if (channel.equals("2")) {
                 channel = getString(R.string.channel_id_rent);
                 openClass = RentActivity.class;
                 photo = R.drawable.ic_attach_money_black_24dp;
@@ -64,19 +68,18 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                 if (imageUrl != null && imageUrl.length() > 4 && Patterns.WEB_URL.matcher(imageUrl).matches()) {
                     Bitmap bitmap = getBitmapFromURL(imageUrl);
                     if (bitmap != null)
-                        showImageNotification(bitmap, title, body,channel,openClass,photo);
+                        showImageNotification(bitmap, title, body, channel, openClass, photo);
                     else
-                        showNotification(title, body,channel,openClass,photo);
+                        showNotification(title, body, channel, openClass, photo);
                 }
             } else
-                showNotification(title, body,channel,openClass,photo);
+                showNotification(title, body, channel, openClass, photo);
             Log.e("DataTitle", title);
-        }
-        else if (remoteMessage.getNotification() != null) {
+        } else if (remoteMessage.getNotification() != null) {
             Log.e("NotificationTitle", "T:" + remoteMessage.getNotification().getTitle());
             String title = remoteMessage.getNotification().getTitle();
             String body = remoteMessage.getNotification().getBody();
-            showNotification(title, body,"",openClass,photo);
+            showNotification(title, body, "", openClass, photo);
         }
 
     }
@@ -86,6 +89,9 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         super.onNewToken(token);
         Log.e("newToken", token);
         getSharedPreferences("_", MODE_PRIVATE).edit().putString("fbtoken", token).apply();
+        long uid = getSharedPreferences("_", MODE_PRIVATE).getLong("user_id", 0L);
+        if (uid != 0L)
+            sendPost(uid, token);
 
     }
 
@@ -141,6 +147,29 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
+    }
+
+    public void sendPost(Long uid, String fbTokenStr) {
+        ApiInterface mAPIService = ApiUtils.getAPIService();
+
+        mAPIService.updateFirebaseToken(uid, fbTokenStr).enqueue(new Callback<SimpleErrorAnswer>() {
+            @Override
+            public void onResponse(Call<SimpleErrorAnswer> call, Response<SimpleErrorAnswer> response) {
+                Log.e("RespMsg", response.message() + "!");
+                Log.e("RespBody", response.toString() + "!");
+                if (response.isSuccessful()) {
+                    if (!response.body().isError())
+                        Log.e("POST", "Updated firebase token");
+                    else
+                        Log.e("POST", "Error response while updating firebase token.");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SimpleErrorAnswer> call, Throwable t) {
+                Log.e("POST", "Unable to submit post to API.");
+            }
+        });
     }
 
     public Bitmap getBitmapFromURL(String strURL) {

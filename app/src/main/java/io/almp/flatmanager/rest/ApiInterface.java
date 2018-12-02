@@ -22,6 +22,12 @@ public interface ApiInterface {
                                 @Field("password") String password,
                                 @Field("firebasetoken") String firebasetoken);
 
+    @POST("/v1/user/updatefbtoken")
+    @FormUrlEncoded
+    Call<SimpleErrorAnswer> updateFirebaseToken(@Field("uid") Long uid,
+                                                @Field("firebasetoken") String firebasetoken);
+
+
     @POST("/v1/flat/rent")
     @FormUrlEncoded
     Call<SimpleErrorAnswer> sendRentData(@Field("uid") Long uid,

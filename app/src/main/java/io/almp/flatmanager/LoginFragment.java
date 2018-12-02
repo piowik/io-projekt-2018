@@ -39,7 +39,6 @@ public class LoginFragment extends Fragment {
     private Button signUp;
     private Button signIn;
     private TextView login;
-    private int skipCounter = 0;
     private TextView password;
     private ApiInterface mAPIService;
 
@@ -101,16 +100,7 @@ public class LoginFragment extends Fragment {
         signIn = rootView.findViewById(R.id.sign_in);
         signIn.setOnClickListener(v -> {
             if (TextUtils.isEmpty(login.getText().toString()) || TextUtils.isEmpty(password.getText().toString())) {
-                if (skipCounter < 3) {
-                    Toast toast = Toast.makeText(getContext(), "Kliknij 3 razy", Toast.LENGTH_SHORT);
-                    toast.show();
-                    skipCounter++;
-                }
-                else {
-                    Intent intent = new Intent(getContext(), MainActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(intent);
-                }
+                Toast.makeText(getContext(), "Uzupelnij pola", Toast.LENGTH_SHORT).show();
                 return;
             }
             signIn.setEnabled(false);
