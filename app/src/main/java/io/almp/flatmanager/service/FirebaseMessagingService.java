@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.text.Html;
 import android.text.TextUtils;
 import android.util.Log;
@@ -49,6 +50,10 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                 channel = getString(R.string.channel_id_chat);
                 openClass = ChatActivity.class;
                 photo = R.drawable.ic_chat_black_128dp;
+                Intent bIntent = new Intent("reload_message_list");
+                bIntent.putExtra("newMessage", "1");
+                LocalBroadcastManager.getInstance(this).sendBroadcast(bIntent);
+
             }else if(channel.equals("2")){
                 channel = getString(R.string.channel_id_rent);
                 openClass = RentActivity.class;

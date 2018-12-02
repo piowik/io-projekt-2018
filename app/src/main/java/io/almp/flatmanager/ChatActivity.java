@@ -1,10 +1,15 @@
 package io.almp.flatmanager;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -36,6 +41,12 @@ public class ChatActivity extends AppCompatActivity {
     private ImageButton mSendMessageImagebutton;
     private MessagesAdapter mMessagesAdapter;
     private List<Message> mMessageList = new ArrayList<>();
+    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            getMessages(getSharedPreferences("_", MODE_PRIVATE).getLong("user_id", 0L),getSharedPreferences("_", MODE_PRIVATE).getString("user_token", "empty"));
+        }
+    };
 
     private ApiInterface mAPIService;
 
@@ -43,16 +54,14 @@ public class ChatActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
-
         mAPIService = ApiUtils.getAPIService();
+
         mListView = findViewById(R.id.messages_listview);
-        getMessages(getSharedPreferences("_", MODE_PRIVATE).getLong("user_id", 0L),getSharedPreferences("_", MODE_PRIVATE).getString("user_token", "empty"));
-
-
         mListView = findViewById(R.id.messages_listview);
         mMessagesAdapter = new MessagesAdapter(this,mMessageList);
         mListView.setAdapter(mMessagesAdapter);
         scrollListView();
+
         mNewMessageEditText = findViewById(R.id.new_message_edittext);
         mSendMessageImagebutton = findViewById(R.id.send_message_imagebutton);
         mSendMessageImagebutton.setOnClickListener(view -> {
@@ -65,8 +74,17 @@ public class ChatActivity extends AppCompatActivity {
             }
 
         });
+
+        getMessages(getSharedPreferences("_", MODE_PRIVATE).getLong("user_id", 0L),getSharedPreferences("_", MODE_PRIVATE).getString("user_token", "empty"));
+        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, new IntentFilter("reload_message_list"));
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(
+                mMessageReceiver);
+    }
 
     private void getMessages(long id, String token){
         mAPIService.getMessages(id,token).enqueue(new Callback<List<Message>>() {
