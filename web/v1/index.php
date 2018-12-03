@@ -73,6 +73,7 @@ $app->post('/flat/update_balance', function() use ($app){
   verifyRequiredParams(array('user_id', 'cost'));
   $user_id = $app->request->post('user_id');
   $cost = $app->request->post('cost');
+  $db = new DbHandler();
   $response = $db->updateUserBalance($user_id, $cost);
   echoRespnse(200, $response);
 });
