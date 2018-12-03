@@ -107,6 +107,7 @@ public class ShoppingMainFragment extends Fragment {
         loadUsers(flat_id);
         loadShoppingHistory(flat_id);
 
+
         Button addShoppingItemButton = rootView.findViewById(R.id.add_shopping_item_button);
         addShoppingItemButton.setOnClickListener(v->{
             AddShoppingItemFragment addShoppingItemFragment = new AddShoppingItemFragment();
