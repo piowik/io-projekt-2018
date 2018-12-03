@@ -54,7 +54,7 @@ public class ShoppingHistoryAdapter extends BaseAdapter {
         String itemName = mHistories.get(position).getItem_name();
         itemNameTextView.setText(itemName);
         TextView itemPriceTextView = convertView.findViewById(R.id.s_price_text_view);
-        double cost = mHistories.get(position).getPrice();
+        String cost = mHistories.get(position).getPrice();
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(cost).append("zł");
         itemPriceTextView.setText(stringBuilder);

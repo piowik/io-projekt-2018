@@ -32,7 +32,7 @@ class DbHandler {
 		}
 		return $response;
     }
-	
+
 	public function updateToken($uid, $fbtoken) {
 		if ($this->doesUserExistsById($uid)) {
 			$response = array();
@@ -44,7 +44,7 @@ class DbHandler {
 		}
 		else {
 			$response["error"] = true;
-			$response["message"] = "Wrong UID: " . $uid; 
+			$response["message"] = "Wrong UID: " . $uid;
 		}
 		return $response;
 	}
@@ -145,6 +145,13 @@ class DbHandler {
 
 	    return $response;
 	}
+  public function addShoppingItem($flat_id, $user_id, $item_name, $price, $date){
+    $stmt = $this->conn->prepare("INSERT INTO shopping (flat_id, user_id, item_name, price, purchase_date) values (?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssss", $flat_id, $user_id, $item_name, $price, $date);
+    $result = $stmt->execute();
+		$stmt->close();
+  }
+
 
 	public function addMessage($id, $message) {
 

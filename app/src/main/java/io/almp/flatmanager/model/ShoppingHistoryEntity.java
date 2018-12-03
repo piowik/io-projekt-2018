@@ -5,7 +5,7 @@ public class ShoppingHistoryEntity {
     private Integer flat_id;
     private String name;
     private String item_name;
-    private double price;
+    private String price;
     private String purchase_date;
 
     public Integer getItem_id() {
@@ -40,11 +40,11 @@ public class ShoppingHistoryEntity {
         this.item_name = item_name;
     }
 
-    public double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
@@ -56,7 +56,7 @@ public class ShoppingHistoryEntity {
         this.purchase_date = purchase_date;
     }
 
-    public ShoppingHistoryEntity(Integer item_id, Integer flat_id, String name, String item_name, double price, String purchase_date) {
+    public ShoppingHistoryEntity(Integer item_id, Integer flat_id, String name, String item_name, String price, String purchase_date) {
 
         this.item_id = item_id;
         this.flat_id = flat_id;

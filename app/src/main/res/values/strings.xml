@@ -45,5 +45,7 @@
     <string name="to_whom">To whom?</string>
     <string name="how_much">How much?</string>
     <string name="pln">PLN</string>
+    <string name="channel_name_chat">Chat</string>
+    <string name="channel_chat_description">Powiadomienia o nowej wiadomości</string>
 
 </resources>
