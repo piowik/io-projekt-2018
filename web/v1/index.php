@@ -57,6 +57,14 @@ $app->post('/flat/add_shopping_item', function() use ($app){
   echoRespnse(200, $response);
 });
 
+$app->post('/flat/update_balance', function() use ($app){
+  verifyRequiredParams(array('user_id', 'cost'));
+  $user_id = $app->request->post('user_id');
+  $cost = $app->request->post('cost');
+  $response = $db->updateUserBalance($user_id, $cost);
+  echoRespnse(200, $response);
+});
+
 $app->post('/chat/get_messages', function() use ($app) {
 // check for required params
 verifyRequiredParams(array('id', 'token'));

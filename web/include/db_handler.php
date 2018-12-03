@@ -127,6 +127,13 @@ class DbHandler {
 		$stmt->close();
   }
 
+  public function updateUserBalance($user_id, $cost){
+    $stmt = $this->conn->prepare("UPDATE users SET balance=balance + ? WHERE user_id = ?");
+    $stmt->bind_param("ss", $cost, $user_id);
+    $result = $stmt->execute();
+    $stmt->close();
+  }
+
 
 	public function addMessage($id, $message) {
 
