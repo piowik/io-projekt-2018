@@ -45,6 +45,18 @@ $response = $db->addMessage($id, $message);
 echoRespnse(200, $response);
 });
 
+$app->post('flat/add_shopping_item', function() use ($app){
+  verifyRequiredParams(array('flat_id', 'user_id', 'item_name', 'price', 'date'));
+  $flat_id = app->request->post('flat_id');
+  $user_id = app->request->post('user_id');
+  $item_name = app->request->post('item_name');
+  $price = app->request->post('price');
+  $date = app->request->post('date');
+  $db = new DbHandler();
+  $response = $db->addShoppingItem($flat_id, $user_id, $item_name, $price, $date);
+  echoRespnse(200, $response);
+});
+
 $app->post('/chat/get_messages', function() use ($app) {
 // check for required params
 verifyRequiredParams(array('id', 'token'));
