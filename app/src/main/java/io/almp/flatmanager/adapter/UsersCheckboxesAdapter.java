@@ -13,12 +13,12 @@ import java.util.List;
 import io.almp.flatmanager.R;
 import io.almp.flatmanager.model.User;
 
-public class UsersChceckboxesAdapter extends BaseAdapter {
+public class UsersCheckboxesAdapter extends BaseAdapter {
     List<User> usersList;
     private Activity mActivity;
     private LayoutInflater inflater;
 
-    public UsersChceckboxesAdapter(Activity mActivity, List<User> usersList) {
+    public UsersCheckboxesAdapter(Activity mActivity, List<User> usersList) {
         this.usersList = usersList;
         this.mActivity = mActivity;
     }
@@ -50,7 +50,7 @@ public class UsersChceckboxesAdapter extends BaseAdapter {
         if(convertView == null){
             convertView = inflater.inflate(R.layout.users_chceckboxes_list_item, parent, false);
         }
-        CheckBox checkBox = convertView.findViewById(R.id.user_chceckbox);
+        CheckBox checkBox = convertView.findViewById(R.id.user_checkbox);
         String userName = usersList.get(position).getName();
         checkBox.setText(userName);
 
