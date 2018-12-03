@@ -79,6 +79,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:text="@string/save"
+        android:id="@+id/save_item"
         android:background="@color/colorAccent"/>
 </FrameLayout>
 

@@ -53,6 +53,7 @@ public class UsersCheckboxesAdapter extends BaseAdapter {
         CheckBox checkBox = convertView.findViewById(R.id.user_checkbox);
         String userName = usersList.get(position).getName();
         checkBox.setText(userName);
+        checkBox.setTag(position);
 
         return convertView;
     }

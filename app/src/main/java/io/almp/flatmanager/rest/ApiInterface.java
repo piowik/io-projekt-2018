@@ -44,6 +44,14 @@ public interface ApiInterface {
                                          @Field("token") String token,
                                          @Field("message") String message);
 
+    @POST("/v1/flat/add_shopping_item")
+    @FormUrlEncoded
+    Call<SimpleErrorAnswer> addShoppingItem(@Field("flat_id") int flat_id,
+                                            @Field("user_id") long user_id,
+                                            @Field("item_name") String item_name,
+                                            @Field("price") String price,
+                                            @Field("date") String date);
+
     @POST("/v1/chat/get_messages")
     @FormUrlEncoded
     Call<List<Message>> getMessages(@Field("id") Long id,
