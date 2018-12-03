@@ -24,6 +24,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.content.Context.MODE_PRIVATE;
+
 
 public class ShoppingMainFragment extends Fragment {
 
@@ -32,6 +34,7 @@ public class ShoppingMainFragment extends Fragment {
     private ListView mShoppingHistories;
     private List<User> usersList;
     private List<ShoppingHistoryEntity> shoppingHistoryEntitiesList;
+    int flat_id;
 
 
     public ShoppingMainFragment() {
@@ -97,13 +100,12 @@ public class ShoppingMainFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_shopping_main, container, false);
         mUserBalances = rootView.findViewById(R.id.all_flatmates_balances);
         mShoppingHistories = rootView.findViewById(R.id.shopping_history_list_view);
-
+        flat_id = getContext().getSharedPreferences("_", MODE_PRIVATE).getInt("flat_id", 0);
         mApiInterface = ApiUtils.getAPIService();
         usersList = new LinkedList<>();
         shoppingHistoryEntitiesList = new LinkedList<>();
-        int flatId = 0;
-        loadUsers(flatId);
-        loadShoppingHistory(flatId);
+        loadUsers(flat_id);
+        loadShoppingHistory(flat_id);
 
         Button addShoppingItemButton = rootView.findViewById(R.id.add_shopping_item_button);
         addShoppingItemButton.setOnClickListener(v->{

@@ -59,9 +59,14 @@ public interface ApiInterface {
 
     @POST("/v1/flat/get_users")
     @FormUrlEncoded
-    Call<List<User>> getUserByFlatId(@Field("flat_id") Integer flatId);
+    Call<List<User>> getUserByFlatId(@Field("flat_id") int flatId);
 
     @POST("v1/flat/get_shoppings")
     @FormUrlEncoded
-    Call<List<ShoppingHistoryEntity>> getShoppingHistoryByFlatId(@Field("flat_id") Integer flatId);
+    Call<List<ShoppingHistoryEntity>> getShoppingHistoryByFlatId(@Field("flat_id") int flatId);
+
+    @POST("v1/flat/update_balance")
+    @FormUrlEncoded
+    Call<SimpleErrorAnswer> updateUserBalance(@Field("user_id") long user_id,
+                                              @Field("cost") double cost);
 }

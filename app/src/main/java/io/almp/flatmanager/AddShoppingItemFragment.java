@@ -4,6 +4,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +36,8 @@ public class AddShoppingItemFragment extends Fragment {
     ListView usersCheckboxesListView;
     private ApiInterface mApiInterface;
     UsersCheckboxesAdapter usersCheckboxesAdapter;
+    long uid;
+    int flat_id;
 
 
     public AddShoppingItemFragment() {
@@ -77,7 +80,9 @@ public class AddShoppingItemFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_add_shopping_item, container, false);
         mApiInterface = ApiUtils.getAPIService();
         usersCheckboxesListView = rootView.findViewById(R.id.users_checkboxes_list_view);
-        loadUsers(0);
+        uid = getContext().getSharedPreferences("_", MODE_PRIVATE).getLong("user_id", 0L);
+        flat_id = getContext().getSharedPreferences("_", MODE_PRIVATE).getInt("flat_id", 0);
+        loadUsers(flat_id);
 
         Button pickDateButton = rootView.findViewById(R.id.pick_date_button);
         DatePicker datePicker = rootView.findViewById(R.id.shopping_date_picker);
@@ -142,26 +147,35 @@ public class AddShoppingItemFragment extends Fragment {
             }
 
             //TODO update balances
+            int numbOfSelectedUsers = selectedUsers.size();
+            double costPerUser = Double.valueOf(itemPrice) / numbOfSelectedUsers;
+            costPerUser = costPerUser * (-1);
+            double costForBuyer = Double.valueOf(itemPrice) + costPerUser;
+
+
+
 
 
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append(year).append("-").append(month).append("-").append(day).append(" ");
             String date = stringBuilder.toString();
-            long uid = getContext().getSharedPreferences("_", MODE_PRIVATE).getLong("user_id", 0L);
-            long userName = getContext().getSharedPreferences("_", MODE_PRIVATE).getLong("user_name", 0L);
 
-            int flat_id = 0; //TODO hardcoded
-            mApiInterface.addShoppingItem(flat_id, uid, itemNameS, itemPrice, date).enqueue(new Callback<SimpleErrorAnswer>() {
-                @Override
-                public void onResponse(Call<SimpleErrorAnswer> call, Response<SimpleErrorAnswer> response) {
+            for (User user: selectedUsers){
+                if(user.getId() != uid){
+                    mApiInterface.updateUserBalance(user.getId(), costPerUser).enqueue(callback);
+                    System.out.println(user.getName() + ". " + user.getId());
+                } else if(user.getId() == uid){
+                    mApiInterface.updateUserBalance(uid, costForBuyer).enqueue(callback);
                 }
+            }
 
-                @Override
-                public void onFailure(Call<SimpleErrorAnswer> call, Throwable t) {
-                    Toast toast = Toast.makeText(AddShoppingItemFragment.this.getContext(), "Dodawanie zakupu nie udało się", Toast.LENGTH_SHORT);
-                    toast.show();
-                }
-            });
+            mApiInterface.addShoppingItem(flat_id, uid, itemNameS, itemPrice, date).enqueue(callback);
+            ShoppingMainFragment shoppingMainFragment = new ShoppingMainFragment();
+
+            FragmentTransaction fragmentTransaction;
+            fragmentTransaction = getFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.shopping_fragment_container, shoppingMainFragment);
+            fragmentTransaction.commit();
 
         });
 
@@ -169,6 +183,20 @@ public class AddShoppingItemFragment extends Fragment {
 
         return rootView;
     }
+
+    private Callback<SimpleErrorAnswer> callback = new Callback<SimpleErrorAnswer>() {
+        @Override
+        public void onResponse(Call<SimpleErrorAnswer> call, Response<SimpleErrorAnswer> response) {
+            System.out.println("i guess its ok");
+
+        }
+
+        @Override
+        public void onFailure(Call<SimpleErrorAnswer> call, Throwable t) {
+            System.out.println("i guess its not ok");
+
+        }
+    };
 
 
 }
