@@ -20,6 +20,7 @@ class DbHandler {
 				$response["error"] = false;
 				$response["user_id"] = $res["user_id"];
 				$response["token"] = $res['token'];
+				$response["flat"] = $res['flat'];
 			}
 			else {
 				$response["error"] = true;
@@ -245,15 +246,16 @@ class DbHandler {
     }
 
 	public function getUserByName($name) {
-        $stmt = $this->conn->prepare("SELECT user_id, name, password, token, firebase_token FROM users WHERE login = ?");
+        $stmt = $this->conn->prepare("SELECT user_id, name, password, flat_id, token, firebase_token FROM users WHERE login = ?");
         $stmt->bind_param("s", $name);
         if ($stmt->execute()) {
-            $stmt->bind_result($id, $name, $password, $token, $fbtoken);
+            $stmt->bind_result($id, $name, $password, $flat_id, $token, $fbtoken);
             $stmt->fetch();
             $user = array();
 			$user["user_id"] = $id;
             $user["name"] = $name;
 			$user["password"] = $password;
+            $user["flat"] = $flat_id;
             $user["token"] = $token;
 			$user["fbtoken"] = $fbtoken;
             $stmt->close();
