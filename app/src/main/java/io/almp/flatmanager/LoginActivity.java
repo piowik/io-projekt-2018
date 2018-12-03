@@ -18,9 +18,16 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         if(this.getSharedPreferences("_", MODE_PRIVATE).getLong("user_id", 0L)!=0L &&
                 !getSharedPreferences("_", MODE_PRIVATE).getString("user_token", "empty").equals("empty")){
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
+            if (getSharedPreferences("_", MODE_PRIVATE).getInt("flat_id", 0) == 0) {
+                Intent intent = new Intent(this, NoFlatActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+            else {
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
 
         }
         LoginFragment fragment = new LoginFragment();
