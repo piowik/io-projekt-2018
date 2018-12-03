@@ -105,7 +105,7 @@ public class LoginFragment extends Fragment {
             }
             signIn.setEnabled(false);
             String fbToken = FirebaseMessagingService.getToken(getContext());
-            sendPost(login.getText().toString(), password.getText().toString(),fbToken);
+            sendPost(login.getText().toString(), password.getText().toString(), fbToken);
 //            Intent mainActivityIntent = new Intent(getContext(), MainActivity.class);
 //            startActivity(mainActivityIntent);
         });
@@ -128,20 +128,26 @@ public class LoginFragment extends Fragment {
                 if (response.isSuccessful()) {
                     if (!response.body().isError()) {
                         Log.e("POST", "Post submitted to API");
+                        int flatId = response.body().getFlat();
                         LoginFragment.this.getContext().getSharedPreferences("_", MODE_PRIVATE).edit().putLong("user_id", response.body().getId()).apply();
                         LoginFragment.this.getContext().getSharedPreferences("_", MODE_PRIVATE).edit().putString("user_token", response.body().getToken()).apply();
-                        LoginFragment.this.getContext().getSharedPreferences("_", MODE_PRIVATE).edit().putInt("flat_id", response.body().getFlat()).apply();
+                        LoginFragment.this.getContext().getSharedPreferences("_", MODE_PRIVATE).edit().putInt("flat_id", flatId).apply();
 
 //                    SaveData(response.body().getId(),response.body().getToken());
-                        Intent intent = new Intent(getContext(), MainActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
+                        if (flatId == 0) { // no flat
+                            Intent intent = new Intent(getContext(), NoFlatActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                        } else {
+                            Intent intent = new Intent(getContext(), MainActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                        }
                     } else {
                         Toast toast = Toast.makeText(getContext(), "Zly login lub haslo", Toast.LENGTH_SHORT);
                         toast.show();
                     }
-                }
-                else {
+                } else {
                     Toast toast = Toast.makeText(getContext(), "Chujwie", Toast.LENGTH_SHORT);
                     toast.show();
                 }
