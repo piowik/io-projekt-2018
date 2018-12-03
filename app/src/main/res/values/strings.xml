@@ -47,5 +47,8 @@
     <string name="pln">PLN</string>
     <string name="channel_name_chat">Chat</string>
     <string name="channel_chat_description">Powiadomienia o nowej wiadomości</string>
+    <string name="no_flat">Nie masz mieszkania</string>
+    <string name="create_flat">Załóż</string>
+    <string name="join_flat">Dołącz</string>
 
 </resources>

@@ -4,6 +4,7 @@ public class LoginAnswer {
 
     private boolean error;
     private String token;
+    private int flat;
     private String message;
 
     public long getId() {
@@ -12,6 +13,14 @@ public class LoginAnswer {
 
     public void setId(long id) {
         this.user_id = id;
+    }
+
+    public int getFlat() {
+        return flat;
+    }
+
+    public void setFlat(Integer flat) {
+        this.flat = flat;
     }
 
     private long user_id;
@@ -24,14 +33,15 @@ public class LoginAnswer {
      * @param error
      * @param token
      * @param user_id
+     * @param flat
      */
-    public LoginAnswer(boolean error, String token, String message, long user_id) {
+    public LoginAnswer(boolean error, String token, String message, long user_id, Integer flat) {
         super();
         this.error = error;
         this.token = token;
         this.message = message;
         this.user_id=user_id;
-
+        this.flat = flat;
     }
 
     public boolean isError() {

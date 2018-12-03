@@ -27,6 +27,7 @@
         <activity android:name=".RentActivity" />
         <activity android:name=".ShoppingActivity" />
         <activity android:name=".DutiesActivity" />
+        <activity android:name=".NoFlatActivity" />
         <activity android:name=".MainActivity">
 
         </activity>
