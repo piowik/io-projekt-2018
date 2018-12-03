@@ -43,6 +43,8 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
         Class openClass = MainActivity.class;
         int photo = R.drawable.common_google_signin_btn_icon_dark;
+        String name = "";
+        String description = "";
         if (remoteMessage.getData().size() > 0) {
             Log.e("Got data:", remoteMessage.getData().toString() + "");
             String title = remoteMessage.getData().get("title");
@@ -53,6 +55,8 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                 channel = getString(R.string.channel_id_chat);
                 openClass = ChatActivity.class;
                 photo = R.drawable.ic_chat_black_128dp;
+                name = getString(R.string.channel_name_chat);
+                description = getString(R.string.channel_chat_description);
 
                 Intent bIntent = new Intent("reload_message_list");
                 bIntent.putExtra("newMessage", "1");
@@ -62,24 +66,26 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                 channel = getString(R.string.channel_id_rent);
                 openClass = RentActivity.class;
                 photo = R.drawable.ic_attach_money_black_24dp;
+                name = getString(R.string.channel_name_chat);
+                description = getString(R.string.channel_chat_description);
             }
             if (!TextUtils.isEmpty(imageUrl)) {
                 Log.e("Image not empty", "not");
                 if (imageUrl != null && imageUrl.length() > 4 && Patterns.WEB_URL.matcher(imageUrl).matches()) {
                     Bitmap bitmap = getBitmapFromURL(imageUrl);
                     if (bitmap != null)
-                        showImageNotification(bitmap, title, body, channel, openClass, photo);
+                        showImageNotification(bitmap, title, body, channel, openClass, photo,name,description);
                     else
-                        showNotification(title, body, channel, openClass, photo);
+                        showNotification(title, body, channel, openClass, photo,name,description);
                 }
             } else
-                showNotification(title, body, channel, openClass, photo);
+                showNotification(title, body, channel, openClass, photo,name,description);
             Log.e("DataTitle", title);
         } else if (remoteMessage.getNotification() != null) {
             Log.e("NotificationTitle", "T:" + remoteMessage.getNotification().getTitle());
             String title = remoteMessage.getNotification().getTitle();
             String body = remoteMessage.getNotification().getBody();
-            showNotification(title, body, "", openClass, photo);
+            showNotification(title, body, "", openClass, photo,name,description);
         }
 
     }
@@ -95,8 +101,8 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
     }
 
-    private void showNotification(String title, String message, String channel, Class openClass, int photo) {
-        createNotificationChannel(channel);
+    private void showNotification(String title, String message, String channel, Class openClass, int photo,String name, String description) {
+        createNotificationChannel(channel,name,description);
         Intent i = new Intent(this, openClass);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
@@ -113,8 +119,8 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         notificationManager.notify(0, mBuilder.build());
     }
 
-    private void showImageNotification(Bitmap bitmap, String title, String message, String channel, Class classToOpen, int photo) {
-        createNotificationChannel(channel);
+    private void showImageNotification(Bitmap bitmap, String title, String message, String channel, Class classToOpen, int photo,String name, String description) {
+        createNotificationChannel(channel,name,description);
         Intent i = new Intent(this, classToOpen);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
@@ -137,13 +143,11 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
     }
 
 
-    private void createNotificationChannel(String channel_) {
+    private void createNotificationChannel(String channel_, String name_, String description_) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = getString(R.string.channel_name_rent);
-            String description = getString(R.string.channel_rent_description);
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel(channel_, name, importance);
-            channel.setDescription(description);
+            NotificationChannel channel = new NotificationChannel(channel_, name_, importance);
+            channel.setDescription(description_);
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(channel);
         }
