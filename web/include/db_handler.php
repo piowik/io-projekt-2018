@@ -20,6 +20,7 @@ class DbHandler {
 				$response["error"] = false;
 				$response["user_id"] = $res["user_id"];
 				$response["token"] = $res['token'];
+				$response["flat"] = $res['flat'];
 			}
 			else {
 				$response["error"] = true;
@@ -47,6 +48,30 @@ class DbHandler {
 		}
 		return $response;
 	}
+	
+	public function joinFlat($uid, $code){
+	  $response = array();
+      if ($this->verifyFlatCode($code)) {
+		  $stmt = $this->conn->prepare("SELECT flat_id FROM flats WHERE invitation_code = ?");
+		  $stmt->bind_param("s", $code);
+		  $flatId = -1;
+          if ($stmt->execute()) {
+            $stmt->bind_result($flatId);
+			$stmt->fetch();
+			$stmt->close();
+		  }
+		  $stmt = $this->conn->prepare("UPDATE users SET flat_id = ? WHERE user_id = ?");
+		  $stmt->bind_param("si", $flatId, $uid);
+		  $stmt->execute();
+	      $stmt->close();
+		  $response["error"] = false;
+	  }
+	  else {
+		  $response["error"] = true;
+		  $response["message"] = "Wrong invitation code.";
+	  }
+	  return $response;
+    }
 
 	public function getRents($flat) {
 		$stmt = $this->conn->prepare("SELECT rent_value, per_person, rent_date FROM rent_history WHERE flat_id = ? ORDER BY rent_date DESC");
@@ -215,6 +240,15 @@ class DbHandler {
         $stmt->close();
         return $num_rows > 0;
     }
+	private function verifyFlatCode($code) {
+        $stmt = $this->conn->prepare("SELECT flat_id from flats WHERE invitation_code = ?");
+        $stmt->bind_param("s", $code);
+        $stmt->execute();
+        $stmt->store_result();
+        $num_rows = $stmt->num_rows;
+        $stmt->close();
+        return $num_rows > 0;
+    }
 	private function doesUserExistsById($id) {
         $stmt = $this->conn->prepare("SELECT user_id from users WHERE user_id = ?");
         $stmt->bind_param("s", $id);
@@ -226,15 +260,16 @@ class DbHandler {
     }
 
 	public function getUserByName($name) {
-        $stmt = $this->conn->prepare("SELECT user_id, name, password, token, firebase_token FROM users WHERE login = ?");
+        $stmt = $this->conn->prepare("SELECT user_id, name, password, flat_id, token, firebase_token FROM users WHERE login = ?");
         $stmt->bind_param("s", $name);
         if ($stmt->execute()) {
-            $stmt->bind_result($id, $name, $password, $token, $fbtoken);
+            $stmt->bind_result($id, $name, $password, $flat_id, $token, $fbtoken);
             $stmt->fetch();
             $user = array();
 			$user["user_id"] = $id;
             $user["name"] = $name;
 			$user["password"] = $password;
+            $user["flat"] = $flat_id;
             $user["token"] = $token;
 			$user["fbtoken"] = $fbtoken;
             $stmt->close();

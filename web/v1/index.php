@@ -32,6 +32,18 @@ $app->post('/user/updatefbtoken', function() use ($app) {
     echoRespnse(200, $response);
 });
 
+$app->post('/flat/join', function() use ($app) {
+    verifyRequiredParams(array('uid', 'code'));
+    // reading post params
+    $uid = $app->request->post('uid');
+	$code = $app->request->post('code');
+
+    $db = new DbHandler();
+    $response = $db->joinFlat($uid, $code);
+    // echo json response
+    echoRespnse(200, $response);
+});
+
 $app->post('/chat/add_message', function() use ($app) {
 // check for required params
 verifyRequiredParams(array('id', 'token', 'message'));
