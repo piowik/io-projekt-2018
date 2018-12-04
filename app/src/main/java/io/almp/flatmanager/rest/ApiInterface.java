@@ -7,6 +7,7 @@ import io.almp.flatmanager.model.Message;
 import io.almp.flatmanager.model.RentHistoryItem;
 import io.almp.flatmanager.model.ShoppingHistoryEntity;
 import io.almp.flatmanager.model.User;
+import io.almp.flatmanager.model.api.JoinFlatAnswer;
 import io.almp.flatmanager.model.api.LoginAnswer;
 import io.almp.flatmanager.model.api.MessagesAnswer;
 import io.almp.flatmanager.model.api.SimpleErrorAnswer;
@@ -37,6 +38,11 @@ public interface ApiInterface {
     @POST("/v1/flat/rents")
     @FormUrlEncoded
     Call<List<RentHistoryItem>> getRents(@Field("flat") Integer flat);
+
+    @POST("/v1/flat/join")
+    @FormUrlEncoded
+    Call<JoinFlatAnswer> joinFlat(@Field("uid") long uid,
+                                  @Field("code") String code);
 
     @POST("/v1/chat/add_message")
     @FormUrlEncoded
