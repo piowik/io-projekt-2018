@@ -69,6 +69,15 @@ $app->post('/flat/add_shopping_item', function() use ($app){
   echoRespnse(200, $response);
 });
 
+$app->post('/flat/add_flat', function() use ($app){
+  verifyRequiredParams(array('$name', '$invitation_code'));
+  $name = $app->request->post('name');
+  $invitation_code = $app->request->post('invitation_code');
+  $db = new DbHandler();
+  $response = $db->addFlat($name, $invitation_code);
+  echoRespnse(200, $response);
+});
+
 $app->post('/flat/update_balance', function() use ($app){
   verifyRequiredParams(array('user_id', 'cost'));
   $user_id = $app->request->post('user_id');

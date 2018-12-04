@@ -48,7 +48,7 @@ class DbHandler {
 		}
 		return $response;
 	}
-	
+
 	public function joinFlat($uid, $code){
 	  $response = array();
       if ($this->verifyFlatCode($code)) {
@@ -64,6 +64,7 @@ class DbHandler {
 		  $stmt->bind_param("si", $flatId, $uid);
 		  $stmt->execute();
 	      $stmt->close();
+        $response["flat"] = $flatId;
 		  $response["error"] = false;
 	  }
 	  else {
@@ -150,6 +151,13 @@ class DbHandler {
     $stmt->bind_param("sssss", $flat_id, $user_id, $item_name, $price, $date);
     $result = $stmt->execute();
 		$stmt->close();
+  }
+
+  public function addFlat($name, $invitation_code){
+    $stmt = $this->conn->prepare("INSERT INTO flats (name, invitation_code) values (?, ?)");
+    $stmt->bind_param("ss", $name, $invitation_code);
+    $result = $stmt->execute();
+    $stmt->close();
   }
 
   public function updateUserBalance($user_id, $cost){
