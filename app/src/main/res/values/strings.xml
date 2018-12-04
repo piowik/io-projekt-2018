@@ -50,5 +50,7 @@
     <string name="no_flat">Nie masz mieszkania</string>
     <string name="create_flat">Załóż</string>
     <string name="join_flat">Dołącz</string>
+    <string name="welcome">Wellcome to Flatmate, please enter Your flat name to start a great adventure!</string>
+    <string name="flat_name">Flat name</string>
 
 </resources>
