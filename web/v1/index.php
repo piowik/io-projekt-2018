@@ -70,7 +70,7 @@ $app->post('/flat/add_shopping_item', function() use ($app){
 });
 
 $app->post('/flat/add_flat', function() use ($app){
-  verifyRequiredParams(array('$name', '$invitation_code'));
+  verifyRequiredParams(array('name', 'invitation_code'));
   $name = $app->request->post('name');
   $invitation_code = $app->request->post('invitation_code');
   $db = new DbHandler();
