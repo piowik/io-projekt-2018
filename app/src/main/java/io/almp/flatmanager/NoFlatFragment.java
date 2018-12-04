@@ -1,5 +1,7 @@
 package io.almp.flatmanager;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -7,7 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class NoFlatFragment extends Fragment {
     @Override
@@ -33,7 +36,15 @@ public class NoFlatFragment extends Fragment {
             fragmentTransaction.commit();
         });
         logoutButton.setOnClickListener(view -> {
-            Toast.makeText(getContext(), "Logout", Toast.LENGTH_SHORT).show();
+            SharedPreferences sharedPref = getContext().getSharedPreferences("_", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putLong("user_id", 0L);
+            editor.putInt("flat_id", -1);
+            editor.putString("user_token", "empty");
+            editor.apply();
+            Intent intent = new Intent(getContext(), LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
         });
         return rootView;
     }

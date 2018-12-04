@@ -106,7 +106,10 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.action_logout) {
             SharedPreferences sharedPref = getSharedPreferences("_", MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPref.edit();
-            editor.clear().apply();
+            editor.putLong("user_id", 0L);
+            editor.putInt("flat_id", -1);
+            editor.putString("user_token", "empty");
+            editor.apply();
             Intent intent = new Intent(this, LoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
