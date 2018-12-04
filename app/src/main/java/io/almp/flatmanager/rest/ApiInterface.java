@@ -50,6 +50,11 @@ public interface ApiInterface {
                                          @Field("token") String token,
                                          @Field("message") String message);
 
+    @POST("v1/flat/add_flat")
+    @FormUrlEncoded
+    Call<SimpleErrorAnswer> addFlat(@Field("name") String name,
+                                    @Field("invitation_code") String invitation_code);
+
     @POST("/v1/flat/add_shopping_item")
     @FormUrlEncoded
     Call<SimpleErrorAnswer> addShoppingItem(@Field("flat_id") int flat_id,
