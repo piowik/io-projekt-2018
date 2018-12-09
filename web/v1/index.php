@@ -20,26 +20,19 @@ $app->post('/user/login', function() use ($app) {
     echoRespnse(200, $response);
 });
 
-$app->post('/user/updatefbtoken', function() use ($app) {
-    verifyRequiredParams(array('uid', 'firebasetoken'));
+//sing up
+
+$app->post('/user/singup', function() use ($app) {
+    // check for required params
+    verifyRequiredParams(array('login', 'password', 'name','email'));
     // reading post params
-    $uid = $app->request->post('uid');
-	$fbtoken = $app->request->post('firebasetoken');
+    $login = $app->request->post('login');
+    $password = $app->request->post('password');
+	$name = $app->request->post('name');
+	$email = $app->request->post('email');
 
     $db = new DbHandler();
-    $response = $db->updateToken($uid, $fbtoken);
-    // echo json response
-    echoRespnse(200, $response);
-});
-
-$app->post('/flat/join', function() use ($app) {
-    verifyRequiredParams(array('uid', 'code'));
-    // reading post params
-    $uid = $app->request->post('uid');
-	$code = $app->request->post('code');
-
-    $db = new DbHandler();
-    $response = $db->joinFlat($uid, $code);
+    $response = $db->singUp($login, $password, $name,$email);
     // echo json response
     echoRespnse(200, $response);
 });
@@ -55,36 +48,6 @@ $db = new DbHandler();
 $response = $db->addMessage($id, $message);
 // echo json response
 echoRespnse(200, $response);
-});
-
-$app->post('/flat/add_shopping_item', function() use ($app){
-  verifyRequiredParams(array('flat_id', 'user_id', 'item_name', 'price', 'date'));
-  $flat_id = $app->request->post('flat_id');
-  $user_id = $app->request->post('user_id');
-  $item_name = $app->request->post('item_name');
-  $price = $app->request->post('price');
-  $date = $app->request->post('date');
-  $db = new DbHandler();
-  $response = $db->addShoppingItem($flat_id, $user_id, $item_name, $price, $date);
-  echoRespnse(200, $response);
-});
-
-$app->post('/flat/add_flat', function() use ($app){
-  verifyRequiredParams(array('name', 'invitation_code'));
-  $name = $app->request->post('name');
-  $invitation_code = $app->request->post('invitation_code');
-  $db = new DbHandler();
-  $response = $db->addFlat($name, $invitation_code);
-  echoRespnse(200, $response);
-});
-
-$app->post('/flat/update_balance', function() use ($app){
-  verifyRequiredParams(array('user_id', 'cost'));
-  $user_id = $app->request->post('user_id');
-  $cost = $app->request->post('cost');
-  $db = new DbHandler();
-  $response = $db->updateUserBalance($user_id, $cost);
-  echoRespnse(200, $response);
 });
 
 $app->post('/chat/get_messages', function() use ($app) {
@@ -128,22 +91,6 @@ $app->post('/flat/rents', function() use ($app) {
 
     $db = new DbHandler();
     $response = $db->getRents($flat);
-    echoRespnse(200, $response);
-});
-
-$app->post('/flat/get_users', function() use($app) {
-    verifyRequiredParams(array('flat_id'));
-    $flat_id = $app->request->post('flat_id');
-    $db = new DbHandler();
-    $response = $db->getUserByFlatId($flat_id);
-    echoRespnse(200, $response);
-});
-
-$app->post('/flat/get_shoppings', function() use($app) {
-    verifyRequiredParams(array('flat_id'));
-    $flat_id = $app->request->post('flat_id');
-    $db = new DbHandler();
-    $response = $db->getShoppingHistoryByFlatId($flat_id);
     echoRespnse(200, $response);
 });
 /**

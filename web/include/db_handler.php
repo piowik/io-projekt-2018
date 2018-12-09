@@ -32,6 +32,23 @@ class DbHandler {
 		}
 		return $response;
     }
+	public function singUp($login, $password, $name, $email) {
+        $response = array();
+		if ($this->doesUserExists($login)) {
+
+			$response["error"] = true;
+			$response["message"] = "Login in use";
+		} else {
+			$stmt = $this->conn->prepare("INSERT INTO users (login,name,password,email ) values (?, ?, ?, ?)");
+			$stmt->bind_param("ssss", $login, $name,$password,$email);
+			$result = $stmt->execute();
+			$stmt->close();
+			$response["error"] = false;
+			$response["message"] = "";
+
+		}
+		return $response;
+    }
 
 	public function updateToken($uid, $fbtoken) {
 		if ($this->doesUserExistsById($uid)) {
