@@ -85,7 +85,7 @@ public class PayDebtFragment extends Fragment {
         long uid = getContext().getSharedPreferences("_", MODE_PRIVATE).getLong("user_id", 0L);
         usersList = new LinkedList<>();
         spinner = rootview.findViewById(R.id.users_spinner);
-        loadUsers(flat_id, rootview); 
+        loadUsers(flat_id, rootview);
         money = rootview.findViewById(R.id.debt_edit_text);
 
 
