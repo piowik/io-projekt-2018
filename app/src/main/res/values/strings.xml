@@ -54,13 +54,12 @@
     <string name="join_flat">Dołącz do mieszkania</string>
     <string name="flat_code">Kod mieszkania</string>
     <string name="join">Join flat</string>
-    <string name="join_flat">Dołącz</string>
     <string name="empty_login">Login nie może być pusty !</string>
     <string name="empty_password">Hasło nie może być puste !</string>
     <string name="empty_email">Email nie może być pusty !</string>
     <string name="empty_name">Imię nie może być puste !</string>
     <string name="different_passwords">Hasła nie mogą być różne !</string>
-    <string name="too_short_password">Hasło musi zawiraćconajmniej 8 znaków !</string>
+    <string name="too_short_password">Hasło musi zawierać co najmniej 8 znaków !</string>
     <string name="singup_correct">Zarejestrowano poprawnie. Zaloguj się.</string>
     <string name="singup_faild">Rejestracja nie powiodła się</string>
     <string name="login_in_use">Login jest już zajęty</string>

@@ -39,6 +39,7 @@ public class SignUpFragment extends Fragment {
     private EditText mPasswordConfirmation;
     private EditText mEmail;
     private EditText mName;
+    private EditText mSurname;
     private OnFragmentInteractionListener mListener;
     private Button mSignUp;
     private ApiInterface mAPIService;
@@ -79,10 +80,15 @@ public class SignUpFragment extends Fragment {
 
         mLogin = rootView.findViewById(R.id.sing_up_login_edittext);
         mPassword = rootView.findViewById(R.id.sing_up_password_edittext);
+        mPasswordConfirmation = rootView.findViewById(R.id.sing_up_password_confirm_edittext);
+        mEmail = rootView.findViewById(R.id.sing_up_email_textedit);
+        mName = rootView.findViewById(R.id.sing_up_first_name_edittext);
+        mSurname = rootView.findViewById(R.id.sing_up_last_name_edittex);
         mSignUp = rootView.findViewById(R.id.sign_up_button);
         mSignUp.setOnClickListener(v->{
             if(validData()){
-                sendPost(mLogin.getText().toString(),mPassword.getText().toString(),mName.getText().toString(),mEmail.getText().toString());
+                String name = mName.getText().toString()+ " " +mSurname.getText().toString();
+                sendPost(mLogin.getText().toString(),mPassword.getText().toString(),name,mEmail.getText().toString());
             }
         });
 
