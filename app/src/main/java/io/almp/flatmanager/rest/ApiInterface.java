@@ -7,6 +7,7 @@ import io.almp.flatmanager.model.Message;
 import io.almp.flatmanager.model.RentHistoryItem;
 import io.almp.flatmanager.model.ShoppingHistoryEntity;
 import io.almp.flatmanager.model.User;
+import io.almp.flatmanager.model.api.ErrorAnswer;
 import io.almp.flatmanager.model.api.LoginAnswer;
 import io.almp.flatmanager.model.api.MessagesAnswer;
 import io.almp.flatmanager.model.api.SimpleErrorAnswer;
@@ -21,6 +22,14 @@ public interface ApiInterface {
     Call<LoginAnswer> loginData(@Field("login") String login,
                                 @Field("password") String password,
                                 @Field("firebasetoken") String firebasetoken);
+
+    @POST("/v1/user/singup")
+    @FormUrlEncoded
+    Call<ErrorAnswer> singup(@Field("login") String login,
+                             @Field("password") String password,
+                             @Field("name") String name,
+                             @Field("email") String email);
+
 
     @POST("/v1/user/updatefbtoken")
     @FormUrlEncoded

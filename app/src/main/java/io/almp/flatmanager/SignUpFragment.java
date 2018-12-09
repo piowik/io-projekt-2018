@@ -1,14 +1,28 @@
 package io.almp.flatmanager;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import io.almp.flatmanager.model.api.ErrorAnswer;
+import io.almp.flatmanager.model.api.LoginAnswer;
+import io.almp.flatmanager.model.api.SimpleErrorAnswer;
+import io.almp.flatmanager.rest.ApiInterface;
+import io.almp.flatmanager.rest.ApiUtils;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static android.content.Context.MODE_PRIVATE;
 
 
 /**
@@ -20,10 +34,14 @@ import android.widget.EditText;
  * create an instance of this fragment.
  */
 public class SignUpFragment extends Fragment {
-    private EditText login;
-    private EditText password;
+    private EditText mLogin;
+    private EditText mPassword;
+    private EditText mPasswordConfirmation;
+    private EditText mEmail;
+    private EditText mName;
     private OnFragmentInteractionListener mListener;
-    private Button signUp;
+    private Button mSignUp;
+    private ApiInterface mAPIService;
 
     public SignUpFragment() {
         // Required empty public constructor
@@ -54,24 +72,26 @@ public class SignUpFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         final View rootView = inflater.inflate(R.layout.fragment_sign_up, container, false);
+        mAPIService = ApiUtils.getAPIService();
 
-        String emailS = getArguments().getString("email");
-        String passwordS = getArguments().getString("password");
-        System.out.println(emailS + ", " + passwordS);
-        login = rootView.findViewById(R.id.login_2);
-        login.setText(emailS);
-        password = rootView.findViewById(R.id.password_2);
-        password.setText(passwordS);
 
-        signUp = rootView.findViewById(R.id.sign_up_2);
-        signUp.setOnClickListener(v->{
-            //TODO register user
+        mLogin = rootView.findViewById(R.id.sing_up_login_edittext);
+        mPassword = rootView.findViewById(R.id.sing_up_password_edittext);
+        mSignUp = rootView.findViewById(R.id.sign_up_button);
+        mSignUp.setOnClickListener(v->{
+            if(validData()){
+                sendPost(mLogin.getText().toString(),mPassword.getText().toString(),mName.getText().toString(),mEmail.getText().toString());
+            }
         });
+
+
 
         return rootView;
     }
+
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -79,19 +99,70 @@ public class SignUpFragment extends Fragment {
             mListener.onFragmentInteraction(uri);
         }
     }
+    private boolean validData(){
+        if(!(mLogin.getText().toString().trim().length() > 0)){
+            showToast(getString(R.string.empty_login));
+            return false;
+        }
+        if(mPassword.getText().toString().trim().length() > 0 && mPasswordConfirmation.getText().toString().trim().length() > 0){
+            if(!mPassword.getText().toString().equals(mPasswordConfirmation.getText().toString()))
+                showToast(getString(R.string.different_passwords));
+            else{
+                if(mPassword.getText().toString().length()<8)
+                    showToast(getString(R.string.too_short_password));
+            }
+
+        }else{
+            showToast(getString(R.string.empty_password));
+            return false;
+        }
+        if(!(mEmail.getText().toString().trim().length() > 0)){
+            showToast(getString(R.string.empty_email));
+            return false;
+        }
+        if(!(mName.getText().toString().trim().length() > 0)){
+            showToast(getString(R.string.empty_name));
+            return false;
+        }
+        return true;
+
+    }
+    private void showToast(String message){
+        Toast toast = Toast.makeText(getContext(), message, Toast.LENGTH_SHORT);
+        toast.show();
+    }
+    private void sendPost(String loginStr, String passwordStr, String nameStr, String emailStr) {
+        mAPIService.singup(loginStr, passwordStr, nameStr,emailStr).enqueue(new Callback<ErrorAnswer>() {
+            @Override
+            public void onResponse(Call<ErrorAnswer> call, Response<ErrorAnswer> response) {
+                Log.e("RespMsg", response.message() + "!");
+                Log.e("RespBody", response.toString() + "!");
+                if (response.isSuccessful()) {
+                    if (!response.body().isError()) {
+                        showToast(getString(R.string.singup_correct));
+                        Intent intent = new Intent(getContext(), LoginActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                    } else {
+                        if(response.body().getMessage().equals("Login in use"))
+                            showToast(getString(R.string.login_in_use));
+                        else
+                            showToast(getString(R.string.singup_faild));
+
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ErrorAnswer> call, Throwable t) {
+                Log.e("POST", "Unable to submit post to API.");
+                showToast(getString(R.string.something_goes_wrong));
+            }
+        });
+    }
 
 
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
