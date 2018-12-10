@@ -19,15 +19,19 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class CreateFlatFragment extends Fragment {
     private Button saveButton;
     private EditText flatNameEditText;
     private ApiInterface mApiInterface;
+    private long uid;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_create_flat, container, false);
         mApiInterface = ApiUtils.getAPIService();
+        uid = getContext().getSharedPreferences("_", MODE_PRIVATE).getLong("user_id", 0L);
         flatNameEditText = rootView.findViewById(R.id.flat_name_edit_text);
         saveButton = rootView.findViewById(R.id.save_flat_name_button);
         saveButton.setOnClickListener(onClickListener);
@@ -38,9 +42,10 @@ public class CreateFlatFragment extends Fragment {
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-                  String flatNameString = flatNameEditText.getText().toString();
-                  String invitationCode = generateInvitationCode(8);
-                  mApiInterface.addFlat(flatNameString, invitationCode).enqueue(callback);
+            System.out.println(uid);
+            String flatNameString = flatNameEditText.getText().toString();
+            String invitationCode = generateInvitationCode(8);
+            mApiInterface.addFlat(flatNameString, invitationCode, uid).enqueue(callback);
         }
     };
 

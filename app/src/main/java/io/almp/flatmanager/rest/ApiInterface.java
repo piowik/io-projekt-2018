@@ -62,7 +62,10 @@ public interface ApiInterface {
     @POST("v1/flat/add_flat")
     @FormUrlEncoded
     Call<SimpleErrorAnswer> addFlat(@Field("name") String name,
-                                    @Field("invitation_code") String invitation_code);
+                                    @Field("invitation_code") String invitation_code,
+                                    @Field("user_id") long user_id);
+
+
 
     @POST("/v1/flat/add_shopping_item")
     @FormUrlEncoded
