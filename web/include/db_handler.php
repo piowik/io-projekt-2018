@@ -91,12 +91,7 @@ class DbHandler {
 	  return $response;
     }
 
-  public function setFlatId($user_id, $flat_id){
-    $stmt = $this->conn->prepare("UPDATE users SET flat_id = ? WHERE user_id =?");
-    $stmt->bind_param("ss", $flat_id, $user_id);
-		$stmt->execute();
-		$stmt->close();
-  }
+
 
 	public function getRents($flat) {
 		$stmt = $this->conn->prepare("SELECT rent_value, per_person, rent_date FROM rent_history WHERE flat_id = ? ORDER BY rent_date DESC");
@@ -177,11 +172,27 @@ class DbHandler {
 		$stmt->close();
   }
 
+  public function setFlatId($user_id, $flat_id){
+    $stmt = $this->conn->prepare("UPDATE users SET flat_id = ? WHERE user_id =?");
+    $stmt->bind_param("ss", $flat_id, $user_id);
+    $stmt->execute();
+    $stmt->close();
+  }
+
   public function addFlat($name, $invitation_code){
     $stmt = $this->conn->prepare("INSERT INTO flats (name, invitation_code) values (?, ?)");
     $stmt->bind_param("ss", $name, $invitation_code);
     $result = $stmt->execute();
     $stmt->close();
+
+    $stmt = $this->conn->prepare("SELECT flat_id from flats where invitation_code=?");
+    $stmt->bind_param("s", $invitation_code);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = mysqli_fetch_array($result);
+    $value = $row['flat_id'];
+    $stmt->close();
+    return $value;
   }
 
   public function updateUserBalance($user_id, $cost){

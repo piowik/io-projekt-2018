@@ -86,11 +86,13 @@ $app->post('/flat/add_shopping_item', function() use ($app){
 });
 
 $app->post('/flat/add_flat', function() use ($app){
-  verifyRequiredParams(array('name', 'invitation_code'));
+  verifyRequiredParams(array('name', 'invitation_code', 'user_id'));
   $name = $app->request->post('name');
   $invitation_code = $app->request->post('invitation_code');
+  $user_id = $app->request->post('user_id');
   $db = new DbHandler();
-  $response = $db->addFlat($name, $invitation_code);
+  $result = $db->addFlat($name, $invitation_code, $user_id);  
+  $response = $db->setFlatId($user_id, $result);
   echoRespnse(200, $response);
 });
 
@@ -103,14 +105,6 @@ $app->post('/flat/update_balance', function() use ($app){
   echoRespnse(200, $response);
 });
 
-$app->post('/flat/updateFlatId', function() use ($app){
-  verifyRequiredParams(array('flat_id', 'user_id'));
-  $flat_id = $app->request->post('flat_id');
-  $user_id = $app->request->post('user_id');
-  $db = new DbHandler();
-  $response = $db->setFlatId($user_id, $flat_id);
-  echoRespnse(200, $response);
-});
 
 $app->post('/chat/get_messages', function() use ($app) {
 // check for required params
