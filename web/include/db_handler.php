@@ -317,7 +317,7 @@ class DbHandler {
     }
 
     public function getShoppingHistoryByFlatId($flat_id){
-      $stmt = $this->conn->prepare("SELECT s.item_id, s.flat_id, name, s.item_name, s.price, s.purchase_date FROM shopping s join users using(user_id) WHERE s.flat_id = ?");
+      $stmt = $this->conn->prepare("SELECT s.item_id, s.flat_id, name, s.item_name, s.price, s.purchase_date FROM shopping s join users using(user_id) WHERE s.flat_id = ? order by s.purchase_date desc");
       $stmt->bind_param("s", $flat_id);
       $stmt->execute();
       $result = $stmt->get_result();
