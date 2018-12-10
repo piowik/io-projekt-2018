@@ -64,5 +64,6 @@
     <string name="singup_faild">Rejestracja nie powiodła się</string>
     <string name="login_in_use">Login jest już zajęty</string>
     <string name="something_goes_wrong">Coś poszło nie tak...</string>
+    <string name="buyer_colon">Buyer:</string>
 
 </resources>

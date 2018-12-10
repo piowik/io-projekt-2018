@@ -9,11 +9,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.LinkedList;
@@ -38,6 +40,9 @@ public class AddShoppingItemFragment extends Fragment {
     UsersCheckboxesAdapter usersCheckboxesAdapter;
     long uid;
     int flat_id;
+    Spinner spinner;
+    ArrayAdapter<String> arrayAdapter;
+
 
 
     public AddShoppingItemFragment() {
@@ -51,7 +56,7 @@ public class AddShoppingItemFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-    public void loadUsers(int flatId){
+    public void loadUsers(int flatId, View rootview){
         mApiInterface.getUserByFlatId(flatId).enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(@NonNull Call<List<User>> call, @NonNull Response<List<User>> response) {
@@ -59,8 +64,13 @@ public class AddShoppingItemFragment extends Fragment {
                 Log.e("RespBody", response.toString() + "!");
                 if(response.isSuccessful()){
                     usersList = response.body();
+                    arrayAdapter = new ArrayAdapter<>(rootview.getContext(), R.layout.users_spinner_text_view);
                     usersCheckboxesAdapter = new UsersCheckboxesAdapter(AddShoppingItemFragment.this.getActivity(), usersList);
                     usersCheckboxesListView.setAdapter(usersCheckboxesAdapter);
+                    for(User user: usersList){
+                        arrayAdapter.add(user.getName());
+                    }
+                    spinner.setAdapter(arrayAdapter);
                 } else {
                     Toast toast = Toast.makeText(AddShoppingItemFragment.this.getContext(), "Chujwie", Toast.LENGTH_SHORT);
                     toast.show();
@@ -82,7 +92,10 @@ public class AddShoppingItemFragment extends Fragment {
         usersCheckboxesListView = rootView.findViewById(R.id.users_checkboxes_list_view);
         uid = getContext().getSharedPreferences("_", MODE_PRIVATE).getLong("user_id", 0L);
         flat_id = getContext().getSharedPreferences("_", MODE_PRIVATE).getInt("flat_id", 0);
-        loadUsers(flat_id);
+
+        loadUsers(flat_id, rootView);
+        spinner = rootView.findViewById(R.id.users_spinner_buyer);
+
 
         Button pickDateButton = rootView.findViewById(R.id.pick_date_button);
         DatePicker datePicker = rootView.findViewById(R.id.shopping_date_picker);
@@ -102,6 +115,7 @@ public class AddShoppingItemFragment extends Fragment {
             EditText itemPriceET = rootView.findViewById(R.id.new_item_price_id);
             String itemNameS = itemNameET.getText().toString();
             String itemPrice = itemPriceET.getText().toString();
+            String selectedBuyer;
 
             if(itemNameS.equals("")){
                 Toast toast = Toast.makeText(AddShoppingItemFragment.this.getContext(), "Item name cannot be empty", Toast.LENGTH_SHORT);
@@ -125,7 +139,6 @@ public class AddShoppingItemFragment extends Fragment {
 
 
             for (int i = 0; i < numberOfUsers; i++) {
-                User user =(User) usersCheckboxesAdapter.getItem(i);
                 CheckBox c = rootView.findViewWithTag(i);
                 if(c.isChecked()){
                     usersName.add(c.getText().toString());
@@ -136,6 +149,27 @@ public class AddShoppingItemFragment extends Fragment {
                 toast.show();
                 return;
             }
+            if(spinner.getSelectedItem()==null){
+                Toast toast = Toast.makeText(AddShoppingItemFragment.this.getContext(), "Choose one user", Toast.LENGTH_SHORT);
+                toast.show();
+                return;
+            }
+
+            selectedBuyer = spinner.getSelectedItem().toString();
+            User selectedBuyerU;
+            long buyerId = -1;
+            for(User user: usersList){
+                if(user.getName().equals(selectedBuyer)){
+                    selectedBuyerU = user;
+                    buyerId = selectedBuyerU.getId();
+                }
+            }
+            if(buyerId == -1){
+                Toast toast = Toast.makeText(AddShoppingItemFragment.this.getContext(), "Buyer doesn't exist", Toast.LENGTH_SHORT);
+                toast.show();
+                return;
+            }
+
 
             for(User user: usersList){
                 for(String s: usersName){
@@ -146,7 +180,7 @@ public class AddShoppingItemFragment extends Fragment {
                 }
             }
 
-            //TODO update balances
+
             int numbOfSelectedUsers = selectedUsers.size();
             double costPerUser = Double.valueOf(itemPrice) / numbOfSelectedUsers;
             costPerUser = costPerUser * (-1);
@@ -161,15 +195,15 @@ public class AddShoppingItemFragment extends Fragment {
             String date = stringBuilder.toString();
 
             for (User user: selectedUsers){
-                if(user.getId() != uid){
+                if(user.getId() != buyerId){
                     mApiInterface.updateUserBalance(user.getId(), costPerUser).enqueue(callback);
                     System.out.println(user.getName() + ". " + user.getId());
-                } else if(user.getId() == uid){
-                    mApiInterface.updateUserBalance(uid, costForBuyer).enqueue(callback);
+                } else if(user.getId() == buyerId){
+                    mApiInterface.updateUserBalance(buyerId, costForBuyer).enqueue(callback);
                 }
             }
 
-            mApiInterface.addShoppingItem(flat_id, uid, itemNameS, itemPrice, date).enqueue(callback);
+            mApiInterface.addShoppingItem(flat_id, buyerId, itemNameS, itemPrice, date).enqueue(callback);
             ShoppingMainFragment shoppingMainFragment = new ShoppingMainFragment();
 
             FragmentTransaction fragmentTransaction;

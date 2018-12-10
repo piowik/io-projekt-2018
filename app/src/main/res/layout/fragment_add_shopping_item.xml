@@ -31,12 +31,19 @@
                 android:hint="@string/price"
                 android:id="@+id/new_item_price_id"
                 android:inputType="numberDecimal"/>
-            <Button
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/pick_date"
-                android:id="@+id/pick_date_button"
-                android:background="@color/colorAccent"/>
+                android:text="@string/buyer_colon"/>
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/users_spinner_buyer"
+                android:padding="15dp"
+                android:paddingStart="25dp"
+                >
+            </Spinner>
+
         </LinearLayout>
         <LinearLayout
             android:layout_weight="1"
@@ -52,8 +59,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/users_checkboxes_list_view">
-
             </ListView>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/pick_date"
+                android:id="@+id/pick_date_button"
+                android:background="@color/colorAccent"/>
         </LinearLayout>
 
     </LinearLayout>
