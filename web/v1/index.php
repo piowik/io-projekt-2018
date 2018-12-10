@@ -103,6 +103,15 @@ $app->post('/flat/update_balance', function() use ($app){
   echoRespnse(200, $response);
 });
 
+$app->post('/flat/updateFlatId', function() use ($app){
+  verifyRequiredParams(array('flat_id', 'user_id'));
+  $flat_id = $app->request->post('flat_id');
+  $user_id = $app->request->post('user_id');
+  $db = new DbHandler();
+  $response = $db->setFlatId($user_id, $flat_id);
+  echoRespnse(200, $response);
+});
+
 $app->post('/chat/get_messages', function() use ($app) {
 // check for required params
 verifyRequiredParams(array('id', 'token'));

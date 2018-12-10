@@ -91,6 +91,13 @@ class DbHandler {
 	  return $response;
     }
 
+  public function setFlatId($user_id, $flat_id){
+    $stmt = $this->conn->prepare("UPDATE users SET flat_id = ? WHERE user_id =?");
+    $stmt->bind_param("ss", $flat_id, $user_id);
+		$stmt->execute();
+		$stmt->close();
+  }
+
 	public function getRents($flat) {
 		$stmt = $this->conn->prepare("SELECT rent_value, per_person, rent_date FROM rent_history WHERE flat_id = ? ORDER BY rent_date DESC");
 		$stmt->bind_param("s", $flat);
