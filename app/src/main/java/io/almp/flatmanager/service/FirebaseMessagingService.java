@@ -153,7 +153,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         }
     }
 
-    public void sendPost(Long uid, String fbTokenStr) {
+    public static void sendPost(Long uid, String fbTokenStr) {
         ApiInterface mAPIService = ApiUtils.getAPIService();
 
         mAPIService.updateFirebaseToken(uid, fbTokenStr).enqueue(new Callback<SimpleErrorAnswer>() {
