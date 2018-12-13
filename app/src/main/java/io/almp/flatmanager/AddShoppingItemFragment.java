@@ -164,11 +164,15 @@ public class AddShoppingItemFragment extends Fragment {
                     buyerId = selectedBuyerU.getId();
                 }
             }
+
+
             if(buyerId == -1){
                 Toast toast = Toast.makeText(AddShoppingItemFragment.this.getContext(), "Buyer doesn't exist", Toast.LENGTH_SHORT);
                 toast.show();
                 return;
             }
+
+            mApiInterface.updateUserBalance(buyerId, Double.valueOf(itemPrice)).enqueue(callback);
 
 
             for(User user: usersList){
