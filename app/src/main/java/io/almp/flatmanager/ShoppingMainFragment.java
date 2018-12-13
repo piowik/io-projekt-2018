@@ -116,6 +116,7 @@ public class ShoppingMainFragment extends Fragment {
                 Bundle bundle = new Bundle();
                 fragmentTransaction = getFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.shopping_fragment_container, addShoppingItemFragment);
+                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
         });
@@ -127,6 +128,7 @@ public class ShoppingMainFragment extends Fragment {
             if (getFragmentManager() != null) {
                 fragmentTransaction = getFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.shopping_fragment_container, payDebtFragment);
+                fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
             }
         });

@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 
 import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.FirebaseMessagingService;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -104,7 +105,9 @@ public class MainActivity extends AppCompatActivity
             return true;
         }
         if (id == R.id.action_logout) {
+
             SharedPreferences sharedPref = getSharedPreferences("_", MODE_PRIVATE);
+            io.almp.flatmanager.service.FirebaseMessagingService.sendPost(getSharedPreferences("_", MODE_PRIVATE).getLong("user_id", 0L),"empty");
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putLong("user_id", 0L);
             editor.putInt("flat_id", -1);
