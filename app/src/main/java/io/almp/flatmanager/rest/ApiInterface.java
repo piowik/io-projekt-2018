@@ -3,6 +3,7 @@ package io.almp.flatmanager.rest;
 
 import java.util.List;
 
+import io.almp.flatmanager.model.DutiesEntity;
 import io.almp.flatmanager.model.Message;
 import io.almp.flatmanager.model.RentHistoryItem;
 import io.almp.flatmanager.model.ShoppingHistoryEntity;
@@ -92,4 +93,20 @@ public interface ApiInterface {
     @FormUrlEncoded
     Call<SimpleErrorAnswer> updateUserBalance(@Field("user_id") long user_id,
                                               @Field("cost") double cost);
+    Call<List<ShoppingHistoryEntity>> getShoppingHistoryByFlatId(@Field("flat_id") Integer flatId);
+
+    @POST("v1/flat/get_duties_todo")
+    @FormUrlEncoded
+    Call<List<DutiesEntity>> getDutiesTodoByFlatId(@Field("flat_id") Integer flatId);
+
+    @POST("v1/flat/get_duties_hist")
+    @FormUrlEncoded
+    Call<List<DutiesEntity>> getDutiesHistoryByFlatId(@Field("flat_id") Integer flatId);
+
+    @POST("/v1/flat/add_shopping_item")
+    @FormUrlEncoded
+    Call<SimpleErrorAnswer> addDutyItem(@Field("flat_id") int flat_id,
+                                            @Field("user_id") long user_id,
+                                            @Field("duty_name") String duty_name,
+                                            @Field("value") String value);
 }
