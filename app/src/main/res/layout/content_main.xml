@@ -205,7 +205,7 @@
                 android:contentDescription="@string/duties"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/swipe"
+                android:src="@drawable/ic_swipe"
                 android:layout_weight="2"
                 />
             <TextView
