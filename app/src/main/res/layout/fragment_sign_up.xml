@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
     tools:context=".LoginActivity"
     android:orientation="vertical"
     android:padding="30dp">
@@ -58,6 +59,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorButtons"
         style="@style/Base.Widget.AppCompat.Button.Borderless"
         android:text="@string/sign_up"
         android:id="@+id/sign_up_button"/>

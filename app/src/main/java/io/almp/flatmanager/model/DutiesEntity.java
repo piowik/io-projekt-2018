@@ -3,8 +3,8 @@ package io.almp.flatmanager.model;
 public class DutiesEntity {
     private Integer duty_id;
     private Integer flat_id;
+    private Integer user_id;
     private String value;
-    private String name;
     private String duty_name;
 
     public Integer getDuty_id() {
@@ -13,6 +13,14 @@ public class DutiesEntity {
 
     public void setDuty_id(Integer duty_id) {
         this.duty_id = duty_id;
+    }
+
+    public Integer getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(Integer user_id) {
+        this.user_id = user_id;
     }
 
     public Integer getFlat_id() {
@@ -31,15 +39,6 @@ public class DutiesEntity {
         this.value = value;
     }
 
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getDuty_name() {
         return duty_name;
     }
@@ -48,11 +47,12 @@ public class DutiesEntity {
         this.duty_name = duty_name;
     }
 
-    public DutiesEntity(Integer duty_id, Integer flat_id, String value, String name, String duty_name) {
+
+    public DutiesEntity(Integer duty_id, Integer flat_id, Integer user_id, String value, String duty_name) {
         this.duty_id = duty_id;
         this.flat_id = flat_id;
+        this.user_id = user_id;
         this.value = value;
-        this.name = name;
         this.duty_name = duty_name;
     }
 }

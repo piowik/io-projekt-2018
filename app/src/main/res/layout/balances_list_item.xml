@@ -4,6 +4,7 @@
     android:id="@+id/balances_list_item_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
     android:orientation="vertical"
     android:padding="5dp"
     android:layout_margin="0dp">

@@ -57,7 +57,7 @@
     <string name="channel_chat_description">Powiadomienia o nowej wiadomości</string>
     <string name="no_flat">Nie masz mieszkania</string>
     <string name="create_flat">Załóż</string>
-    <string name="welcome">Wellcome to Flatmate, please enter Your flat name to start a great adventure!</string>
+    <string name="welcome">Welcome to Flatmate! Please enter your flat name to start a great adventure!</string>
     <string name="flat_name">Flat name</string>
     <string name="join_flat">Dołącz do mieszkania</string>
     <string name="flat_code">Kod mieszkania</string>

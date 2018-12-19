@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/rent_date_text_view"
-        android:layout_width="72dp"
+        android:layout_width="373dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:text="aaa"

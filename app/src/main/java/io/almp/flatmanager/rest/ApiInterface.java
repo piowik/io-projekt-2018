@@ -76,6 +76,21 @@ public interface ApiInterface {
                                             @Field("price") String price,
                                             @Field("date") String date);
 
+    @POST("/v1/flat/add_duty_todo")
+    @FormUrlEncoded
+    Call<SimpleErrorAnswer> addDutyTodo(@Field("flat_id") int flat_id,
+                                            @Field("user_id") long user_id,
+                                            @Field("value") String value,
+                                            @Field("duty_name") String duty_name);
+/*
+    @POST("/v1/flat/add_duty_history")
+    @FormUrlEncoded
+    Call<SimpleErrorAnswer> addDutyHistory(@Field("duty_id") int duty_id,
+                                        @Field("flat_id") int flat_id,
+                                        @Field("user_id") long user_id,
+                                        @Field("value") String value,
+                                        @Field("duty_name") String duty_name);
+*/
     @POST("/v1/chat/get_messages")
     @FormUrlEncoded
     Call<List<Message>> getMessages(@Field("id") Long id,
@@ -97,9 +112,9 @@ public interface ApiInterface {
 
     @POST("v1/flat/get_duties_todo")
     @FormUrlEncoded
-    Call<List<DutiesEntity>> getDutiesTodoByFlatId(@Field("flat_id") Integer flatId);
+    Call<List<DutiesEntity>> getDutiesTodoByFlatId(@Field("flat_id") int flatId);
 
-    @POST("v1/flat/get_duties_hist")
+    @POST("v1/flat/get_duties_history")
     @FormUrlEncoded
     Call<List<DutiesEntity>> getDutiesHistoryByFlatId(@Field("flat_id") Integer flatId);
 

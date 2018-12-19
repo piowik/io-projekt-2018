@@ -2,6 +2,7 @@ package io.almp.flatmanager;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -16,10 +17,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import io.almp.flatmanager.adapter.DutiesTodoAdapter;
-import io.almp.flatmanager.adapter.PointsAdapter;
 import io.almp.flatmanager.adapter.DutiesHistoryAdapter;
 import io.almp.flatmanager.model.DutiesEntity;
-import io.almp.flatmanager.model.User;
 import io.almp.flatmanager.rest.ApiInterface;
 import io.almp.flatmanager.rest.ApiUtils;
 import retrofit2.Call;
@@ -90,13 +89,13 @@ public class DutiesMainFragment extends Fragment {
     public void loadDutiesTodo(int flatId){
         mApiInterface.getDutiesTodoByFlatId(flatId).enqueue(new Callback<List<DutiesEntity>>() {
             @Override
-            public void onResponse(Call<List<DutiesEntity>> call, Response<List<DutiesEntity>> response) {
+            public void onResponse(@NonNull Call<List<DutiesEntity>> call, @NonNull Response<List<DutiesEntity>> response) {
                 Log.e("RespMsg", response.message() + "!");
                 Log.e("RespBody", response.toString() + "!");
                 if(response.isSuccessful()){
                     DutiesEntitiesTodoList = response.body();
-                    DutiesTodoAdapter dutiesAdapter = new DutiesTodoAdapter(DutiesMainFragment.this.getActivity(), DutiesEntitiesTodoList);
-                    mDutiesTodo.setAdapter(dutiesAdapter);
+                    DutiesTodoAdapter dutiesTodoAdapter = new DutiesTodoAdapter(DutiesMainFragment.this.getActivity(), DutiesEntitiesTodoList);
+                    mDutiesTodo.setAdapter(dutiesTodoAdapter);
                 } else {
                     Toast toast = Toast.makeText(DutiesMainFragment.this.getContext(), "Chujwie", Toast.LENGTH_SHORT);
                     toast.show();
@@ -109,7 +108,7 @@ public class DutiesMainFragment extends Fragment {
             }
         });
     }
-
+/*
     public void loadDutiesHistory(int flatId){
         mApiInterface.getDutiesHistoryByFlatId(flatId).enqueue(new Callback<List<DutiesEntity>>() {
             @Override
@@ -131,7 +130,7 @@ public class DutiesMainFragment extends Fragment {
                 Log.e("POST", "Unable to submit post to API.");
             }
         });
-    }
+    }*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -143,17 +142,17 @@ public class DutiesMainFragment extends Fragment {
 
         mApiInterface = ApiUtils.getAPIService();
         DutiesEntitiesTodoList = new LinkedList<>();
-        DutiesEntitiesHistoryList = new LinkedList<>();
+       // DutiesEntitiesHistoryList = new LinkedList<>();
         int flatId = 0;
         loadDutiesTodo(flatId);
-        loadDutiesHistory(flatId);
+       // loadDutiesHistory(flatId);
 
 
         addDutiesItemButton = rootView.findViewById(R.id.add_duties_item_button);
         addDutiesItemButton.setOnClickListener(v->{
-            AddDutyItemFragment addDutyItemFragment = new AddDutyItemFragment();
+            AddDutyTodoItemFragment addDutyTodoItemFragment = new AddDutyTodoItemFragment();
             FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.duties_fragment_container, addDutyItemFragment);
+            fragmentTransaction.replace(R.id.duties_fragment_container, addDutyTodoItemFragment);
             fragmentTransaction.commit();
         });
 

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackground"
     tools:context=".AddShoppingItemFragment"
     android:orientation="vertical"
     android:padding="25dp">
@@ -12,37 +13,42 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <LinearLayout
-            android:layout_weight="1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_margin="10dp">
+            android:layout_height="308dp"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
             <EditText
+                android:id="@+id/new_item_name_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/item_name"
-                android:id="@+id/new_item_name_id"
-                android:inputType="text"/>
+                android:inputType="text"
+                android:textAlignment="textStart" />
 
             <EditText
+                android:id="@+id/new_item_price_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/price"
-                android:id="@+id/new_item_price_id"
-                android:inputType="numberDecimal"/>
+                android:inputType="numberDecimal"
+                android:textAlignment="textStart" />
+
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/buyer_colon"/>
+                android:text="@string/buyer_colon"
+                android:textAlignment="center" />
+
             <Spinner
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/users_spinner_buyer"
+                android:layout_width="98dp"
+                android:layout_height="wrap_content"
                 android:padding="15dp"
-                android:paddingStart="25dp"
-                >
-            </Spinner>
+                android:paddingStart="25dp"></Spinner>
 
         </LinearLayout>
         <LinearLayout
@@ -51,10 +57,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_margin="10dp">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/divie_into"/>
+                android:text="@string/divie_into"
+                android:textAlignment="center" />
             <ListView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

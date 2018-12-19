@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddDutyItemFragment"
+    tools:context=".AddDutyTodoItemFragment"
+    android:background="@color/colorBackground"
     android:orientation="vertical"
     android:padding="25dp">
 
@@ -39,12 +40,13 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <Button
+            android:id="@+id/save_duty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
-            android:text="@string/save"
-            android:id="@+id/save_duty"
-            android:background="@color/colorAccent"/>
+            android:background="@color/colorButtons"
+            android:text="@string/save" />
     </FrameLayout>
 </LinearLayout>
