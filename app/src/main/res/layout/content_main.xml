@@ -76,30 +76,34 @@
         app:contentPadding="2dp">
 
         <LinearLayout
+            android:id="@+id/chat"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:layout_gravity="fill"
             android:layout_margin="0dp"
-            android:background="@android:color/white"
-            android:padding="0dp"
+            android:background="@color/colorButtons"
             android:clickable="true"
             android:focusable="true"
-            android:id="@+id/chat">
+            android:orientation="vertical"
+            android:padding="0dp">
+
             <ImageView
-                android:contentDescription="@string/chat"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_chat_black_128dp"
+                android:layout_height="145dp"
                 android:layout_weight="2"
-                />
+                android:contentDescription="@string/chat"
+                android:scaleType="center"
+                android:src="@drawable/ic_chat_black_128dp" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif"
                 android:text="@string/chat"
                 android:textAlignment="center"
-                android:textSize="30sp"
-                android:layout_weight="1"/>
+                android:textColor="@color/colorAccent"
+                android:textSize="30sp" />
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
@@ -120,25 +124,28 @@
             android:orientation="vertical"
             android:layout_gravity="fill"
             android:layout_margin="0dp"
-            android:background="@android:color/white"
+            android:background="@color/colorButtons"
             android:padding="0dp"
             android:clickable="true"
             android:focusable="true"
             android:id="@+id/rent">
+
             <ImageView
-                android:contentDescription="@string/rent"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_attach_money_black_24dp"
+                android:layout_height="140dp"
                 android:layout_weight="2"
-                />
+                android:contentDescription="@string/rent"
+                android:scaleType="center"
+                android:src="@drawable/ic_attach_money_black_24dp" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="@string/rent"
                 android:textAlignment="center"
-                android:textSize="30sp"
-                android:layout_weight="1"/>
+                android:textColor="@color/colorAccent"
+                android:textSize="30sp" />
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
@@ -158,25 +165,28 @@
             android:orientation="vertical"
             android:layout_gravity="fill"
             android:layout_margin="0dp"
-            android:background="@android:color/white"
+            android:background="@color/colorButtons"
             android:padding="0dp"
             android:clickable="true"
             android:focusable="true"
             android:id="@+id/shopping">
+
             <ImageView
-                android:contentDescription="@string/shopping"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_shopping_cart_black_24dp"
                 android:layout_weight="2"
-                />
+                android:contentDescription="@string/shopping"
+                android:scaleType="center"
+                android:src="@drawable/ic_shopping_cart_black_24dp" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="@string/shopping"
                 android:textAlignment="center"
-                android:textSize="30sp"
-                android:layout_weight="1"/>
+                android:textColor="@color/colorAccent"
+                android:textSize="30sp" />
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
@@ -196,25 +206,28 @@
             android:orientation="vertical"
             android:layout_gravity="fill"
             android:layout_margin="0dp"
-            android:background="@android:color/white"
+            android:background="@color/colorButtons"
             android:padding="0dp"
             android:clickable="true"
             android:focusable="true"
             android:id="@+id/duties">
+
             <ImageView
-                android:contentDescription="@string/duties"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/swipe"
+                android:layout_height="122dp"
                 android:layout_weight="2"
-                />
+                android:contentDescription="@string/duties"
+                android:scaleType="center"
+                android:src="@drawable/ic_swipe" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="@string/duties"
                 android:textAlignment="center"
-                android:textSize="30sp"
-                android:layout_weight="1"/>
+                android:textColor="@color/colorAccent"
+                android:textSize="30sp" />
         </LinearLayout>
     </android.support.v7.widget.CardView>
 

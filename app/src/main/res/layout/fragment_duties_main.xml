@@ -3,34 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ShoppingMainFragment"
+    android:background="@color/colorBackground"
+    tools:context=".DutiesMainFragment"
     android:orientation="vertical">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="30sp"
         android:textColor="@color/colorPrimaryDark"
-        android:text="@string/actual_balance"
-        android:padding="5dp"
-        android:textAlignment="center" />
-
-    <ListView
-        android:id="@+id/all_flatmates_balances"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="5"
-        android:divider="@color/colorAccent"
-        android:dividerHeight="0.5dp"></ListView>
-
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:textColor="@color/colorPrimaryDark"
-        android:text="@string/recent_shopping_items"
+        android:text="@string/duties_todo"
         android:padding="5dp"
         android:textAlignment="center" />
     <LinearLayout
@@ -41,21 +23,15 @@
         <TextView
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:textAlignment="viewStart"
+            android:textAlignment="center"
             android:layout_height="wrap_content"
-            android:text="@string/item_name"/>
+            android:text="@string/duty_name"/>
         <TextView
             android:layout_width="0dp"
             android:layout_weight="1"
             android:textAlignment="center"
             android:layout_height="wrap_content"
-            android:text="@string/price"/>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:textAlignment="viewEnd"
-            android:layout_height="wrap_content"
-            android:text="@string/buyer"/>
+            android:text="@string/duty_value"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
@@ -67,7 +43,49 @@
         android:layout_weight="6">
 
         <ListView
-            android:id="@+id/shopping_history_list_view"
+            android:id="@+id/duties_todo_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="147dp"></ListView>
+    </FrameLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:text="@string/duties_history"
+        android:padding="5dp"
+        android:textAlignment="center" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="30dp"
+        android:paddingEnd="30dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:text="@string/duty_name"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:text="@string/duty_doer"/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@android:color/darker_gray"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6">
+
+        <ListView
+            android:id="@+id/duties_history_list_view"
             android:layout_width="match_parent"
             android:layout_height="147dp"></ListView>
     </FrameLayout>
@@ -77,7 +95,7 @@
         >
 
         <Button
-            android:id="@+id/add_shopping_item_button"
+            android:id="@+id/add_duties_item_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
@@ -87,13 +105,13 @@
             android:clickable="true"
             android:focusable="true"
             android:padding="5dp"
-            android:text="@string/add_purchase"
+            android:text="@string/add_duty"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/pay_debt" />
+            app:layout_constraintStart_toEndOf="@+id/see_stats" />
 
         <Button
-            android:id="@+id/pay_debt"
+            android:id="@+id/see_stats"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
@@ -103,14 +121,15 @@
             android:clickable="true"
             android:focusable="true"
             android:padding="5dp"
-            android:text="@string/pay_debt"
+            android:text="@string/see_stats"
             android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/add_shopping_item_button"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/add_duties_item_button"
+            />
 
 
-</android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
 
 
 </LinearLayout>

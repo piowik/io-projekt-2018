@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/balances_list_item_layout"
+    android:id="@+id/duties_history_list_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground"
+    android:background="@color/colorButtons"
     android:orientation="vertical"
     android:padding="5dp"
     android:layout_margin="0dp">
@@ -13,25 +13,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:id="@+id/balances_element_layout"
+        android:paddingStart="20dp"
         android:paddingEnd="20dp"
-        android:paddingStart="20dp">
+        android:id="@+id/duties_history_element_layout">
         <TextView
-            android:id="@+id/user_name_text_view"
-            android:layout_width="wrap_content"
+            android:id="@+id/d_hist_name_text_view"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_gravity="top|start"
             android:layout_margin="5dp"
             android:textSize="18sp"
             />
-        <TextView
-            android:id="@+id/user_balance_text_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="viewEnd"
-            android:layout_margin="5dp"
-            android:textSize="18sp"
-            />
-
     </LinearLayout>
 </LinearLayout>

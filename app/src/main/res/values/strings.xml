@@ -27,6 +27,12 @@
     <string name="price">Price</string>
     <string name="item_name">Item name</string>
     <string name="buyer">Buyer</string>
+    <string name="value">Value</string>
+    <string name="duties_todo">To do</string>
+    <string name="duties_history">History</string>
+    <string name="duty_name">Duty</string>
+    <string name="duty_value">Value</string>
+    <string name="duty_doer">Doer</string>
     <string name="Kanal">channel_name</string>
     <string name="channel_name_rent">Czynsz</string>
     <string name="channel_rent_description">Powiadomienia o wysokości czynszu</string>
@@ -45,11 +51,13 @@
     <string name="to_whom">To whom?</string>
     <string name="how_much">How much?</string>
     <string name="pln">PLN</string>
+    <string name="see_stats">See stats</string>
+    <string name="add_duty">Add duty</string>
     <string name="channel_name_chat">Chat</string>
     <string name="channel_chat_description">Powiadomienia o nowej wiadomości</string>
     <string name="no_flat">Nie masz mieszkania</string>
     <string name="create_flat">Załóż</string>
-    <string name="welcome">Wellcome to Flatmate, please enter Your flat name to start a great adventure!</string>
+    <string name="welcome">Welcome to Flatmate! Please enter your flat name to start a great adventure!</string>
     <string name="flat_name">Flat name</string>
     <string name="join_flat">Dołącz do mieszkania</string>
     <string name="flat_code">Kod mieszkania</string>
