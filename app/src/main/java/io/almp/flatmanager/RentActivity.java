@@ -30,6 +30,7 @@ public class RentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        int flat_id = getSharedPreferences("_", MODE_PRIVATE).getInt("flat_id", 0);
         setContentView(R.layout.activity_rent);
         long uid = getSharedPreferences("_", MODE_PRIVATE).getLong("user_id", 0L);
         mApiInterface = ApiUtils.getAPIService();
@@ -37,16 +38,16 @@ public class RentActivity extends AppCompatActivity {
         EditText rentValueEditText = findViewById(R.id.rentValueEditText);
         ListView renthistoryListView = findViewById(R.id.rentHistoryListview);
         sendRentButton = findViewById(R.id.sendRentButton);
-        loadRents(0); // TODO: hardcoded
+        loadRents(flat_id);
 
         sendRentButton.setOnClickListener(view -> {
             if (TextUtils.isEmpty(rentValueEditText.getText().toString()))
                 return;
             float rentValue = Float.valueOf(rentValueEditText.getText().toString());
-            sendPost(uid,0, rentValue); // TODO: hardcoded flat id
+            sendPost(uid,flat_id, rentValue);
             rentValueEditText.setText("");
             sendRentButton.setEnabled(false);
-            loadRents(0); // TODO: hardcoded
+            loadRents(flat_id);
         });
         mRentHistoryAdapter = new RentHistoryAdapter(this, mRentHistoryItemList);
         renthistoryListView.setAdapter(mRentHistoryAdapter);
