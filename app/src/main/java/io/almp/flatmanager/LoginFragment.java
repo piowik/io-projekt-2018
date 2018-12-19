@@ -123,7 +123,7 @@ public class LoginFragment extends Fragment {
                         toast.show();
                     }
                 } else {
-                    Toast toast = Toast.makeText(getContext(), getString(R.string.something_goes_wrong), Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(getContext(), getString(R.string.something_went_wrong), Toast.LENGTH_SHORT);
                     toast.show();
                 }
                 signIn.setEnabled(true);

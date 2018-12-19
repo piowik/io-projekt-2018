@@ -7,9 +7,6 @@ import android.content.IntentFilter;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -19,14 +16,11 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
 import io.almp.flatmanager.adapter.MessagesAdapter;
 import io.almp.flatmanager.model.Message;
-import io.almp.flatmanager.model.api.LoginAnswer;
-import io.almp.flatmanager.model.api.MessagesAnswer;
 import io.almp.flatmanager.model.api.SimpleErrorAnswer;
 import io.almp.flatmanager.rest.ApiInterface;
 import io.almp.flatmanager.rest.ApiUtils;
@@ -106,7 +100,7 @@ public class ChatActivity extends AppCompatActivity {
                     }
                 }
                 else{
-                    Toast toast = Toast.makeText(ChatActivity.this, getString(R.string.something_goes_wrong), Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(ChatActivity.this, getString(R.string.something_went_wrong), Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }
@@ -134,7 +128,7 @@ public class ChatActivity extends AppCompatActivity {
                     scrollListView();
                 }
                 else{
-                    Toast toast = Toast.makeText(ChatActivity.this, getString(R.string.something_goes_wrong), Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(ChatActivity.this, getString(R.string.something_went_wrong), Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }

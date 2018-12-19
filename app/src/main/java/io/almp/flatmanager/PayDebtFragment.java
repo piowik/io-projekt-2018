@@ -12,13 +12,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import io.almp.flatmanager.adapter.UsersCheckboxesAdapter;
 import io.almp.flatmanager.model.User;
 import io.almp.flatmanager.model.api.SimpleErrorAnswer;
 import io.almp.flatmanager.rest.ApiInterface;
@@ -68,7 +66,7 @@ public class PayDebtFragment extends Fragment {
                     }
                     spinner.setAdapter(arrayAdapter);
                 } else {
-                    Toast toast = Toast.makeText(PayDebtFragment.this.getContext(), getString(R.string.something_goes_wrong), Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(PayDebtFragment.this.getContext(), getString(R.string.something_went_wrong), Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }

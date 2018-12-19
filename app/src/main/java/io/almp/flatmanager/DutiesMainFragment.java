@@ -17,7 +17,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import io.almp.flatmanager.adapter.DutiesTodoAdapter;
-import io.almp.flatmanager.adapter.DutiesHistoryAdapter;
 import io.almp.flatmanager.model.DutiesEntity;
 import io.almp.flatmanager.rest.ApiInterface;
 import io.almp.flatmanager.rest.ApiUtils;
@@ -92,7 +91,7 @@ public class DutiesMainFragment extends Fragment {
                     DutiesTodoAdapter dutiesTodoAdapter = new DutiesTodoAdapter(DutiesMainFragment.this.getActivity(), DutiesEntitiesTodoList);
                     mDutiesTodo.setAdapter(dutiesTodoAdapter);
                 } else {
-                    Toast toast = Toast.makeText(DutiesMainFragment.this.getContext(), getString(R.string.something_goes_wrong), Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(DutiesMainFragment.this.getContext(), getString(R.string.something_went_wrong), Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }

@@ -153,7 +153,7 @@ public class SignUpFragment extends Fragment {
             @Override
             public void onFailure(Call<ErrorAnswer> call, Throwable t) {
                 Log.e("POST", "Unable to submit post to API.");
-                showToast(getString(R.string.something_goes_wrong));
+                showToast(getString(R.string.something_went_wrong));
             }
         });
     }
