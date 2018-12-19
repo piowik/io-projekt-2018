@@ -1,5 +1,9 @@
 package io.almp.flatmanager.model;
 
+/**
+ *  Class containing methods required to create entity of users.
+ */
+
 public class User {
     private Integer user_id;
     private Integer flat_id ;

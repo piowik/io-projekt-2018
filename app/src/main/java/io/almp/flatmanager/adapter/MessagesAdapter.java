@@ -18,8 +18,9 @@ import io.almp.flatmanager.model.User;
 import static android.content.Context.MODE_PRIVATE;
 
 /**
- * Created by Mateusz Zaremba on 29.11.2018.
+ *  Class containing methods required to create the proper view for messages.
  */
+
 public class MessagesAdapter extends BaseAdapter {
 
     private Activity mActivity;

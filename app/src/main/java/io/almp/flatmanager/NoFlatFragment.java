@@ -12,6 +12,11 @@ import android.widget.Button;
 
 import static android.content.Context.MODE_PRIVATE;
 
+/**
+ *  Main fragment for class of flat not found.
+ */
+
+
 public class NoFlatFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

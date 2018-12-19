@@ -29,6 +29,10 @@ import retrofit2.Response;
 
 import static android.content.Context.MODE_PRIVATE;
 
+/**
+ *  Main fragment for class of paying debt.
+ */
+
 
 public class PayDebtFragment extends Fragment {
     List<User> usersList;
@@ -64,7 +68,7 @@ public class PayDebtFragment extends Fragment {
                     }
                     spinner.setAdapter(arrayAdapter);
                 } else {
-                    Toast toast = Toast.makeText(PayDebtFragment.this.getContext(), "Chujwie", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(PayDebtFragment.this.getContext(), getString(R.string.something_goes_wrong), Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }

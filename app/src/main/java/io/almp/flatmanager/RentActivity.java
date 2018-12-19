@@ -21,6 +21,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ *  Main class for rents.
+ */
+
 public class RentActivity extends AppCompatActivity {
     private RentHistoryAdapter mRentHistoryAdapter;
     private ApiInterface mApiInterface;
@@ -69,7 +73,7 @@ public class RentActivity extends AppCompatActivity {
                     }
                 }
                 else {
-                    Toast toast = Toast.makeText(RentActivity.this, "Chujwie", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(RentActivity.this, getString(R.string.something_goes_wrong), Toast.LENGTH_SHORT);
                     toast.show();
                 }
                 sendRentButton.setEnabled(true);
@@ -100,7 +104,7 @@ public class RentActivity extends AppCompatActivity {
                     updateRents(returnedList);
                 }
                 else {
-                    Toast toast = Toast.makeText(RentActivity.this, "Chujwie", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(RentActivity.this, getString(R.string.something_goes_wrong), Toast.LENGTH_SHORT);
                     toast.show();
                 }
                 sendRentButton.setEnabled(true);

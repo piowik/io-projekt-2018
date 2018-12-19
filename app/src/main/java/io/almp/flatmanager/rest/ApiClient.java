@@ -4,6 +4,10 @@ package io.almp.flatmanager.rest;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ *  Class containing methods required to create API for clients.
+ */
+
 public class ApiClient {
 
     private static Retrofit retrofit = null;

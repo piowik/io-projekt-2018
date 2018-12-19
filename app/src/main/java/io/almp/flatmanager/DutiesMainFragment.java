@@ -25,15 +25,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link DutiesMainFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link DutiesMainFragment#newInstance} factory method to
- * create an instance of this fragment.
+ *  Main fragment for class of duties.
  */
+
 public class DutiesMainFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -97,7 +92,7 @@ public class DutiesMainFragment extends Fragment {
                     DutiesTodoAdapter dutiesTodoAdapter = new DutiesTodoAdapter(DutiesMainFragment.this.getActivity(), DutiesEntitiesTodoList);
                     mDutiesTodo.setAdapter(dutiesTodoAdapter);
                 } else {
-                    Toast toast = Toast.makeText(DutiesMainFragment.this.getContext(), "Chujwie", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(DutiesMainFragment.this.getContext(), getString(R.string.something_goes_wrong), Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }
@@ -120,7 +115,7 @@ public class DutiesMainFragment extends Fragment {
                     DutiesHistoryAdapter DutiesAdapter = new DutiesHistoryAdapter(DutiesMainFragment.this.getActivity(), DutiesEntitiesHistoryList);
                     mDutiesHistories.setAdapter(DutiesAdapter);
                 } else {
-                    Toast toast = Toast.makeText(DutiesMainFragment.this.getContext(), "Chujwie", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(DutiesMainFragment.this.getContext(), getString(R.string.something_goes_wrong), Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }

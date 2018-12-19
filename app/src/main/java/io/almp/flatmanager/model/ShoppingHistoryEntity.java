@@ -1,5 +1,9 @@
 package io.almp.flatmanager.model;
 
+/**
+ *  Class containing methods required to create entity of shopping history.
+ */
+
 public class ShoppingHistoryEntity {
     private Integer item_id;
     private Integer flat_id;

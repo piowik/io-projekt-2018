@@ -1,6 +1,6 @@
 package io.almp.flatmanager;
 
-import android.content.Context;
+
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -12,27 +12,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import io.almp.flatmanager.model.api.ErrorAnswer;
-import io.almp.flatmanager.model.api.LoginAnswer;
-import io.almp.flatmanager.model.api.SimpleErrorAnswer;
 import io.almp.flatmanager.rest.ApiInterface;
 import io.almp.flatmanager.rest.ApiUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static android.content.Context.MODE_PRIVATE;
-
-
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link SignUpFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link SignUpFragment#newInstance} factory method to
- * create an instance of this fragment.
+ *  Main fragment for class of singing up.
  */
+
 public class SignUpFragment extends Fragment {
     private EditText mLogin;
     private EditText mPassword;

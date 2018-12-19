@@ -4,8 +4,9 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by Mateusz Zaremba on 29.11.2018.
+ *  Class containing methods required to create entity of message.
  */
+
 public class Message {
     @SerializedName("sender_id")
     @Expose

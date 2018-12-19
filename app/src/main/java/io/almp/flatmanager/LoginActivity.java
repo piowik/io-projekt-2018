@@ -10,6 +10,10 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 import io.almp.flatmanager.service.FirebaseMessagingService;
 
+/**
+ *  Main class for logging.
+ */
+
 public class LoginActivity extends AppCompatActivity {
 
     @Override

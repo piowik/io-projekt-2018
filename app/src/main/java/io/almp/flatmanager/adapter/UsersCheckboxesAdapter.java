@@ -13,6 +13,10 @@ import java.util.List;
 import io.almp.flatmanager.R;
 import io.almp.flatmanager.model.User;
 
+/**
+ *  Class containing methods required to create the proper view for checkboxes of users used in shopping tab.
+ */
+
 public class UsersCheckboxesAdapter extends BaseAdapter {
     List<User> usersList;
     private Activity mActivity;

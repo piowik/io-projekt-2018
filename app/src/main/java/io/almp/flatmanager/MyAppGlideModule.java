@@ -8,6 +8,11 @@ import com.bumptech.glide.load.DecodeFormat;
 import com.bumptech.glide.module.AppGlideModule;
 import com.bumptech.glide.request.RequestOptions;
 
+/**
+ *  Main class for gliding module.
+ */
+
+
 // new since Glide v4
 @GlideModule
 public final class MyAppGlideModule extends AppGlideModule {

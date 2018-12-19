@@ -4,6 +4,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+/**
+ *  Main class for duties.
+ */
+
 public class DutiesActivity extends AppCompatActivity {
 
     @Override

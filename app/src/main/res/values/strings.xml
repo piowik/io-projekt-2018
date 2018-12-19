@@ -76,5 +76,9 @@
     <string name="login_in_use">Login jest już zajęty</string>
     <string name="something_goes_wrong">Coś poszło nie tak...</string>
     <string name="buyer_colon">Buyer:</string>
+    <string name="no_internet_error">Brak internetu</string>
+    <string name="message_sending_error">Wysyłanie wiadomości nie powiodło się</string>
+    <string name="empty_message_sending_error">Nie można wysłać pustej wiadomości</string>
+    <string name="bad_login_or_password">Zly login lub haslo</string>
 
 </resources>

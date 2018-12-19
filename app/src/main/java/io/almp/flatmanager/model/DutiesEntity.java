@@ -1,5 +1,9 @@
 package io.almp.flatmanager.model;
 
+/**
+ *  Class containing methods required to create entity of duties.
+ */
+
 public class DutiesEntity {
     private Integer duty_id;
     private Integer flat_id;

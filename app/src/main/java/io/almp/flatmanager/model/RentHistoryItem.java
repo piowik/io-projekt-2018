@@ -3,6 +3,10 @@ package io.almp.flatmanager.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+/**
+ *  Class containing methods required to create entity of items in rent history.
+ */
+
 public class RentHistoryItem {
     @SerializedName("rent_value")
     @Expose

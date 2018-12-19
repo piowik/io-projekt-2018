@@ -1,6 +1,5 @@
 package io.almp.flatmanager;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -32,6 +31,9 @@ import retrofit2.Response;
 
 import static android.content.Context.MODE_PRIVATE;
 
+/**
+ *  Class containing methods required to create properly functioning shopping items tab.
+ */
 
 public class AddShoppingItemFragment extends Fragment {
     private List<User> usersList;
@@ -72,7 +74,7 @@ public class AddShoppingItemFragment extends Fragment {
                     }
                     spinner.setAdapter(arrayAdapter);
                 } else {
-                    Toast toast = Toast.makeText(AddShoppingItemFragment.this.getContext(), "Chujwie", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(AddShoppingItemFragment.this.getContext(), getString(R.string.something_goes_wrong), Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }

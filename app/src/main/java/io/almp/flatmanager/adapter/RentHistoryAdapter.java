@@ -13,6 +13,10 @@ import java.util.List;
 import io.almp.flatmanager.R;
 import io.almp.flatmanager.model.RentHistoryItem;
 
+/**
+ *  Class containing methods required to create the proper view for rent history.
+ */
+
 public class RentHistoryAdapter extends BaseAdapter {
     private Activity mActivity;
     private List<RentHistoryItem> mItems;

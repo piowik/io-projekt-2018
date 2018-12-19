@@ -34,6 +34,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ *  Class containing methods required to create properly functioning chat.
+ */
+
 public class ChatActivity extends AppCompatActivity {
 
     private ListView mListView;
@@ -69,7 +73,7 @@ public class ChatActivity extends AppCompatActivity {
                 addMessage(getSharedPreferences("_", MODE_PRIVATE).getLong("user_id", 0L),getSharedPreferences("_", MODE_PRIVATE).getString("user_token", "empty"),
                         mNewMessageEditText.getText().toString());
             }else {
-                Toast toast = Toast.makeText(ChatActivity.this, "Nie można wysłać pustej wiadomości", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(ChatActivity.this, getString(R.string.empty_message_sending_error), Toast.LENGTH_SHORT);
                 toast.show();
             }
 
@@ -102,14 +106,14 @@ public class ChatActivity extends AppCompatActivity {
                     }
                 }
                 else{
-                    Toast toast = Toast.makeText(ChatActivity.this, "Chujwie", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(ChatActivity.this, getString(R.string.something_goes_wrong), Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<Message>> call, Throwable t) {
-                Toast toast = Toast.makeText(ChatActivity.this, "Brak neta", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(ChatActivity.this, getString(R.string.no_internet_error), Toast.LENGTH_SHORT);
                 toast.show();
             }
         });
@@ -121,7 +125,6 @@ public class ChatActivity extends AppCompatActivity {
         mAPIService.addMessage(id,token,message).enqueue(new Callback<SimpleErrorAnswer>() {
             @Override
             public void onResponse(Call<SimpleErrorAnswer> call, Response<SimpleErrorAnswer> response) {
-
                 if (response.isSuccessful()&&response.body()!=null&&!response.body().isError()) {
                     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     Date date = new Date();
@@ -131,20 +134,19 @@ public class ChatActivity extends AppCompatActivity {
                     scrollListView();
                 }
                 else{
-                    Toast toast = Toast.makeText(ChatActivity.this, "Kurza twarz, coś poszło nie tak", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(ChatActivity.this, getString(R.string.something_goes_wrong), Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }
 
             @Override
             public void onFailure(Call<SimpleErrorAnswer> call, Throwable t) {
-                Toast toast = Toast.makeText(ChatActivity.this, "Wysyłanie wiadomości nie powiodło się", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(ChatActivity.this, getString(R.string.message_sending_error), Toast.LENGTH_SHORT);
                 toast.show();
             }
         });
 
     }
-
     private void scrollListView(){
         mListView.setSelection(mMessagesAdapter.getCount() - 1);
     }

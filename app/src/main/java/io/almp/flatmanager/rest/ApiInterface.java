@@ -18,6 +18,10 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
+/**
+ *  Interface containing POSTS to database for every action.
+ */
+
 public interface ApiInterface {
     @POST("/v1/user/login")
     @FormUrlEncoded

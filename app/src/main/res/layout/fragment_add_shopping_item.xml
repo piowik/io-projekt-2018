@@ -11,12 +11,12 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="264dp"
         android:orientation="horizontal">
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="308dp"
+            android:layout_height="240dp"
             android:layout_margin="10dp"
             android:layout_weight="1"
             android:orientation="vertical">
@@ -41,67 +41,70 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/buyer_colon"
-                android:textAlignment="center" />
+                android:textAlignment="textStart"
+                android:textSize="18sp" />
 
             <Spinner
                 android:id="@+id/users_spinner_buyer"
-                android:layout_width="98dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="15dp"
                 android:paddingStart="25dp"></Spinner>
 
         </LinearLayout>
+
         <LinearLayout
-            android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_margin="10dp">
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/divie_into"
                 android:textAlignment="center" />
+
             <ListView
+                android:id="@+id/users_checkboxes_list_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/users_checkboxes_list_view">
-            </ListView>
+                android:layout_height="169dp"></ListView>
+
             <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/pick_date"
                 android:id="@+id/pick_date_button"
-                android:background="@color/colorAccent"/>
+                android:layout_width="match_parent"
+                android:layout_height="51dp"
+                android:background="@color/colorAccent"
+                android:text="@string/pick_date" />
         </LinearLayout>
 
     </LinearLayout>
 
 
-
     <DatePicker
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:datePickerMode="spinner"
-        android:calendarViewShown="false"
-        android:textAlignment="center"
-        android:visibility="invisible"
         android:id="@+id/shopping_date_picker"
-        >
+        android:layout_width="match_parent"
+        android:layout_height="156dp"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner"
+        android:textAlignment="center"
+        android:visibility="invisible">
 
     </DatePicker>
-<FrameLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:text="@string/save"
-        android:id="@+id/save_item"
-        android:background="@color/colorAccent"/>
-</FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="43dp">
+
+        <Button
+            android:id="@+id/save_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:background="@color/colorAccent"
+            android:text="@string/save" />
+    </FrameLayout>
 
 
 

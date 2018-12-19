@@ -13,6 +13,10 @@ import java.util.List;
 import io.almp.flatmanager.R;
 import io.almp.flatmanager.model.User;
 
+/**
+ *  Class containing methods required to create the proper view for points.
+ */
+
 public class PointsAdapter extends BaseAdapter {
     private Activity mActivity;
     private List<User> mUserPoints;
