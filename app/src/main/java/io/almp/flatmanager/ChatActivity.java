@@ -121,7 +121,6 @@ public class ChatActivity extends AppCompatActivity {
         mAPIService.addMessage(id,token,message).enqueue(new Callback<SimpleErrorAnswer>() {
             @Override
             public void onResponse(Call<SimpleErrorAnswer> call, Response<SimpleErrorAnswer> response) {
-
                 if (response.isSuccessful()&&response.body()!=null&&!response.body().isError()) {
                     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     Date date = new Date();
@@ -144,7 +143,6 @@ public class ChatActivity extends AppCompatActivity {
         });
 
     }
-
     private void scrollListView(){
         mListView.setSelection(mMessagesAdapter.getCount() - 1);
     }

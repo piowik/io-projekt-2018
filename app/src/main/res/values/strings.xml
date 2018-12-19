@@ -76,5 +76,6 @@
     <string name="no_internet_error">Brak internetu</string>
     <string name="message_sending_error">Wysyłanie wiadomości nie powiodło się</string>
     <string name="empty_message_sending_error">Nie można wysłać pustej wiadomości</string>
+    <string name="bad_login_or_password">Zly login lub haslo</string>
 
 </resources>

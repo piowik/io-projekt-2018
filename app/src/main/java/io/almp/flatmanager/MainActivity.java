@@ -33,8 +33,7 @@ public class MainActivity extends AppCompatActivity
         int flat_id = getSharedPreferences("_", MODE_PRIVATE).getInt("flat_id", 0);
 
         ImageView mainImageView = findViewById(R.id.image_view_main);
-        int flatId = flat_id;
-        String imageUrl = BASE_URL + flatId + ".png";
+        String imageUrl = BASE_URL + flat_id + ".png";
         GlideApp.with(this)
                 .load(imageUrl)
                 .apply(RequestOptions.circleCropTransform())
@@ -68,7 +67,6 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }

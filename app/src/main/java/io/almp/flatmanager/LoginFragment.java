@@ -3,6 +3,7 @@ package io.almp.flatmanager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
@@ -25,17 +26,7 @@ import retrofit2.Response;
 import static android.content.Context.MODE_PRIVATE;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link LoginFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link LoginFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class LoginFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private Button signUp;
     private Button signIn;
     private TextView login;
@@ -45,21 +36,10 @@ public class LoginFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     public LoginFragment() {
-        // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment LoginFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static LoginFragment newInstance(String param1, String param2) {
-        LoginFragment fragment = new LoginFragment();
-        return fragment;
+        return new LoginFragment();
     }
 
     @Override
@@ -70,7 +50,7 @@ public class LoginFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_login, container, false);
         mAPIService = ApiUtils.getAPIService();
@@ -106,18 +86,10 @@ public class LoginFragment extends Fragment {
             signIn.setEnabled(false);
             String fbToken = FirebaseMessagingService.getToken(getContext());
             sendPost(login.getText().toString(), password.getText().toString(), fbToken);
-//            Intent mainActivityIntent = new Intent(getContext(), MainActivity.class);
-//            startActivity(mainActivityIntent);
         });
         return rootView;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
 
     public void sendPost(String loginStr, String passwordStr, String fbTokenStr) {
         mAPIService.loginData(loginStr, passwordStr, fbTokenStr).enqueue(new Callback<LoginAnswer>() {
@@ -133,7 +105,6 @@ public class LoginFragment extends Fragment {
                         LoginFragment.this.getContext().getSharedPreferences("_", MODE_PRIVATE).edit().putString("user_token", response.body().getToken()).apply();
                         LoginFragment.this.getContext().getSharedPreferences("_", MODE_PRIVATE).edit().putInt("flat_id", flatId).apply();
 
-//                    SaveData(response.body().getId(),response.body().getToken());
                         if (flatId == 0) { // no flat
                             Intent intent = new Intent(getContext(), NoFlatActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -144,7 +115,7 @@ public class LoginFragment extends Fragment {
                             startActivity(intent);
                         }
                     } else {
-                        Toast toast = Toast.makeText(getContext(), "Zly login lub haslo", Toast.LENGTH_SHORT);
+                        Toast toast = Toast.makeText(getContext(), getString(R.string.bad_login_or_password), Toast.LENGTH_SHORT);
                         toast.show();
                     }
                 } else {
@@ -163,16 +134,6 @@ public class LoginFragment extends Fragment {
     }
 
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
