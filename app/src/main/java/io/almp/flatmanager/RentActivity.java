@@ -34,19 +34,22 @@ public class RentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        int flat_id = getSharedPreferences("_", MODE_PRIVATE).getInt("flat_id", 0);
         setContentView(R.layout.activity_rent);
+
+        int flat_id = getSharedPreferences("_", MODE_PRIVATE).getInt("flat_id", 0);
         long uid = getSharedPreferences("_", MODE_PRIVATE).getLong("user_id", 0L);
         mApiInterface = ApiUtils.getAPIService();
         mRentHistoryItemList = new ArrayList<>();
         EditText rentValueEditText = findViewById(R.id.rentValueEditText);
-        ListView renthistoryListView = findViewById(R.id.rentHistoryListview);
+        ListView rentHistoryListView = findViewById(R.id.rentHistoryListview);
         sendRentButton = findViewById(R.id.sendRentButton);
         loadRents(flat_id);
 
         sendRentButton.setOnClickListener(view -> {
-            if (TextUtils.isEmpty(rentValueEditText.getText().toString()))
+            if (TextUtils.isEmpty(rentValueEditText.getText().toString())) {
+                Toast.makeText(this, R.string.rent_value_cannot_be_null, Toast.LENGTH_SHORT).show();
                 return;
+            }
             float rentValue = Float.valueOf(rentValueEditText.getText().toString());
             sendPost(uid,flat_id, rentValue);
             rentValueEditText.setText("");
@@ -54,7 +57,7 @@ public class RentActivity extends AppCompatActivity {
             loadRents(flat_id);
         });
         mRentHistoryAdapter = new RentHistoryAdapter(this, mRentHistoryItemList);
-        renthistoryListView.setAdapter(mRentHistoryAdapter);
+        rentHistoryListView.setAdapter(mRentHistoryAdapter);
     }
 
     public void sendPost(long uid, int flat, float value) {
@@ -73,7 +76,7 @@ public class RentActivity extends AppCompatActivity {
                     }
                 }
                 else {
-                    Toast toast = Toast.makeText(RentActivity.this, getString(R.string.something_goes_wrong), Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(RentActivity.this, getString(R.string.something_went_wrong), Toast.LENGTH_SHORT);
                     toast.show();
                 }
                 sendRentButton.setEnabled(true);
@@ -104,7 +107,7 @@ public class RentActivity extends AppCompatActivity {
                     updateRents(returnedList);
                 }
                 else {
-                    Toast toast = Toast.makeText(RentActivity.this, getString(R.string.something_goes_wrong), Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(RentActivity.this, getString(R.string.something_went_wrong), Toast.LENGTH_SHORT);
                     toast.show();
                 }
                 sendRentButton.setEnabled(true);
