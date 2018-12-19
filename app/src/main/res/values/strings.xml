@@ -48,7 +48,7 @@
     <string name="pick_date">Pick date</string>
     <string name="save">save</string>
     <string name="me">Ja</string>
-    <string name="logout">Wyloguj</string>
+    <string name="logout">Logout</string>
     <string name="add_purchase">Add purhcase</string>
     <string name="pay_debt">Pay debt</string>
     <string name="to_whom">To whom?</string>
@@ -58,11 +58,11 @@
     <string name="add_duty">Add duty</string>
     <string name="channel_name_chat">Chat</string>
     <string name="channel_chat_description">Powiadomienia o nowej wiadomości</string>
-    <string name="no_flat">Nie masz mieszkania</string>
-    <string name="create_flat">Załóż</string>
+    <string name="no_flat">You haven\'t got a flat yet</string>
+    <string name="create_flat">Create</string>
     <string name="welcome">Welcome to Flatmate! Please enter your flat name to start a great adventure!</string>
     <string name="flat_name">Flat name</string>
-    <string name="join_flat">Dołącz do mieszkania</string>
+    <string name="join_flat">Join</string>
     <string name="flat_code">Flat invitation code</string>
     <string name="join">Join flat</string>
     <string name="empty_login">Login nie może być pusty !</string>
@@ -81,5 +81,6 @@
     <string name="empty_message_sending_error">Nie można wysłać pustej wiadomości</string>
     <string name="bad_login_or_password">Zly login lub haslo</string>
     <string name="rent_value_cannot_be_null">Rent value cannot be null</string>
+    <string name="success">Success</string>
 
 </resources>

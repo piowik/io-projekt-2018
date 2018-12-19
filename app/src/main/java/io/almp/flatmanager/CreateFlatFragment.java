@@ -1,5 +1,7 @@
 package io.almp.flatmanager;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -48,7 +50,7 @@ public class CreateFlatFragment extends Fragment {
         public void onClick(View v) {
             System.out.println(uid);
             String flatNameString = flatNameEditText.getText().toString();
-            String invitationCode = generateInvitationCode(8);
+            String invitationCode = generateInvitationCode(6);
             mApiInterface.addFlat(flatNameString, invitationCode, uid).enqueue(callback);
         }
     };
@@ -60,7 +62,17 @@ public class CreateFlatFragment extends Fragment {
     private Callback<SimpleErrorAnswer> callback = new Callback<SimpleErrorAnswer>() {
         @Override
         public void onResponse(Call<SimpleErrorAnswer> call, Response<SimpleErrorAnswer> response) {
-            System.out.println("i guess its ok");
+            Toast.makeText(getContext(), R.string.success, Toast.LENGTH_SHORT).show();
+            SharedPreferences sharedPref = getContext().getSharedPreferences("_", MODE_PRIVATE);
+            io.almp.flatmanager.service.FirebaseMessagingService.sendPost(sharedPref.getLong("user_id", 0L),"empty");
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putLong("user_id", 0L);
+            editor.putInt("flat_id", -1);
+            editor.putString("user_token", "empty");
+            editor.apply();
+            Intent intent = new Intent(getContext(), LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
         }
 
         @Override
