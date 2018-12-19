@@ -18,6 +18,9 @@
     <string name="password_confirm">Confirm password</string>
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>
+    <string name="rent_value_pln">%1$.2f PLN</string>
+    <string name="rent_value_each">%1$.2f PLN each</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="write_a_message">Napisz wiadomość...</string>

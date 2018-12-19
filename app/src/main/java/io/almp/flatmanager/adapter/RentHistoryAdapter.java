@@ -53,9 +53,12 @@ public class RentHistoryAdapter extends BaseAdapter {
         dateTextView.setText(rentItem.getDate());
 
         TextView totalValueTextView = convertView.findViewById(R.id.rent_total_value_text_view);
-        totalValueTextView.setText(String.valueOf(rentItem.getTotalValue()) + " złotych polskich");
+
+        String totalText = String.format(mActivity.getString(R.string.rent_value_pln), rentItem.getTotalValue());
+        totalValueTextView.setText(totalText);
         TextView valuePerPersonTextView = convertView.findViewById(R.id.rent_value_per_person_text_view);
-        valuePerPersonTextView.setText(String.valueOf(rentItem.getValuePerPerson()) + " na głowę");
+        String eachText = String.format(mActivity.getString(R.string.rent_value_each), rentItem.getValuePerPerson());
+        valuePerPersonTextView.setText(eachText);
 
         return convertView;
     }
