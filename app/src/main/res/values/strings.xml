@@ -37,10 +37,10 @@
     <string name="duty_value">Value</string>
     <string name="duty_doer">Doer</string>
     <string name="Kanal">channel_name</string>
-    <string name="channel_name_rent">Czynsz</string>
-    <string name="channel_rent_description">Powiadomienia o wysokości czynszu</string>
-    <string name="channel_id_rent">CzynszChannel</string>
-    <string name="channel_id_chat">CzatChannel</string>
+    <string name="channel_name_rent">Rent Channel</string>
+    <string name="channel_rent_description">Notifications about rent</string>
+    <string name="channel_id_rent">RentChannel</string>
+    <string name="channel_id_chat">ChatChannel</string>
     <string name="login">Login</string>
     <string name="buyer_s">Buyer(s)</string>
     <string name="divide_on">Divide on:</string>
@@ -63,7 +63,7 @@
     <string name="welcome">Welcome to Flatmate! Please enter your flat name to start a great adventure!</string>
     <string name="flat_name">Flat name</string>
     <string name="join_flat">Dołącz do mieszkania</string>
-    <string name="flat_code">Kod mieszkania</string>
+    <string name="flat_code">Flat invitation code</string>
     <string name="join">Join flat</string>
     <string name="empty_login">Login nie może być pusty !</string>
     <string name="empty_password">Hasło nie może być puste !</string>
