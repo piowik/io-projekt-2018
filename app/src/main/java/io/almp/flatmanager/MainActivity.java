@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity
         String imageUrl = BASE_URL + flatId + ".png";
         GlideApp.with(this)
                 .load(imageUrl)
-                .apply(RequestOptions.circleCropTransform())
+                .apply(RequestOptions.centerCropTransform())
                 .into(mainImageView);
         chatLayout = findViewById(R.id.chat);
         dutiesLayout = findViewById(R.id.duties);
