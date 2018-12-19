@@ -1,5 +1,9 @@
 package io.almp.flatmanager.rest;
 
+/**
+ *  Class containing methods required to create API for utilities.
+ */
+
 public class ApiUtils {
     private ApiUtils() {}
 

@@ -34,6 +34,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ *  Class containing methods required to create properly functioning chat.
+ */
+
 public class ChatActivity extends AppCompatActivity {
 
     private ListView mListView;

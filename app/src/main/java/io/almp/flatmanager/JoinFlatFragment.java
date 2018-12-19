@@ -21,6 +21,11 @@ import retrofit2.Response;
 
 import static android.content.Context.MODE_PRIVATE;
 
+/**
+ *  Main fragment for class of joining flats.
+ */
+
+
 public class JoinFlatFragment extends Fragment {
     private ApiInterface mApiInterface;
     private Button mJoinFlatButton;

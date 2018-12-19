@@ -1,5 +1,10 @@
 package io.almp.flatmanager.model.api;
 
+/**
+ *  Class containing methods required to check and answer properly on logging tab.
+ */
+
+
 public class LoginAnswer {
 
     private boolean error;

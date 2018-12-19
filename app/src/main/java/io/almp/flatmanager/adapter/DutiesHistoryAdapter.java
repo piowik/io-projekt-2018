@@ -13,6 +13,10 @@ import java.util.List;
 import io.almp.flatmanager.R;
 import io.almp.flatmanager.model.DutiesEntity;
 
+/**
+ *  Class containing methods required to create the proper view for history of duties.
+ */
+
 public class DutiesHistoryAdapter extends BaseAdapter {
     private Activity mActivity;
     private List<DutiesEntity> mHistories;

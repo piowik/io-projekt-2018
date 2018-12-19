@@ -17,6 +17,10 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
 
+/**
+ *  Main class for activity in menu.
+ */
+
 public class MainActivity extends AppCompatActivity
 {
     private LinearLayout chatLayout;

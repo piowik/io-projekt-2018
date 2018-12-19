@@ -8,8 +8,9 @@ import java.util.List;
 import io.almp.flatmanager.model.Message;
 
 /**
- * Created by Mateusz Zaremba on 29.11.2018.
+ *  Class containing methods required to check and answer properly on logging tab.
  */
+
 public class MessagesAnswer {
     @SerializedName("messages")
     @Expose

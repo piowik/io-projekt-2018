@@ -1,5 +1,10 @@
 package io.almp.flatmanager.model.api;
 
+/**
+ *  Class containing methods required to check and answer error if found.
+ */
+
+
 public class ErrorAnswer {
 
     private boolean error;

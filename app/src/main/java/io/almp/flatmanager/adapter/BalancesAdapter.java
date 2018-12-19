@@ -13,6 +13,10 @@ import java.util.List;
 import io.almp.flatmanager.R;
 import io.almp.flatmanager.model.User;
 
+/**
+ *  Class containing methods required to create the proper view for balances.
+ */
+
 public class BalancesAdapter extends BaseAdapter {
     private Activity mActivity;
     private List<User> mUserBalances;

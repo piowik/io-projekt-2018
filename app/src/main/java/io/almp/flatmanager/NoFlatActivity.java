@@ -4,6 +4,11 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
+/**
+ *  Main class for 'no flat' tab.
+ */
+
+
 public class NoFlatActivity extends AppCompatActivity {
 
     @Override

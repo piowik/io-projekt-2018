@@ -1,5 +1,9 @@
 package io.almp.flatmanager.model.api;
 
+/**
+ *  Class containing methods required to answer properly on join flat tab.
+ */
+
 public class JoinFlatAnswer {
 
     private boolean error;

@@ -29,6 +29,10 @@ import retrofit2.Response;
 
 import static android.content.Context.MODE_PRIVATE;
 
+/**
+ *  Main fragment for class of paying debt.
+ */
+
 
 public class PayDebtFragment extends Fragment {
     List<User> usersList;

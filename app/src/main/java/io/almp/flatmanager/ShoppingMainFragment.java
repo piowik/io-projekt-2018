@@ -26,6 +26,10 @@ import retrofit2.Response;
 
 import static android.content.Context.MODE_PRIVATE;
 
+/**
+ *  Main fragment for class of shopping.
+ */
+
 
 public class ShoppingMainFragment extends Fragment {
 

@@ -13,6 +13,10 @@ import java.util.List;
 import io.almp.flatmanager.R;
 import io.almp.flatmanager.model.DutiesEntity;
 
+/**
+ *  Class containing methods required to create the proper view for duties to do.
+ */
+
 public class DutiesTodoAdapter extends BaseAdapter {
     private Activity mActivity;
     private List<DutiesEntity> mTodo;

@@ -21,6 +21,10 @@ import retrofit2.Response;
 
 import static android.content.Context.MODE_PRIVATE;
 
+/**
+ *  Class containing methods required to create properly functioning 'create flat' tab.
+ */
+
 public class CreateFlatFragment extends Fragment {
     private Button saveButton;
     private EditText flatNameEditText;

@@ -17,6 +17,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ *  Class containing methods required to create properly functioning adding duties to do method.
+ */
 
 public class AddDutyTodoItemFragment extends Fragment {
 

@@ -25,6 +25,10 @@ import retrofit2.Response;
 
 import static android.content.Context.MODE_PRIVATE;
 
+/**
+ *  Main fragment for class of logging.
+ */
+
 
 public class LoginFragment extends Fragment {
     private Button signUp;

@@ -21,6 +21,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ *  Main class for rents.
+ */
+
 public class RentActivity extends AppCompatActivity {
     private RentHistoryAdapter mRentHistoryAdapter;
     private ApiInterface mApiInterface;
