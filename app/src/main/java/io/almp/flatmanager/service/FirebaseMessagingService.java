@@ -66,8 +66,8 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                 channel = getString(R.string.channel_id_rent);
                 openClass = RentActivity.class;
                 photo = R.drawable.ic_attach_money_black_24dp;
-                name = getString(R.string.channel_name_chat);
-                description = getString(R.string.channel_chat_description);
+                name = getString(R.string.channel_name_rent);
+                description = getString(R.string.channel_rent_description);
             }
             if (!TextUtils.isEmpty(imageUrl)) {
                 Log.e("Image not empty", "not");
