@@ -5,7 +5,8 @@
     <color name="colorPictures">#AC4C64</color>
     <color name="colorAccent">#AC4C64</color>
     <color name="colorBackground">#FFF6E9</color>
-    <color name="colorButtons">#F4E9D5</color>
+    <color name="colorButtons">#AC4C64</color>
+    <color name="colorButtonsMain">#F4E9D5</color>
     <color name="green">#1fa900</color>
     <color name="red">#dc0000</color>
     <color name="black">#1e1e1e</color>
