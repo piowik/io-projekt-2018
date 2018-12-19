@@ -72,7 +72,7 @@ public class AddShoppingItemFragment extends Fragment {
                     }
                     spinner.setAdapter(arrayAdapter);
                 } else {
-                    Toast toast = Toast.makeText(AddShoppingItemFragment.this.getContext(), "Chujwie", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(AddShoppingItemFragment.this.getContext(), getString(R.string.something_goes_wrong), Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }

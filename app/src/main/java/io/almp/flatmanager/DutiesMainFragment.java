@@ -97,7 +97,7 @@ public class DutiesMainFragment extends Fragment {
                     DutiesTodoAdapter dutiesTodoAdapter = new DutiesTodoAdapter(DutiesMainFragment.this.getActivity(), DutiesEntitiesTodoList);
                     mDutiesTodo.setAdapter(dutiesTodoAdapter);
                 } else {
-                    Toast toast = Toast.makeText(DutiesMainFragment.this.getContext(), "Chujwie", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(DutiesMainFragment.this.getContext(), getString(R.string.something_goes_wrong), Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }
@@ -120,7 +120,7 @@ public class DutiesMainFragment extends Fragment {
                     DutiesHistoryAdapter DutiesAdapter = new DutiesHistoryAdapter(DutiesMainFragment.this.getActivity(), DutiesEntitiesHistoryList);
                     mDutiesHistories.setAdapter(DutiesAdapter);
                 } else {
-                    Toast toast = Toast.makeText(DutiesMainFragment.this.getContext(), "Chujwie", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(DutiesMainFragment.this.getContext(), getString(R.string.something_goes_wrong), Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }

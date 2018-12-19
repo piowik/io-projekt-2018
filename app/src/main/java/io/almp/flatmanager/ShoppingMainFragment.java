@@ -59,7 +59,7 @@ public class ShoppingMainFragment extends Fragment {
                     BalancesAdapter balancesAdapter = new BalancesAdapter(ShoppingMainFragment.this.getActivity(), usersList);
                     mUserBalances.setAdapter(balancesAdapter);
                 } else {
-                    Toast toast = Toast.makeText(ShoppingMainFragment.this.getContext(), "Chujwie", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(ShoppingMainFragment.this.getContext(), getString(R.string.something_goes_wrong), Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }
@@ -82,7 +82,7 @@ public class ShoppingMainFragment extends Fragment {
                     ShoppingHistoryAdapter shoppingAdapter = new ShoppingHistoryAdapter(ShoppingMainFragment.this.getActivity(), shoppingHistoryEntitiesList);
                     mShoppingHistories.setAdapter(shoppingAdapter);
                 } else {
-                    Toast toast = Toast.makeText(ShoppingMainFragment.this.getContext(), "Chujwie", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(ShoppingMainFragment.this.getContext(), getString(R.string.something_goes_wrong), Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }
