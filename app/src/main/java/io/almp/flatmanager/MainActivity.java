@@ -31,8 +31,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         FirebaseMessaging.getInstance().setAutoInitEnabled(true);
 
-        Log.e("Uid", " " + getSharedPreferences("_", MODE_PRIVATE).getString("user_token", "empty")); // TODO: debugging only
-        Log.e("Uid", " " + getSharedPreferences("_", MODE_PRIVATE).getLong("user_id", 0L));
         // Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //    setSupportActionBar(toolbar);
         //  DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -40,11 +38,12 @@ public class MainActivity extends AppCompatActivity
         //           this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         //   drawer.addDrawerListener(toggle);
         //<   toggle.syncState();
+        int flat_id = getSharedPreferences("_", MODE_PRIVATE).getInt("flat_id", 0);
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         ImageView mainImageView = findViewById(R.id.image_view_main);
-        int flatId = 0; // TODO: hardcoded
+        int flatId = flat_id;
         String imageUrl = BASE_URL + flatId + ".png";
         GlideApp.with(this)
                 .load(imageUrl)
