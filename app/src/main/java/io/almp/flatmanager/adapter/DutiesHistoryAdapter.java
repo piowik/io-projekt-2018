@@ -53,8 +53,6 @@ public class DutiesHistoryAdapter extends BaseAdapter {
         TextView itemNameTextView = convertView.findViewById(R.id.d_hist_name_text_view);
         String dutyName = mHistories.get(position).getDuty_name();
         itemNameTextView.setText(dutyName);
-        TextView doerTextView = convertView.findViewById(R.id.d_hist_doer_text_view);
-        doerTextView.setText(mHistories.get(position).getName());
 
         return convertView;
     }

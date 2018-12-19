@@ -4,6 +4,7 @@
     android:id="@+id/duties_history_list_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorButtons"
     android:orientation="vertical"
     android:padding="5dp"
     android:layout_margin="0dp">
@@ -23,15 +24,6 @@
             android:layout_gravity="top|start"
             android:layout_margin="5dp"
             android:textSize="18sp"
-            />
-        <TextView
-            android:id="@+id/d_hist_doer_text_view"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:textSize="18sp"
-            android:textAlignment="viewEnd"
             />
     </LinearLayout>
 </LinearLayout>

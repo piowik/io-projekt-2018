@@ -7,11 +7,11 @@ public class User {
     private String name;
     private String email;
     private double balance;
-    private Integer points;
+    private double points;
 
     public User(){}
 
-    public User(Integer id, Integer flatId, String login, String name, String email, double balance, Integer points) {
+    public User(Integer id, Integer flatId, String login, String name, String email, double balance, double points) {
         this.user_id = id;
         this.flat_id = flatId;
         this.login = login;
@@ -69,9 +69,9 @@ public class User {
         this.balance = balance;
     }
 
-    public Integer getPoints() { return points; }
+    public double getPoints() { return points; }
 
-    public void setPoints(Integer points) {
+    public void setPoints(double points) {
         this.points = points;
     }
 }
