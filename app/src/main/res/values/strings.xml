@@ -70,5 +70,8 @@
     <string name="rent_value_cannot_be_null">Rent value cannot be null</string>
     <string name="success">Success</string>
     <string name="fields_cannot_be_empty">Fields cannot be empty</string>
+    <string name="your_invitation_code">Your invitation code:</string>
+    <string name="share_code">Share code</string>
+    <string name="invite_friends">Invite friends</string>
 
 </resources>

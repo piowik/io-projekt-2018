@@ -64,6 +64,7 @@ public class ChatActivity extends AppCompatActivity {
         mSendMessageImagebutton = findViewById(R.id.send_message_imagebutton);
         mSendMessageImagebutton.setOnClickListener(view -> {
             if(mNewMessageEditText.getText().toString().trim().length() > 0){
+                mSendMessageImagebutton.setClickable(false);
                 addMessage(getSharedPreferences("_", MODE_PRIVATE).getLong("user_id", 0L),getSharedPreferences("_", MODE_PRIVATE).getString("user_token", "empty"),
                         mNewMessageEditText.getText().toString());
             }else {
@@ -94,12 +95,14 @@ public class ChatActivity extends AppCompatActivity {
                         if (mMessageList.size() > 0) {
                             Collections.sort(mMessageList, (object1, object2) -> object1.getDate().compareTo(object2.getDate()));
                         }
+                        mSendMessageImagebutton.setClickable(true);
                         mMessagesAdapter.setMessagesList(mMessageList);
                         mMessagesAdapter.notifyDataSetChanged();
                         scrollListView();
                     }
                 }
                 else{
+                    mSendMessageImagebutton.setClickable(true);
                     Toast toast = Toast.makeText(ChatActivity.this, getString(R.string.something_went_wrong), Toast.LENGTH_SHORT);
                     toast.show();
                 }

@@ -70,7 +70,7 @@ public class AddShoppingItemFragment extends Fragment {
                     usersCheckboxesAdapter = new UsersCheckboxesAdapter(AddShoppingItemFragment.this.getActivity(), usersList);
                     usersCheckboxesListView.setAdapter(usersCheckboxesAdapter);
                     for(User user: usersList){
-                        arrayAdapter.add(user.getName());
+                        arrayAdapter.add(Utils.nameParser(user.getName()));
                     }
                     spinner.setAdapter(arrayAdapter);
                 } else {

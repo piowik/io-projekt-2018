@@ -47,8 +47,7 @@
                 android:id="@+id/users_spinner_buyer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="15dp"
-                android:paddingStart="25dp" />
+                android:padding="10dp" />
 
         </LinearLayout>
 

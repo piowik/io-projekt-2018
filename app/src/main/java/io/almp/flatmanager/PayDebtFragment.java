@@ -55,7 +55,7 @@ public class PayDebtFragment extends Fragment {
                     arrayAdapter = new ArrayAdapter<>(rootview.getContext(), R.layout.users_spinner_text_view);
                     List<User> list = response.body();
                     for(User user: list){
-                        arrayAdapter.add(user.getName());
+                        arrayAdapter.add(Utils.nameParser(user.getName()));
                     }
                     spinner.setAdapter(arrayAdapter);
                 } else {
