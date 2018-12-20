@@ -43,10 +43,9 @@ public class LoginActivity extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
                     String msg = "subscribed to global";
                     if (!task.isSuccessful()) {
-                        msg = "couldnt subscribe to global";
+                        msg = "couldn't subscribe to global";
                     }
                     Log.d("FCM", msg);
-                    Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
                 });
     }
 
