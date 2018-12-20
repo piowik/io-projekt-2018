@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity
         int flat_id = getSharedPreferences("_", MODE_PRIVATE).getInt("flat_id", 0);
 
         ImageView mainImageView = findViewById(R.id.image_view_main);
-        String imageUrl = ApiUtils.BASE_URL + flat_id + ".png";
+        String imageUrl = ApiUtils.BASE_URL + "images/flats/" + flat_id + ".png";
         GlideApp.with(this)
                 .load(imageUrl)
                 .apply(RequestOptions.fitCenterTransform())
