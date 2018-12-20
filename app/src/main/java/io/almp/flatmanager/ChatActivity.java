@@ -95,14 +95,12 @@ public class ChatActivity extends AppCompatActivity {
                         if (mMessageList.size() > 0) {
                             Collections.sort(mMessageList, (object1, object2) -> object1.getDate().compareTo(object2.getDate()));
                         }
-                        mSendMessageImagebutton.setClickable(true);
                         mMessagesAdapter.setMessagesList(mMessageList);
                         mMessagesAdapter.notifyDataSetChanged();
                         scrollListView();
                     }
                 }
                 else{
-                    mSendMessageImagebutton.setClickable(true);
                     Toast toast = Toast.makeText(ChatActivity.this, getString(R.string.something_went_wrong), Toast.LENGTH_SHORT);
                     toast.show();
                 }
@@ -134,10 +132,12 @@ public class ChatActivity extends AppCompatActivity {
                     Toast toast = Toast.makeText(ChatActivity.this, getString(R.string.something_went_wrong), Toast.LENGTH_SHORT);
                     toast.show();
                 }
+                mSendMessageImagebutton.setClickable(true);
             }
 
             @Override
             public void onFailure(Call<SimpleErrorAnswer> call, Throwable t) {
+                mSendMessageImagebutton.setClickable(true);
                 Toast toast = Toast.makeText(ChatActivity.this, getString(R.string.message_sending_error), Toast.LENGTH_SHORT);
                 toast.show();
             }
