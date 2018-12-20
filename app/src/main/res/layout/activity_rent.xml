@@ -39,7 +39,7 @@
     </LinearLayout>
 
     <ListView
-        android:id="@+id/rentHistoryListview"
+        android:id="@+id/rentHistoryListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>

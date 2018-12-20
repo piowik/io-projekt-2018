@@ -44,21 +44,21 @@ public class CreateFlatFragment extends Fragment {
         return rootView;
     }
 
-    View.OnClickListener onClickListener = new View.OnClickListener() {
+    private final View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             System.out.println(uid);
             String flatNameString = flatNameEditText.getText().toString();
-            String invitationCode = generateInvitationCode(6);
+            String invitationCode = generateInvitationCode();
             mApiInterface.addFlat(flatNameString, invitationCode, uid).enqueue(callback);
         }
     };
 
-    private String generateInvitationCode(int length){
-        return RandomStringUtils.random(length, true, true).toUpperCase();
+    private String generateInvitationCode(){
+        return RandomStringUtils.random(6, true, true).toUpperCase();
     }
 
-    private Callback<SimpleErrorAnswer> callback = new Callback<SimpleErrorAnswer>() {
+    private final Callback<SimpleErrorAnswer> callback = new Callback<SimpleErrorAnswer>() {
         @Override
         public void onResponse(Call<SimpleErrorAnswer> call, Response<SimpleErrorAnswer> response) {
             Toast.makeText(getContext(), R.string.success, Toast.LENGTH_SHORT).show();

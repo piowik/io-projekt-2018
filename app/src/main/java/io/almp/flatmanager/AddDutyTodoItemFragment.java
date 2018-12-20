@@ -24,8 +24,8 @@ import retrofit2.Response;
 public class AddDutyTodoItemFragment extends Fragment {
 
     private ApiInterface mApiInterface;
-    long uid;
-    int flat_id;
+    private long uid;
+    private int flat_id;
     int duty_id;
 
     public AddDutyTodoItemFragment() {
@@ -80,7 +80,7 @@ public class AddDutyTodoItemFragment extends Fragment {
         return rootView;
     }
 
-    private Callback<SimpleErrorAnswer> callback = new Callback<SimpleErrorAnswer>() {
+    private final Callback<SimpleErrorAnswer> callback = new Callback<SimpleErrorAnswer>() {
         @Override
         public void onResponse(Call<SimpleErrorAnswer> call, Response<SimpleErrorAnswer> response) {
             System.out.println("i guess its ok");

@@ -18,8 +18,8 @@ import io.almp.flatmanager.model.RentHistoryItem;
  */
 
 public class RentHistoryAdapter extends BaseAdapter {
-    private Activity mActivity;
-    private List<RentHistoryItem> mItems;
+    private final Activity mActivity;
+    private final List<RentHistoryItem> mItems;
     private LayoutInflater mInflater;
 
     public RentHistoryAdapter(Activity activity, List<RentHistoryItem> items) {

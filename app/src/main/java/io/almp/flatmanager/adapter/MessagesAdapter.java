@@ -21,7 +21,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class MessagesAdapter extends BaseAdapter {
 
-    private Activity mActivity;
+    private final Activity mActivity;
     private List<Message> mMessagesList;
     private LayoutInflater mInflater;
 

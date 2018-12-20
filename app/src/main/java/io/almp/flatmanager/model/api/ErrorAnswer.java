@@ -23,7 +23,7 @@ public class ErrorAnswer {
     }
 
     /**
-     * @param error
+     * @param error returns true if an error occurred
      */
     public ErrorAnswer(boolean error, String message) {
         super();

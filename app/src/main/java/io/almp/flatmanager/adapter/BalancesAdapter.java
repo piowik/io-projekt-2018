@@ -18,8 +18,8 @@ import io.almp.flatmanager.model.User;
  */
 
 public class BalancesAdapter extends BaseAdapter {
-    private Activity mActivity;
-    private List<User> mUserBalances;
+    private final Activity mActivity;
+    private final List<User> mUserBalances;
     private LayoutInflater inflater;
 
     public BalancesAdapter(Activity fragment, List<User> userBalancesList) {
@@ -60,7 +60,7 @@ public class BalancesAdapter extends BaseAdapter {
         TextView userBalanceTextView = convertView.findViewById(R.id.user_balance_text_view);
         double balance = mUserBalances.get(position).getBalance();
         if(balance >= 0){
-            userBalanceTextView.setText(new StringBuilder().append("+").append(String.valueOf(balance)).toString());
+            userBalanceTextView.setText("+" + String.valueOf(balance));
             userBalanceTextView.setTextColor(convertView.getResources().getColor(R.color.green));
         } else {
             userBalanceTextView.setText(String.valueOf(balance));

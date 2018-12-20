@@ -2,7 +2,6 @@ package io.almp.flatmanager;
 
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -30,28 +29,11 @@ public class SignUpFragment extends Fragment {
     private EditText mEmail;
     private EditText mName;
     private EditText mSurname;
-    private OnFragmentInteractionListener mListener;
     private Button mSignUp;
     private ApiInterface mAPIService;
 
     public SignUpFragment() {
-        // Required empty public constructor
-    }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SignUpFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SignUpFragment newInstance(String param1, String param2) {
-        SignUpFragment fragment = new SignUpFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
@@ -88,13 +70,6 @@ public class SignUpFragment extends Fragment {
     }
 
 
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
     private boolean validData(){
         if(!(mLogin.getText().toString().trim().length() > 0)){
             showToast(getString(R.string.empty_login));
@@ -156,11 +131,5 @@ public class SignUpFragment extends Fragment {
                 showToast(getString(R.string.something_went_wrong));
             }
         });
-    }
-
-
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
 }

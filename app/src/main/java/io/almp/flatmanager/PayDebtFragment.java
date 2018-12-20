@@ -33,25 +33,18 @@ import static android.content.Context.MODE_PRIVATE;
 
 
 public class PayDebtFragment extends Fragment {
-    List<User> usersList;
-    ArrayAdapter<String> arrayAdapter;
+    private List<User> usersList;
+    private ArrayAdapter<String> arrayAdapter;
     private ApiInterface mApiInterface;
-    Spinner spinner;
-    Button payDebtButton;
-    EditText money;
+    private Spinner spinner;
+    private Button payDebtButton;
+    private EditText money;
 
 
     public PayDebtFragment() {
     }
 
-
-    // TODO: Rename and change types and number of parameters
-    public static PayDebtFragment newInstance(String param1, String param2) {
-        return new PayDebtFragment();
-    }
-
-
-    public void loadUsers(int flatId, View rootview){
+    private void loadUsers(int flatId, View rootview){
         mApiInterface.getUserByFlatId(flatId).enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(@NonNull Call<List<User>> call, @NonNull Response<List<User>> response) {
@@ -129,7 +122,7 @@ public class PayDebtFragment extends Fragment {
         //TODO send moneyS and selectedUser to server
         return rootview;
     }
-    private Callback<SimpleErrorAnswer> callback = new Callback<SimpleErrorAnswer>() {
+    private final Callback<SimpleErrorAnswer> callback = new Callback<SimpleErrorAnswer>() {
         @Override
         public void onResponse(Call<SimpleErrorAnswer> call, Response<SimpleErrorAnswer> response) {
             System.out.println("i guess its ok");

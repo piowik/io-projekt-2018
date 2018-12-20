@@ -18,8 +18,8 @@ import io.almp.flatmanager.model.DutiesEntity;
  */
 
 public class DutiesTodoAdapter extends BaseAdapter {
-    private Activity mActivity;
-    private List<DutiesEntity> mTodo;
+    private final Activity mActivity;
+    private final List<DutiesEntity> mTodo;
     private LayoutInflater inflater;
 
     public DutiesTodoAdapter(Activity fragment, List<DutiesEntity> histories) {

@@ -1,7 +1,6 @@
 package io.almp.flatmanager;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -37,13 +36,7 @@ public class LoginFragment extends Fragment {
     private TextView password;
     private ApiInterface mAPIService;
 
-    private OnFragmentInteractionListener mListener;
-
     public LoginFragment() {
-    }
-
-    public static LoginFragment newInstance(String param1, String param2) {
-        return new LoginFragment();
     }
 
     @Override
@@ -95,7 +88,7 @@ public class LoginFragment extends Fragment {
     }
 
 
-    public void sendPost(String loginStr, String passwordStr, String fbTokenStr) {
+    private void sendPost(String loginStr, String passwordStr, String fbTokenStr) {
         mAPIService.loginData(loginStr, passwordStr, fbTokenStr).enqueue(new Callback<LoginAnswer>() {
             @Override
             public void onResponse(Call<LoginAnswer> call, Response<LoginAnswer> response) {
@@ -135,11 +128,5 @@ public class LoginFragment extends Fragment {
                 signIn.setEnabled(true);
             }
         });
-    }
-
-
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
 }

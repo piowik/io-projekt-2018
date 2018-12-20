@@ -18,8 +18,8 @@ import io.almp.flatmanager.model.ShoppingHistoryEntity;
  */
 
 public class ShoppingHistoryAdapter extends BaseAdapter {
-    private Activity mActivity;
-    private List<ShoppingHistoryEntity> mHistories;
+    private final Activity mActivity;
+    private final List<ShoppingHistoryEntity> mHistories;
     private LayoutInflater inflater;
 
     public ShoppingHistoryAdapter(Activity fragment, List<ShoppingHistoryEntity> histories) {

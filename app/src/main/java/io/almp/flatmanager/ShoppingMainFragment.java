@@ -38,7 +38,7 @@ public class ShoppingMainFragment extends Fragment {
     private ListView mShoppingHistories;
     private List<User> usersList;
     private List<ShoppingHistoryEntity> shoppingHistoryEntitiesList;
-    int flat_id;
+    private int flat_id;
 
 
     public ShoppingMainFragment() {
@@ -52,7 +52,7 @@ public class ShoppingMainFragment extends Fragment {
     }
 
 
-    public void loadUsers(int flatId){
+    private void loadUsers(int flatId){
         mApiInterface.getUserByFlatId(flatId).enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(@NonNull Call<List<User>> call, @NonNull Response<List<User>> response) {
@@ -75,7 +75,7 @@ public class ShoppingMainFragment extends Fragment {
         });
     }
 
-    public void loadShoppingHistory(int flatId){
+    private void loadShoppingHistory(int flatId){
         mApiInterface.getShoppingHistoryByFlatId(flatId).enqueue(new Callback<List<ShoppingHistoryEntity>>() {
             @Override
             public void onResponse(@NonNull Call<List<ShoppingHistoryEntity>> call, @NonNull Response<List<ShoppingHistoryEntity>> response) {

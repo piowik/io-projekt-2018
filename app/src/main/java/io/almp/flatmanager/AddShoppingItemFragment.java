@@ -37,13 +37,13 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class AddShoppingItemFragment extends Fragment {
     private List<User> usersList;
-    ListView usersCheckboxesListView;
+    private ListView usersCheckboxesListView;
     private ApiInterface mApiInterface;
-    UsersCheckboxesAdapter usersCheckboxesAdapter;
-    long uid;
-    int flat_id;
-    Spinner spinner;
-    ArrayAdapter<String> arrayAdapter;
+    private UsersCheckboxesAdapter usersCheckboxesAdapter;
+    private long uid;
+    private int flat_id;
+    private Spinner spinner;
+    private ArrayAdapter<String> arrayAdapter;
 
 
 
@@ -58,7 +58,7 @@ public class AddShoppingItemFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-    public void loadUsers(int flatId, View rootview){
+    private void loadUsers(int flatId, View rootview){
         mApiInterface.getUserByFlatId(flatId).enqueue(new Callback<List<User>>() {
             @Override
             public void onResponse(@NonNull Call<List<User>> call, @NonNull Response<List<User>> response) {
@@ -193,12 +193,7 @@ public class AddShoppingItemFragment extends Fragment {
             double costForBuyer = Double.valueOf(itemPrice) + costPerUser;
 
 
-
-
-
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append(year).append("-").append(month).append("-").append(day).append(" ");
-            String date = stringBuilder.toString();
+            String date = String.valueOf(year) + "-" + month + "-" + day + " ";
 
             for (User user: selectedUsers){
                 if(user.getId() != buyerId){
@@ -224,7 +219,7 @@ public class AddShoppingItemFragment extends Fragment {
         return rootView;
     }
 
-    private Callback<SimpleErrorAnswer> callback = new Callback<SimpleErrorAnswer>() {
+    private final Callback<SimpleErrorAnswer> callback = new Callback<SimpleErrorAnswer>() {
         @Override
         public void onResponse(Call<SimpleErrorAnswer> call, Response<SimpleErrorAnswer> response) {
             System.out.println("i guess its ok");

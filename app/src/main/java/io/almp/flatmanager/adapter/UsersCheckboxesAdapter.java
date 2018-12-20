@@ -18,8 +18,8 @@ import io.almp.flatmanager.model.User;
  */
 
 public class UsersCheckboxesAdapter extends BaseAdapter {
-    List<User> usersList;
-    private Activity mActivity;
+    private final List<User> usersList;
+    private final Activity mActivity;
     private LayoutInflater inflater;
 
     public UsersCheckboxesAdapter(Activity mActivity, List<User> usersList) {

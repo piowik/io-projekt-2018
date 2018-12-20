@@ -41,7 +41,7 @@ public class RentActivity extends AppCompatActivity {
         mApiInterface = ApiUtils.getAPIService();
         mRentHistoryItemList = new ArrayList<>();
         EditText rentValueEditText = findViewById(R.id.rentValueEditText);
-        ListView rentHistoryListView = findViewById(R.id.rentHistoryListview);
+        ListView rentHistoryListView = findViewById(R.id.rentHistoryListView);
         sendRentButton = findViewById(R.id.sendRentButton);
         loadRents(flat_id);
 
@@ -60,7 +60,7 @@ public class RentActivity extends AppCompatActivity {
         rentHistoryListView.setAdapter(mRentHistoryAdapter);
     }
 
-    public void sendPost(long uid, int flat, float value) {
+    private void sendPost(long uid, int flat, float value) {
         mApiInterface.sendRentData(uid, flat, value).enqueue(new Callback<SimpleErrorAnswer>() {
             @Override
             public void onResponse(Call<SimpleErrorAnswer> call, Response<SimpleErrorAnswer> response) {
@@ -90,13 +90,13 @@ public class RentActivity extends AppCompatActivity {
         });
     }
 
-    public void updateRents(List<RentHistoryItem> list) {
+    private void updateRents(List<RentHistoryItem> list) {
         mRentHistoryItemList.clear();
         mRentHistoryItemList.addAll(list);
         mRentHistoryAdapter.notifyDataSetChanged();
     }
 
-    public void loadRents(int flat) {
+    private void loadRents(int flat) {
         mApiInterface.getRents(flat).enqueue(new Callback<List<RentHistoryItem>>() {
             @Override
             public void onResponse(Call<List<RentHistoryItem>> call, Response<List<RentHistoryItem>> response) {

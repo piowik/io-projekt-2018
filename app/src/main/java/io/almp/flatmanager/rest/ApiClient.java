@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  *  Class containing methods required to create API for clients.
  */
 
-public class ApiClient {
+class ApiClient {
 
     private static Retrofit retrofit = null;
 

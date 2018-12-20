@@ -48,7 +48,7 @@ public class JoinFlatFragment extends Fragment {
         return rootView;
     }
 
-    public void joinFlat(long uid, String code) {
+    private void joinFlat(long uid, String code) {
         mApiInterface.joinFlat(uid, code).enqueue(new Callback<JoinFlatAnswer>() {
             @Override
             public void onResponse(Call<JoinFlatAnswer> call, Response<JoinFlatAnswer> response) {

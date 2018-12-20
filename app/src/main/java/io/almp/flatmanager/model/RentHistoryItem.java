@@ -10,13 +10,13 @@ import com.google.gson.annotations.SerializedName;
 public class RentHistoryItem {
     @SerializedName("rent_value")
     @Expose
-    private float mTotalValue;
+    private final float mTotalValue;
     @SerializedName("per_person")
     @Expose
-    private float mValuePerPerson;
+    private final float mValuePerPerson;
     @SerializedName("rent_date")
     @Expose
-    private String mDate;
+    private final String mDate;
 
     public RentHistoryItem(float totalValue, float valuePerPerson, String date) {
         this.mTotalValue = totalValue;

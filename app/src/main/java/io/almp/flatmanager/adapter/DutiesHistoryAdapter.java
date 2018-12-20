@@ -17,9 +17,9 @@ import io.almp.flatmanager.model.DutiesEntity;
  *  Class containing methods required to create the proper view for history of duties.
  */
 
-public class DutiesHistoryAdapter extends BaseAdapter {
-    private Activity mActivity;
-    private List<DutiesEntity> mHistories;
+class DutiesHistoryAdapter extends BaseAdapter {
+    private final Activity mActivity;
+    private final List<DutiesEntity> mHistories;
     private LayoutInflater inflater;
 
     public DutiesHistoryAdapter(Activity fragment, List<DutiesEntity> histories) {

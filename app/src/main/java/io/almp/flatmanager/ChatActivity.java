@@ -39,7 +39,7 @@ public class ChatActivity extends AppCompatActivity {
     private ImageButton mSendMessageImagebutton;
     private MessagesAdapter mMessagesAdapter;
     private List<Message> mMessageList = new ArrayList<>();
-    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             getMessages(getSharedPreferences("_", MODE_PRIVATE).getLong("user_id", 0L),getSharedPreferences("_", MODE_PRIVATE).getString("user_token", "empty"));

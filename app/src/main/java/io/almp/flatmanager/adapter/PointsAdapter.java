@@ -17,9 +17,9 @@ import io.almp.flatmanager.model.User;
  *  Class containing methods required to create the proper view for points.
  */
 
-public class PointsAdapter extends BaseAdapter {
-    private Activity mActivity;
-    private List<User> mUserPoints;
+class PointsAdapter extends BaseAdapter {
+    private final Activity mActivity;
+    private final List<User> mUserPoints;
     private LayoutInflater inflater;
 
     public PointsAdapter(Activity fragment, List<User> userPointsList) {

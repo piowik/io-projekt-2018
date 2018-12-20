@@ -12,7 +12,7 @@ public class SimpleErrorAnswer {
     }
 
     /**
-     * @param error
+     * @param error returns true if an error occurred
      */
     public SimpleErrorAnswer(boolean error) {
         super();
@@ -21,10 +21,6 @@ public class SimpleErrorAnswer {
 
     public boolean isError() {
         return error;
-    }
-
-    public void setError(boolean error) {
-        this.error = error;
     }
 
 
