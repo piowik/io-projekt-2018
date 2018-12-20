@@ -63,12 +63,13 @@ public class JoinFlatFragment extends Fragment {
                     } else
                         Toast.makeText(getContext(), response.body().getMessage(), Toast.LENGTH_SHORT).show();
                 } else
-                    Toast.makeText(getContext(), "An error occured", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), R.string.something_went_wrong, Toast.LENGTH_SHORT).show();
                 mJoinFlatButton.setEnabled(true);
             }
 
             @Override
             public void onFailure(Call<JoinFlatAnswer> call, Throwable t) {
+                Toast.makeText(getContext(), R.string.something_went_wrong, Toast.LENGTH_SHORT).show();
                 Log.e("POST", "Unable to submit post to API.");
                 mJoinFlatButton.setEnabled(true);
             }
