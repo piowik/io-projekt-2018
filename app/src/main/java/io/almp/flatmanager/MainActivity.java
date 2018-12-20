@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -27,7 +28,8 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.content_main);
         FirebaseMessaging.getInstance().setAutoInitEnabled(true);
         int flat_id = getSharedPreferences("_", MODE_PRIVATE).getInt("flat_id", 0);
-
+        String invitationCode = getSharedPreferences("_", MODE_PRIVATE).getString("invitation_code", "");
+        Log.e("Invitation code", invitationCode);
         ImageView mainImageView = findViewById(R.id.image_view_main);
         String imageUrl = ApiUtils.BASE_URL + "images/flats/" + flat_id + ".png";
         GlideApp.with(this)
