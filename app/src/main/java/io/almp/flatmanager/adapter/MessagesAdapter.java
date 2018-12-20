@@ -6,14 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.List;
 
 import io.almp.flatmanager.R;
 import io.almp.flatmanager.model.Message;
-import io.almp.flatmanager.model.User;
 
 import static android.content.Context.MODE_PRIVATE;
 

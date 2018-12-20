@@ -11,7 +11,6 @@ import io.almp.flatmanager.model.User;
 import io.almp.flatmanager.model.api.ErrorAnswer;
 import io.almp.flatmanager.model.api.JoinFlatAnswer;
 import io.almp.flatmanager.model.api.LoginAnswer;
-import io.almp.flatmanager.model.api.MessagesAnswer;
 import io.almp.flatmanager.model.api.SimpleErrorAnswer;
 import retrofit2.Call;
 import retrofit2.http.Field;
