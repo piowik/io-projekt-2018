@@ -37,15 +37,12 @@ public class JoinFlatFragment extends Fragment {
         EditText codeTextView = rootView.findViewById(R.id.flat_code_edit_text);
         mApiInterface = ApiUtils.getAPIService();
         mJoinFlatButton = rootView.findViewById(R.id.button_join_flat);
-        mJoinFlatButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String flatCode = codeTextView.getText().toString();
-                if (!TextUtils.isEmpty(flatCode)) {
-                    mJoinFlatButton.setEnabled(false);
-                    long uid = getContext().getSharedPreferences("_", MODE_PRIVATE).getLong("user_id", 0L);
-                    joinFlat(uid, flatCode);
-                }
+        mJoinFlatButton.setOnClickListener(view -> {
+            String flatCode = codeTextView.getText().toString();
+            if (!TextUtils.isEmpty(flatCode)) {
+                mJoinFlatButton.setEnabled(false);
+                long uid = getContext().getSharedPreferences("_", MODE_PRIVATE).getLong("user_id", 0L);
+                joinFlat(uid, flatCode);
             }
         });
         return rootView;
