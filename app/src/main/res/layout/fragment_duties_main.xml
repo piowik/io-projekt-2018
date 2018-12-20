@@ -1,42 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/colorBackground"
-    tools:context=".DutiesMainFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".DutiesMainFragment">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:textColor="@color/colorPrimaryDark"
-        android:text="@string/duties_todo"
         android:padding="5dp"
-        android:textAlignment="center" />
+        android:text="@string/duties_todo"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="30sp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingStart="30dp"
         android:paddingEnd="30dp">
+
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:textAlignment="center"
             android:layout_height="wrap_content"
-            android:text="@string/duty_name"/>
+            android:layout_weight="1"
+            android:text="@string/duty_name"
+            android:textAlignment="center" />
+
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:textAlignment="center"
             android:layout_height="wrap_content"
-            android:text="@string/duty_value"/>
+            android:layout_weight="1"
+            android:text="@string/duty_value"
+            android:textAlignment="center" />
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@android:color/darker_gray"/>
+        android:background="@android:color/darker_gray" />
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -52,33 +57,38 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:textColor="@color/colorPrimaryDark"
-        android:text="@string/duties_history"
         android:padding="5dp"
-        android:textAlignment="center" />
+        android:text="@string/duties_history"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="30sp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingStart="30dp"
         android:paddingEnd="30dp">
+
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:textAlignment="center"
             android:layout_height="wrap_content"
-            android:text="@string/duty_name"/>
+            android:layout_weight="1"
+            android:text="@string/duty_name"
+            android:textAlignment="center" />
+
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:textAlignment="center"
             android:layout_height="wrap_content"
-            android:text="@string/duty_doer"/>
+            android:layout_weight="1"
+            android:text="@string/duty_doer"
+            android:textAlignment="center" />
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="@android:color/darker_gray"/>
+        android:background="@android:color/darker_gray" />
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -89,10 +99,10 @@
             android:layout_width="match_parent"
             android:layout_height="147dp"></ListView>
     </FrameLayout>
+
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
 
         <Button
             android:id="@+id/add_duties_item_button"
@@ -124,9 +134,8 @@
             android:text="@string/see_stats"
             android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/add_duties_item_button"
-            />
+            app:layout_constraintStart_toStartOf="parent" />
 
 
     </android.support.constraint.ConstraintLayout>

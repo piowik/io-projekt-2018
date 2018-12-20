@@ -1,68 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackground"
-    tools:context=".LoginActivity"
     android:orientation="vertical"
-    android:padding="30dp">
+    android:padding="30dp"
+    tools:context=".LoginActivity">
 
     <!-- TODO: Update blank fragment layout -->
     <EditText
+        android:id="@+id/sing_up_login_edittext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/sing_up_login_edittext"
-        android:hint="@string/login"
         android:layout_marginBottom="20dp"
-        android:inputType="text"
-        />
+        android:hint="@string/login"
+        android:inputType="text" />
 
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/sing_up_password_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
         android:hint="@string/password"
-        android:layout_marginBottom="20dp"
-        android:inputType="textPassword"/>
+        android:inputType="textPassword" />
+
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/sing_up_password_confirm_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
         android:hint="@string/password_confirm"
-        android:layout_marginBottom="20dp"
-        android:inputType="textPassword"/>
+        android:inputType="textPassword" />
+
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/sing_up_email_textedit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
         android:hint="@string/email"
-        android:layout_marginBottom="20dp"
-        android:inputType="textEmailAddress"
-        />
+        android:inputType="textEmailAddress" />
+
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/sing_up_first_name_edittext"
-        android:hint="@string/first_name"
-        android:layout_marginBottom="20dp"
-        android:inputType="text"/>
-    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/sing_up_last_name_edittex"
-        android:hint="@string/last_name"
         android:layout_marginBottom="20dp"
-        android:inputType="text"/>
+        android:hint="@string/first_name"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/sing_up_last_name_edittex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:hint="@string/last_name"
+        android:inputType="text" />
+
     <Button
+        android:id="@+id/sign_up_button"
+        style="@style/Base.Widget.AppCompat.Button.Borderless"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorButtons"
-        style="@style/Base.Widget.AppCompat.Button.Borderless"
-        android:text="@string/sign_up"
-        android:id="@+id/sign_up_button"/>
+        android:text="@string/sign_up" />
 
 
 </LinearLayout>

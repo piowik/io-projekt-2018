@@ -3,29 +3,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/login_fragment_id"
     android:layout_width="match_parent"
-    android:background="@color/colorBackground"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="30dp"
     tools:context=".NoFlatActivity">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-    <TextView
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/welcome"
-        android:textSize="30sp"
-        android:textAlignment="center"/>
-    <EditText
-        android:inputType="text"
-        android:layout_margin="30dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/flat_name_edit_text"
-        android:hint="@string/flat_name"/>
-</LinearLayout>
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/welcome"
+            android:textAlignment="center"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/flat_name_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:hint="@string/flat_name"
+            android:inputType="text" />
+    </LinearLayout>
 
 
     <FrameLayout
@@ -40,7 +42,6 @@
             android:background="@color/colorButtons"
             android:text="@string/save" />
     </FrameLayout>
-
 
 
 </LinearLayout>
