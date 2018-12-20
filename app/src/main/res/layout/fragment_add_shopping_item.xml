@@ -48,7 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="15dp"
-                android:paddingStart="25dp"></Spinner>
+                android:paddingStart="25dp" />
 
         </LinearLayout>
 
@@ -68,7 +68,7 @@
             <ListView
                 android:id="@+id/users_checkboxes_list_view"
                 android:layout_width="match_parent"
-                android:layout_height="169dp"></ListView>
+                android:layout_height="169dp" />
 
             <Button
                 android:id="@+id/pick_date_button"

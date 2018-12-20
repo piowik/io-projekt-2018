@@ -50,7 +50,7 @@
         <ListView
             android:id="@+id/duties_todo_list_view"
             android:layout_width="match_parent"
-            android:layout_height="147dp"></ListView>
+            android:layout_height="147dp" />
     </FrameLayout>
 
 
@@ -97,7 +97,7 @@
         <ListView
             android:id="@+id/duties_history_list_view"
             android:layout_width="match_parent"
-            android:layout_height="147dp"></ListView>
+            android:layout_height="147dp" />
     </FrameLayout>
 
     <android.support.constraint.ConstraintLayout
