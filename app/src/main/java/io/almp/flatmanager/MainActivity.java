@@ -12,17 +12,14 @@ import android.widget.LinearLayout;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import io.almp.flatmanager.rest.ApiUtils;
+
 /**
  *  Main class for activity in menu.
  */
 
 public class MainActivity extends AppCompatActivity
 {
-    private LinearLayout chatLayout;
-    private LinearLayout dutiesLayout;
-    private LinearLayout rentLayout;
-    private LinearLayout shoppingLayout;
-    private final String BASE_URL = "http://lamp.harryweb.pl/images/flats/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,15 +29,15 @@ public class MainActivity extends AppCompatActivity
         int flat_id = getSharedPreferences("_", MODE_PRIVATE).getInt("flat_id", 0);
 
         ImageView mainImageView = findViewById(R.id.image_view_main);
-        String imageUrl = BASE_URL + flat_id + ".png";
+        String imageUrl = ApiUtils.BASE_URL + flat_id + ".png";
         GlideApp.with(this)
                 .load(imageUrl)
                 .apply(RequestOptions.fitCenterTransform())
                 .into(mainImageView);
-        chatLayout = findViewById(R.id.chat);
-        dutiesLayout = findViewById(R.id.duties);
-        rentLayout = findViewById(R.id.rent);
-        shoppingLayout = findViewById(R.id.shopping);
+        LinearLayout chatLayout = findViewById(R.id.chat);
+        LinearLayout dutiesLayout = findViewById(R.id.duties);
+        LinearLayout rentLayout = findViewById(R.id.rent);
+        LinearLayout shoppingLayout = findViewById(R.id.shopping);
 
         chatLayout.setOnClickListener(v -> {
             Intent intent = new Intent(this, ChatActivity.class);
