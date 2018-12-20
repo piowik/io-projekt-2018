@@ -21,6 +21,13 @@ class DbHandler {
 				$response["user_id"] = $res["user_id"];
 				$response["token"] = $res['token'];
 				$response["flat"] = $res['flat'];
+				
+				    $stmt = $this->conn->prepare("SELECT invitation_code from flats where flat_id=?");
+					$stmt->bind_param("s", $res['flat']);
+					$stmt->execute();
+					$result = $stmt->get_result();
+					$row = mysqli_fetch_array($result);
+				$response["invitation_code"] = $row['invitation_code'];
 			}
 			else {
 				$response["error"] = true;
