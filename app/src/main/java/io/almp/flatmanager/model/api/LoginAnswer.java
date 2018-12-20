@@ -1,5 +1,8 @@
 package io.almp.flatmanager.model.api;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 /**
  *  Class containing methods required to check and answer properly on logging tab.
  */
@@ -11,23 +14,9 @@ public class LoginAnswer {
     private String token;
     private int flat;
     private String message;
-
-    public long getId() {
-        return user_id;
-    }
-
-    public void setId(long id) {
-        this.user_id = id;
-    }
-
-    public int getFlat() {
-        return flat;
-    }
-
-    public void setFlat(Integer flat) {
-        this.flat = flat;
-    }
-
+    @SerializedName("invitation_code")
+    @Expose
+    private String invitationCode;
     private long user_id;
 
     public LoginAnswer() {
@@ -39,30 +28,24 @@ public class LoginAnswer {
      * @param token
      * @param user_id
      * @param flat
+     * @param invitationCode
      */
-    public LoginAnswer(boolean error, String token, String message, long user_id, Integer flat) {
+    public LoginAnswer(boolean error, String token, String message, long user_id, Integer flat, String invitationCode) {
         super();
         this.error = error;
         this.token = token;
         this.message = message;
         this.user_id=user_id;
         this.flat = flat;
+        this.invitationCode = invitationCode;
     }
 
     public boolean isError() {
         return error;
     }
 
-    public void setError(boolean error) {
-        this.error = error;
-    }
-
     public String getToken() {
         return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
     }
 
     public String getMessage() {
@@ -71,6 +54,22 @@ public class LoginAnswer {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getInvitationCode() {
+        return invitationCode;
+    }
+
+    public long getId() {
+        return user_id;
+    }
+
+    public void setId(long id) {
+        this.user_id = id;
+    }
+
+    public int getFlatId() {
+        return flat;
     }
 
 }

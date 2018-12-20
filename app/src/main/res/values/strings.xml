@@ -82,5 +82,6 @@
     <string name="bad_login_or_password">Zly login lub haslo</string>
     <string name="rent_value_cannot_be_null">Rent value cannot be null</string>
     <string name="success">Success</string>
+    <string name="fields_cannot_be_empty">Fields cannot be empty</string>
 
 </resources>

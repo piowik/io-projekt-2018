@@ -26,7 +26,7 @@ import retrofit2.Response;
 import static android.content.Context.MODE_PRIVATE;
 
 /**
- *  Main fragment for class of logging.
+ * Main fragment for class of logging.
  */
 
 
@@ -84,7 +84,7 @@ public class LoginFragment extends Fragment {
         signIn = rootView.findViewById(R.id.sign_in);
         signIn.setOnClickListener(v -> {
             if (TextUtils.isEmpty(login.getText().toString()) || TextUtils.isEmpty(password.getText().toString())) {
-                Toast.makeText(getContext(), "Uzupelnij pola", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), R.string.fields_cannot_be_empty, Toast.LENGTH_SHORT).show();
                 return;
             }
             signIn.setEnabled(false);
@@ -104,11 +104,11 @@ public class LoginFragment extends Fragment {
                 if (response.isSuccessful()) {
                     if (!response.body().isError()) {
                         Log.e("POST", "Post submitted to API");
-                        int flatId = response.body().getFlat();
+                        int flatId = response.body().getFlatId();
                         LoginFragment.this.getContext().getSharedPreferences("_", MODE_PRIVATE).edit().putLong("user_id", response.body().getId()).apply();
                         LoginFragment.this.getContext().getSharedPreferences("_", MODE_PRIVATE).edit().putString("user_token", response.body().getToken()).apply();
                         LoginFragment.this.getContext().getSharedPreferences("_", MODE_PRIVATE).edit().putInt("flat_id", flatId).apply();
-
+                        LoginFragment.this.getContext().getSharedPreferences("_", MODE_PRIVATE).edit().putString("invitation_code", response.body().getInvitationCode()).apply();
                         if (flatId == 0) { // no flat
                             Intent intent = new Intent(getContext(), NoFlatActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
