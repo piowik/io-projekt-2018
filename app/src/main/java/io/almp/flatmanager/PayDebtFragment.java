@@ -90,12 +90,12 @@ public class PayDebtFragment extends Fragment {
             String moneyS;
             String selectedUserS;
             moneyS = money.getText().toString();
-            double cost = Double.valueOf(moneyS);
             if(moneyS.equals("")){
                 Toast toast = Toast.makeText(PayDebtFragment.this.getContext(), "Enter value", Toast.LENGTH_SHORT);
                 toast.show();
                 return;
             }
+            double cost = Double.valueOf(moneyS);
             if(spinner.getSelectedItem()==null){
                 Toast toast = Toast.makeText(PayDebtFragment.this.getContext(), "Choose one user", Toast.LENGTH_SHORT);
                 toast.show();
