@@ -13,7 +13,7 @@
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>
     <string name="rent_value_pln">%1$.2f PLN</string>
-    <string name="rent_value_each">%1$.2f PLN each</string>
+    <string name="rent_value_each">Your part: %1$.2f PLN</string>
     <string name="write_a_message">Write a message…</string>
     <string name="actual_balance">Actual balance</string>
     <string name="recent_shopping_items">Recent history</string>
@@ -74,5 +74,6 @@
     <string name="share_code">Share code</string>
     <string name="invite_friends">Invite friends</string>
     <string name="add_rent">Add rent</string>
+    <string name="extras">Extras</string>
 
 </resources>

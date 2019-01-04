@@ -100,9 +100,10 @@ class DbHandler {
 
 
 
-	public function getRents($flat) {
-		$stmt = $this->conn->prepare("SELECT rent_value, per_person, rent_date FROM rent_history WHERE flat_id = ? ORDER BY rent_date DESC");
-		$stmt->bind_param("s", $flat);
+	public function getRents($flat, $uid) {
+		#$stmt = $this->conn->prepare("SELECT rent_value, per_person, rent_date FROM rent_history WHERE flat_id = ? ORDER BY rent_date DESC");
+		$stmt = $this->conn->prepare("SELECT total_value, value, rent_date from rent_history join rent_item on rent_history.rent_id = rent_item.rent_id where user_id = ? AND flat_id = ? ORDER BY rent_date DESC");
+		$stmt->bind_param("ss", $uid, $flat);
 		$stmt->execute();
 		$result = $stmt->get_result();
 		$stmt->close();
@@ -113,7 +114,8 @@ class DbHandler {
 		return $rents;
 	}
 
-	public function addRent($uid, $flat, $value) {
+	public function addRent($uid, $flat, $value, $user_ids, $user_values) {
+		$response = array();
 		$stmt = $this->conn->prepare("SELECT user_id FROM users WHERE flat_id = ?");
 		$stmt->bind_param("s", $flat);
 		$stmt->execute();
@@ -122,10 +124,25 @@ class DbHandler {
 		$stmt->close();
 		$per_person = $value/$num_rows;
 
-		$stmt = $this->conn->prepare("INSERT INTO rent_history(flat_id, rent_value, per_person, rent_date) values(?, ?, ?, now())");
+		$stmt = $this->conn->prepare("INSERT INTO rent_history(flat_id, total_value, per_person, rent_date) values(?, ?, ?, now())");
 		$stmt->bind_param("sss", $flat, $value, $per_person);
 		$result = $stmt->execute();
 		$stmt->close();
+		
+		$stmt = $this->conn->prepare("SELECT rent_id from rent_history where flat_id=? ORDER BY rent_date DESC LIMIT 1");
+		$stmt->bind_param("s", $flat);
+		$stmt->execute();
+		$result = $stmt->get_result();
+		$row = mysqli_fetch_array($result);
+		$inserted_id = $row['rent_id'];
+		for ($i = 0; $i < count($user_ids); $i++) {
+			$stmt = $this->conn->prepare("INSERT INTO rent_item(rent_id, user_id, value) values(?, ?, ?)");
+			$this_uid = $user_ids[$i];
+			$this_val = $user_values[$i];
+			$stmt->bind_param("sss", $inserted_id, $this_uid, $this_val);
+			$result = $stmt->execute();
+			$stmt->close();		
+		}
         if ($result) {
 			$response["error"] = false;
 			$stmt = $this->conn->prepare("SELECT firebase_token FROM users WHERE flat_id = ? AND firebase_token <> 'empty' AND user_id <> ?");
@@ -139,7 +156,7 @@ class DbHandler {
 			}
 			$msg =
 				 [
-					'message'   => $value . "(na glowe ". $per_person . ")",
+					'message'   => $value,
 					'title'   => "Czynsz w tym miesiacu",
 					'chann_id' 	=> 2
 				 ];

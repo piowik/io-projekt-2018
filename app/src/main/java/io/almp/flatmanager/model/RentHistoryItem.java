@@ -8,10 +8,10 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class RentHistoryItem {
-    @SerializedName("rent_value")
+    @SerializedName("total_value")
     @Expose
     private final float mTotalValue;
-    @SerializedName("per_person")
+    @SerializedName("value")
     @Expose
     private final float mValuePerPerson;
     @SerializedName("rent_date")

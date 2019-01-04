@@ -1,6 +1,7 @@
 package io.almp.flatmanager.rest;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.almp.flatmanager.model.DutiesEntity;
@@ -46,11 +47,14 @@ public interface ApiInterface {
     @FormUrlEncoded
     Call<SimpleErrorAnswer> sendRentData(@Field("uid") Long uid,
                                          @Field("flat") Integer flat,
-                                         @Field("value") float value);
+                                         @Field("value") float value,
+                                         @Field("user_ids[]") List<Integer> uids,
+                                         @Field("user_values[]") List<Float> values);
 
     @POST("/v1/flat/rents")
     @FormUrlEncoded
-    Call<List<RentHistoryItem>> getRents(@Field("flat") Integer flat);
+    Call<List<RentHistoryItem>> getRents(@Field("flat") Integer flat,
+                                         @Field("uid") Long uid);
 
     @POST("/v1/flat/join")
     @FormUrlEncoded

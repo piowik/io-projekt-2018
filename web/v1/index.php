@@ -129,24 +129,28 @@ echoRespnse(200, $response);
 
 
 $app->post('/flat/rent', function() use ($app) {
-    verifyRequiredParams(array('uid', 'flat', 'value'));
-	$uid = $app->request->post('uid');
-	$flat = $app->request->post('flat');
-    $value = $app->request->post('value');
+    #verifyRequiredParams(array('uid', 'flat', 'value', 'user_ids', 'user_values'));
+	$uid = $app->request()->post('uid');
+	$flat = $app->request()->post('flat');
+    $value = $app->request()->post('value');
+	$user_ids = $app->request()->post('user_ids');
+	$user_values = $app->request()->post('user_values');
 
     $db = new DbHandler();
-    $response = $db->addRent($uid, $flat, $value);
-
+    $response = $db->addRent($uid, $flat, $value, $user_ids, $user_values);
+	$response = array();
+	$response["error"] = false;
     echoRespnse(200, $response);
 });
 
 
 $app->post('/flat/rents', function() use ($app) {
-    verifyRequiredParams(array('flat'));
+    verifyRequiredParams(array('flat','uid'));
 	$flat = $app->request->post('flat');
+	$uid = $app->request->post('uid');
 
     $db = new DbHandler();
-    $response = $db->getRents($flat);
+    $response = $db->getRents($flat,$uid);
     echoRespnse(200, $response);
 });
 

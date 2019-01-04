@@ -55,20 +55,18 @@ public class RentMainFragment extends Fragment {
 
         int flat_id = getContext().getSharedPreferences("_", MODE_PRIVATE).getInt("flat_id", 0);
         long uid = getContext().getSharedPreferences("_", MODE_PRIVATE).getLong("user_id", 0L);
+
         mApiInterface = ApiUtils.getAPIService();
         mRentHistoryItemList = new ArrayList<>();
         ListView rentHistoryListView = rootView.findViewById(R.id.rentHistoryListView);
         Button addRentButton = rootView.findViewById(R.id.button_rent_add);
-        addRentButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                RentAddFragment rentAddFragment = new RentAddFragment();
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.duties_fragment_container, rentAddFragment);
-                fragmentTransaction.commit();
-            }
+        addRentButton.setOnClickListener(view -> {
+            RentAddFragment rentAddFragment = new RentAddFragment();
+            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, rentAddFragment);
+            fragmentTransaction.commit();
         });
-        loadRents(flat_id);
+        loadRents(flat_id, uid);
 
 
         mRentHistoryAdapter = new RentHistoryAdapter(getActivity(), mRentHistoryItemList);
@@ -83,8 +81,8 @@ public class RentMainFragment extends Fragment {
         mRentHistoryAdapter.notifyDataSetChanged();
     }
 
-    private void loadRents(int flat) {
-        mApiInterface.getRents(flat).enqueue(new Callback<List<RentHistoryItem>>() {
+    private void loadRents(int flat, long uid) {
+        mApiInterface.getRents(flat, uid).enqueue(new Callback<List<RentHistoryItem>>() {
             @Override
             public void onResponse(Call<List<RentHistoryItem>> call, Response<List<RentHistoryItem>> response) {
                 Log.e("RespMsg", response.message() + "!");
