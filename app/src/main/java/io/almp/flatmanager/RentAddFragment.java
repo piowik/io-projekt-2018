@@ -29,15 +29,14 @@ import retrofit2.Response;
 import static android.content.Context.MODE_PRIVATE;
 
 /**
- * Main fragment for rents.
+ * Fragment for adding rents.
  */
 
-public class RentMainFragment extends Fragment {
-    private RentHistoryAdapter mRentHistoryAdapter;
+public class RentAddFragment extends Fragment {
     private ApiInterface mApiInterface;
-    private List<RentHistoryItem> mRentHistoryItemList;
+    private ImageButton sendRentButton;
 
-    public RentMainFragment() {
+    public RentAddFragment() {
         // Required empty public constructor
     }
 
@@ -50,58 +49,55 @@ public class RentMainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_rent_main, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_rent_add, container, false);
         // mUserPoints = rootView.findViewById(R.id.all_flatmates_balances);
 
         int flat_id = getContext().getSharedPreferences("_", MODE_PRIVATE).getInt("flat_id", 0);
         long uid = getContext().getSharedPreferences("_", MODE_PRIVATE).getLong("user_id", 0L);
         mApiInterface = ApiUtils.getAPIService();
-        mRentHistoryItemList = new ArrayList<>();
-        ListView rentHistoryListView = rootView.findViewById(R.id.rentHistoryListView);
-        Button addRentButton = rootView.findViewById(R.id.button_rent_add);
-        addRentButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                RentAddFragment rentAddFragment = new RentAddFragment();
-                FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.duties_fragment_container, rentAddFragment);
-                fragmentTransaction.commit();
+        EditText rentValueEditText = rootView.findViewById(R.id.rentValueEditText);
+        sendRentButton = rootView.findViewById(R.id.sendRentButton);
+        sendRentButton.setOnClickListener(view -> {
+            if (TextUtils.isEmpty(rentValueEditText.getText().toString())) {
+                Toast.makeText(getContext(), R.string.rent_value_cannot_be_null, Toast.LENGTH_SHORT).show();
+                return;
             }
+            float rentValue = Float.valueOf(rentValueEditText.getText().toString());
+            sendPost(uid, flat_id, rentValue);
+            rentValueEditText.setText("");
+            sendRentButton.setEnabled(false);
         });
-        loadRents(flat_id);
-
-
-        mRentHistoryAdapter = new RentHistoryAdapter(getActivity(), mRentHistoryItemList);
-        rentHistoryListView.setAdapter(mRentHistoryAdapter);
         return rootView;
     }
 
 
-    private void updateRents(List<RentHistoryItem> list) {
-        mRentHistoryItemList.clear();
-        mRentHistoryItemList.addAll(list);
-        mRentHistoryAdapter.notifyDataSetChanged();
-    }
-
-    private void loadRents(int flat) {
-        mApiInterface.getRents(flat).enqueue(new Callback<List<RentHistoryItem>>() {
+    private void sendPost(long uid, int flat, float value) {
+        mApiInterface.sendRentData(uid, flat, value).enqueue(new Callback<SimpleErrorAnswer>() {
             @Override
-            public void onResponse(Call<List<RentHistoryItem>> call, Response<List<RentHistoryItem>> response) {
+            public void onResponse(Call<SimpleErrorAnswer> call, Response<SimpleErrorAnswer> response) {
                 Log.e("RespMsg", response.message() + "!");
                 Log.e("RespBody", response.toString() + "!");
                 if (response.isSuccessful()) {
-                    List<RentHistoryItem> returnedList = response.body();
-                    updateRents(returnedList);
+                    if (!response.body().isError()) {
+                        Log.e("POST", "Post submitted to API");
+
+                    } else {
+                        Toast toast = Toast.makeText(getContext(), "Error", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
                 } else {
                     Toast toast = Toast.makeText(getContext(), getString(R.string.something_went_wrong), Toast.LENGTH_SHORT);
                     toast.show();
                 }
+                sendRentButton.setEnabled(true);
             }
 
             @Override
-            public void onFailure(Call<List<RentHistoryItem>> call, Throwable t) {
+            public void onFailure(Call<SimpleErrorAnswer> call, Throwable t) {
                 Log.e("POST", "Unable to submit post to API.");
+                sendRentButton.setEnabled(true);
             }
         });
     }
+
 }

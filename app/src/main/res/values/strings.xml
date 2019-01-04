@@ -73,5 +73,6 @@
     <string name="your_invitation_code">Your invitation code:</string>
     <string name="share_code">Share code</string>
     <string name="invite_friends">Invite friends</string>
+    <string name="add_rent">Add rent</string>
 
 </resources>
