@@ -123,7 +123,7 @@ public interface ApiInterface {
 
     @POST("v1/flat/get_duties_history")
     @FormUrlEncoded
-    Call<List<DutiesEntity>> getDutiesHistoryByFlatId(@Field("flat_id") Integer flatId);
+    Call<List<DutiesEntity>> getDutiesHistoryByFlatId(@Field("flat_id") int flatId);
 
     @POST("/v1/flat/add_shopping_item")
     @FormUrlEncoded

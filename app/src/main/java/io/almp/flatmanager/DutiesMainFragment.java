@@ -16,12 +16,15 @@ import java.util.LinkedList;
 import java.util.List;
 
 import io.almp.flatmanager.adapter.DutiesTodoAdapter;
+import io.almp.flatmanager.adapter.DutiesHistoryAdapter;
 import io.almp.flatmanager.model.DutiesEntity;
 import io.almp.flatmanager.rest.ApiInterface;
 import io.almp.flatmanager.rest.ApiUtils;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  *  Main fragment for class of duties.
@@ -36,6 +39,7 @@ public class DutiesMainFragment extends Fragment {
     private List<DutiesEntity> DutiesEntitiesHistoryList;
     private Button addDutiesItemButton;
     private Button seeStatsButton;
+    private int flat_id;
 
     public DutiesMainFragment() {
         // Required empty public constructor
@@ -69,7 +73,7 @@ public class DutiesMainFragment extends Fragment {
             }
         });
     }
-/*
+
     public void loadDutiesHistory(int flatId){
         mApiInterface.getDutiesHistoryByFlatId(flatId).enqueue(new Callback<List<DutiesEntity>>() {
             @Override
@@ -78,10 +82,10 @@ public class DutiesMainFragment extends Fragment {
                 Log.e("RespBody", response.toString() + "!");
                 if(response.isSuccessful()){
                     DutiesEntitiesHistoryList = response.body();
-                    DutiesHistoryAdapter DutiesAdapter = new DutiesHistoryAdapter(DutiesMainFragment.this.getActivity(), DutiesEntitiesHistoryList);
-                    mDutiesHistories.setAdapter(DutiesAdapter);
+                    DutiesHistoryAdapter dutiesHistoryAdapter = new DutiesHistoryAdapter(DutiesMainFragment.this.getActivity(), DutiesEntitiesHistoryList);
+                    mDutiesHistories.setAdapter(dutiesHistoryAdapter);
                 } else {
-                    Toast toast = Toast.makeText(DutiesMainFragment.this.getContext(), getString(R.string.something_goes_wrong), Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(DutiesMainFragment.this.getContext(), getString(R.string.something_went_wrong), Toast.LENGTH_SHORT);
                     toast.show();
                 }
             }
@@ -91,22 +95,20 @@ public class DutiesMainFragment extends Fragment {
                 Log.e("POST", "Unable to submit post to API.");
             }
         });
-    }*/
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_duties_main, container, false);
-       // mUserPoints = rootView.findViewById(R.id.all_flatmates_balances);
         mDutiesHistories = rootView.findViewById(R.id.duties_history_list_view);
         mDutiesTodo = rootView.findViewById(R.id.duties_todo_list_view);
-
+        flat_id = getContext().getSharedPreferences("_", MODE_PRIVATE).getInt("flat_id", 0);
         mApiInterface = ApiUtils.getAPIService();
         DutiesEntitiesTodoList = new LinkedList<>();
-       // DutiesEntitiesHistoryList = new LinkedList<>();
-        int flatId = 0;
-        loadDutiesTodo(flatId);
-       // loadDutiesHistory(flatId);
+        DutiesEntitiesHistoryList = new LinkedList<>();
+        loadDutiesTodo(flat_id);
+        loadDutiesHistory(flat_id);
 
 
         addDutiesItemButton = rootView.findViewById(R.id.add_duties_item_button);

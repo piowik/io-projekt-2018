@@ -85,6 +85,30 @@ $app->post('/flat/add_shopping_item', function() use ($app){
   echoRespnse(200, $response);
 });
 
+$app->post('/flat/add_duty_todo', function() use ($app){
+  verifyRequiredParams(array('flat_id', 'user_id', 'value', 'duty_name'));
+  $flat_id = $app->request->post('flat_id');
+  $user_id = $app->request->post('user_id');
+  $value = $app->request->post('value');
+  $duty_name = $app->request->post('duty_name');
+  $db = new DbHandler();
+  $response = $db->addDutyTodo($flat_id, $user_id, $value, $duty_name);
+  echoRespnse(200, $response);
+});
+/*
+$app->post('/flat/add_duty_history', function() use ($app){
+  verifyRequiredParams(array('duty_id', ''flat_id', 'user_id', 'value', 'duty_name'));
+  $duty_id = $app->request->post('duty_id');
+  $flat_id = $app->request->post('flat_id');
+  $user_id = $app->request->post('user_id');
+  $value = $app->request->post('value');
+  $duty_name = $app->request->post('duty_name');
+  $db = new DbHandler();
+  $response = $db->addDutyHistory($duty_id, $flat_id, $user_id, $value, $duty_name);
+  echoRespnse(200, $response);
+});
+*/
+
 $app->post('/flat/add_flat', function() use ($app){
   verifyRequiredParams(array('name', 'invitation_code', 'user_id'));
   $name = $app->request->post('name');
@@ -169,6 +193,24 @@ $app->post('/flat/get_shoppings', function() use($app) {
     $response = $db->getShoppingHistoryByFlatId($flat_id);
     echoRespnse(200, $response);
 });
+
+$app->post('/flat/get_duties_todo', function() use($app) {
+    verifyRequiredParams(array('flat_id'));
+    $flat_id = $app->request->post('flat_id');
+    $db = new DbHandler();
+    $response = $db->getDutiesTodoByFlatId($flat_id);
+    echoRespnse(200, $response);
+});
+
+$app->post('/flat/get_duties_history', function() use($app) {
+    verifyRequiredParams(array('flat_id'));
+    $flat_id = $app->request->post('flat_id');
+    $db = new DbHandler();
+    $response = $db->getDutiesHistoryByFlatId($flat_id);
+    echoRespnse(200, $response);
+});
+
+
 /**
  * Verifying required params posted or not
  */

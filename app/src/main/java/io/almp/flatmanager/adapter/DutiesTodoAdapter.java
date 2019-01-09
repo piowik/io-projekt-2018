@@ -22,9 +22,9 @@ public class DutiesTodoAdapter extends BaseAdapter {
     private final List<DutiesEntity> mTodo;
     private LayoutInflater inflater;
 
-    public DutiesTodoAdapter(Activity fragment, List<DutiesEntity> histories) {
+    public DutiesTodoAdapter(Activity fragment, List<DutiesEntity> todo) {
         mActivity = fragment;
-        mTodo = histories;
+        mTodo = todo;
     }
 
     @Override

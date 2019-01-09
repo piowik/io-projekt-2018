@@ -196,6 +196,20 @@ class DbHandler {
 		$stmt->close();
   }
 
+  public function addDutyTodo($flat_id, $user_id, $value, $duty_name){
+    $stmt = $this->conn->prepare("INSERT INTO duties (flat_id, user_id, value, duty_name) values (?, ?, ?, ?)");
+    $stmt->bind_param("sssss", $flat_id, $user_id, $value, $duty_name);
+    $result = $stmt->execute();
+		$stmt->close();
+  }
+/*
+  public function addDutyHistory($duty_id, $flat_id, $user_id, $value, $duty_name){
+      $stmt = $this->conn->prepare("INSERT INTO dutiesCompletions (duty_id, flat_id, user_id, value, duty_name) values (?, ?, ?, ?, ?)");
+      $stmt->bind_param($duty_id, $flat_id, $user_id, $value, $duty_name);
+      $result = $stmt->execute();
+  		$stmt->close();
+    }
+*/
   public function setFlatId($user_id, $flat_id){
     $stmt = $this->conn->prepare("UPDATE users SET flat_id = ? WHERE user_id =?");
     $stmt->bind_param("ss", $flat_id, $user_id);
@@ -249,7 +263,7 @@ class DbHandler {
 			while ($token = $result->fetch_assoc()) {
 				array_push($tokens, $token["firebase_token"]);
             }
-			$title = "Nowa waiadomość";
+			$title = "Nowa wiadomość";
 			$notification = $message;
 			$msg =
 
@@ -327,7 +341,8 @@ class DbHandler {
     }
 
 	public function getUserByName($name) {
-        $stmt = $this->conn->prepare("SELECT user_id, name, password, flat_id, token, firebase_token FROM users WHERE login = ?");
+        $stmt = $this->conn->prepare("SELECT user_id, name, password, flat_id, 
+		token, firebase_token FROM users WHERE login = ?");
         $stmt->bind_param("s", $name);
         if ($stmt->execute()) {
             $stmt->bind_result($id, $name, $password, $flat_id, $token, $fbtoken);
@@ -346,10 +361,11 @@ class DbHandler {
         }
     }
     public function getUserByFlatId($flat_id){
-      $stmt = $this->conn->prepare("SELECT user_id, flat_id, login, name, email, balance FROM users WHERE flat_id = ?");
+      $stmt = $this->conn->prepare("SELECT user_id, flat_id, login, name, 
+	  email, balance, points FROM users WHERE flat_id = ?");
       $stmt->bind_param("s", $flat_id);
       $stmt->execute();
-      $result = $stmt->get_result();
+      $result = $stmt->get_result(); 
       $stmt->close();
       $users = array();
       while($user = $result->fetch_assoc()){
@@ -359,7 +375,9 @@ class DbHandler {
     }
 
     public function getShoppingHistoryByFlatId($flat_id){
-      $stmt = $this->conn->prepare("SELECT s.item_id, s.flat_id, name, s.item_name, s.price, s.purchase_date FROM shopping s join users using(user_id) WHERE s.flat_id = ? order by s.purchase_date desc");
+      $stmt = $this->conn->prepare("SELECT s.item_id, s.flat_id, name, s.item_name, 
+	  s.price, s.purchase_date FROM shopping s join users using(user_id) WHERE s.flat_id = ? 
+	  order by s.purchase_date desc");
       $stmt->bind_param("s", $flat_id);
       $stmt->execute();
       $result = $stmt->get_result();
@@ -370,5 +388,33 @@ class DbHandler {
       }
       return $items;
     }
+
+    public function getDutiesTodoByFlatId($flat_id){
+          $stmt = $this->conn->prepare("SELECT s.duty_id, s.flat_id, 
+		  s.value, s.duty_name FROM duties s join users using(user_id) WHERE s.flat_id = ?");
+          $stmt->bind_param("s", $flat_id);
+          $stmt->execute();
+          $result = $stmt->get_result();
+          $stmt->close();
+          $duties = array();
+          while($duty = $result->fetch_assoc()){
+            array_push($duties, $duty);
+          }
+          return $duties;
+        }
+
+   public function getDutiesHistoryByFlatId($flat_id){
+          $stmt = $this->conn->prepare("SELECT s.duty_id, s.flat_id, s.duty_name 
+		  FROM dutiesCompletions s join users using(user_id) WHERE s.flat_id = ?");
+          $stmt->bind_param("s", $flat_id);
+          $stmt->execute();
+          $result = $stmt->get_result();
+          $stmt->close();
+          $dutiesCompleted = array();
+          while($dutyCompleted = $result->fetch_assoc()){
+            array_push($dutiesCompleted, $dutyCompleted);
+          }
+          return $dutiesCompleted;
+        }
 }
 ?>
