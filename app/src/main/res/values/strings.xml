@@ -25,7 +25,8 @@
     <string name="duties_history">History</string>
     <string name="duty_name">Duty</string>
     <string name="duty_value">Value</string>
-    <string name="duty_doer">Doer</string>
+    <string name="duty_date">Date</string>
+    <string name="statistics">Statistics</string>
     <string name="channel_name_rent">Rent Channel</string>
     <string name="channel_rent_description">Notifications about rent</string>
     <string name="channel_id_rent">RentChannel</string>

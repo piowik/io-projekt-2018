@@ -1,15 +1,22 @@
 package io.almp.flatmanager;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.List;
+
+import io.almp.flatmanager.adapter.UsersCheckboxesAdapter;
+import io.almp.flatmanager.model.User;
 import io.almp.flatmanager.model.api.SimpleErrorAnswer;
 import io.almp.flatmanager.rest.ApiInterface;
 import io.almp.flatmanager.rest.ApiUtils;
@@ -17,21 +24,21 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.content.Context.MODE_PRIVATE;
+
 /**
  *  Class containing methods required to create properly functioning adding duties to do method.
  */
 
 public class AddDutyTodoItemFragment extends Fragment {
-
     private ApiInterface mApiInterface;
-    private long uid;
+    private long user_id;
     private int flat_id;
-    int duty_id;
+    private ArrayAdapter<String> arrayAdapter;
 
     public AddDutyTodoItemFragment() {
         // Required empty public constructor
     }
-
 
 
     @Override
@@ -39,13 +46,13 @@ public class AddDutyTodoItemFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_add_duty_item, container, false);
         mApiInterface = ApiUtils.getAPIService();
-
+        flat_id = getContext().getSharedPreferences("_", MODE_PRIVATE).getInt("flat_id", 0);
+        user_id = getContext().getSharedPreferences("_", MODE_PRIVATE).getLong("user_id", 0L);
         Button saveButton = rootView.findViewById(R.id.save_duty);
         saveButton.setOnClickListener(v->{
             EditText dutyValueET = rootView.findViewById(R.id.new_duty_value_id);
@@ -67,8 +74,7 @@ public class AddDutyTodoItemFragment extends Fragment {
 
             System.out.println("Dane ok");
 
-
-            mApiInterface.addDutyTodo(flat_id, uid, dutyValue, dutyName).enqueue(callback);
+            mApiInterface.addDutyTodo(flat_id, user_id, dutyValue, dutyName).enqueue(callback);
             DutiesMainFragment dutyMainFragment = new DutiesMainFragment();
 
             FragmentTransaction fragmentTransaction;

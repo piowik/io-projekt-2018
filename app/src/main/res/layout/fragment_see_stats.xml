@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".SeeStatsFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="91dp"
+        android:padding="5dp"
+        android:text="@string/statistics"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="30sp" />
+
+
+    <ListView
+        android:id="@+id/all_flatmates_points"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:divider="@color/colorAccent"
+        android:dividerHeight="0.5dp" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="114dp">
+
+    </FrameLayout>
+</LinearLayout>

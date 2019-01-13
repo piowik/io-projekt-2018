@@ -17,7 +17,8 @@ import java.util.List;
 
 import io.almp.flatmanager.adapter.DutiesTodoAdapter;
 import io.almp.flatmanager.adapter.DutiesHistoryAdapter;
-import io.almp.flatmanager.model.DutiesEntity;
+import io.almp.flatmanager.model.DutiesHistoryEntity;
+import io.almp.flatmanager.model.DutiesTodoEntity;
 import io.almp.flatmanager.rest.ApiInterface;
 import io.almp.flatmanager.rest.ApiUtils;
 import retrofit2.Call;
@@ -32,11 +33,10 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class DutiesMainFragment extends Fragment {
     private ApiInterface mApiInterface;
-    private ListView mUserPoints;
     private ListView mDutiesTodo;
     private ListView mDutiesHistories;
-    private List<DutiesEntity> DutiesEntitiesTodoList;
-    private List<DutiesEntity> DutiesEntitiesHistoryList;
+    private List<DutiesTodoEntity> DutiesEntitiesTodoList;
+    private List<DutiesHistoryEntity> DutiesEntitiesHistoryList;
     private Button addDutiesItemButton;
     private Button seeStatsButton;
     private int flat_id;
@@ -52,9 +52,9 @@ public class DutiesMainFragment extends Fragment {
 
 
     private void loadDutiesTodo(int flatId){
-        mApiInterface.getDutiesTodoByFlatId(flatId).enqueue(new Callback<List<DutiesEntity>>() {
+        mApiInterface.getDutiesTodoByFlatId(flatId).enqueue(new Callback<List<DutiesTodoEntity>>() {
             @Override
-            public void onResponse(@NonNull Call<List<DutiesEntity>> call, @NonNull Response<List<DutiesEntity>> response) {
+            public void onResponse(@NonNull Call<List<DutiesTodoEntity>> call, @NonNull Response<List<DutiesTodoEntity>> response) {
                 Log.e("RespMsg", response.message() + "!");
                 Log.e("RespBody", response.toString() + "!");
                 if(response.isSuccessful()){
@@ -68,16 +68,16 @@ public class DutiesMainFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<DutiesEntity>> call, Throwable t) {
+            public void onFailure(Call<List<DutiesTodoEntity>> call, Throwable t) {
                 Log.e("POST", "Unable to submit post to API.");
             }
         });
     }
 
     public void loadDutiesHistory(int flatId){
-        mApiInterface.getDutiesHistoryByFlatId(flatId).enqueue(new Callback<List<DutiesEntity>>() {
+        mApiInterface.getDutiesHistoryByFlatId(flatId).enqueue(new Callback<List<DutiesHistoryEntity>>() {
             @Override
-            public void onResponse(Call<List<DutiesEntity>> call, Response<List<DutiesEntity>> response) {
+            public void onResponse(@NonNull Call<List<DutiesHistoryEntity>> call, @NonNull Response<List<DutiesHistoryEntity>> response) {
                 Log.e("RespMsg", response.message() + "!");
                 Log.e("RespBody", response.toString() + "!");
                 if(response.isSuccessful()){
@@ -91,15 +91,14 @@ public class DutiesMainFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<DutiesEntity>> call, Throwable t) {
+            public void onFailure(Call<List<DutiesHistoryEntity>> call, Throwable t) {
                 Log.e("POST", "Unable to submit post to API.");
             }
         });
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_duties_main, container, false);
         mDutiesHistories = rootView.findViewById(R.id.duties_history_list_view);
         mDutiesTodo = rootView.findViewById(R.id.duties_todo_list_view);
@@ -116,6 +115,7 @@ public class DutiesMainFragment extends Fragment {
             AddDutyTodoItemFragment addDutyTodoItemFragment = new AddDutyTodoItemFragment();
             FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.duties_fragment_container, addDutyTodoItemFragment);
+            fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         });
 
@@ -123,7 +123,8 @@ public class DutiesMainFragment extends Fragment {
         seeStatsButton.setOnClickListener(v->{
             SeeStatsFragment seeStatsFragment = new SeeStatsFragment();
             FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-         //   fragmentTransaction.replace(R.id.duties_fragment_container, seeStatsFragment);
+            fragmentTransaction.replace(R.id.duties_fragment_container, seeStatsFragment);
+            fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         });
 

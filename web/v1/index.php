@@ -95,19 +95,19 @@ $app->post('/flat/add_duty_todo', function() use ($app){
   $response = $db->addDutyTodo($flat_id, $user_id, $value, $duty_name);
   echoRespnse(200, $response);
 });
-/*
+
 $app->post('/flat/add_duty_history', function() use ($app){
-  verifyRequiredParams(array('duty_id', ''flat_id', 'user_id', 'value', 'duty_name'));
-  $duty_id = $app->request->post('duty_id');
+  verifyRequiredParams(array('flat_id', 'user_id', 'value', 'duty_name', 'completion_date'));
   $flat_id = $app->request->post('flat_id');
   $user_id = $app->request->post('user_id');
   $value = $app->request->post('value');
   $duty_name = $app->request->post('duty_name');
+  $completion_date = $app->request->post('completion_date');
   $db = new DbHandler();
-  $response = $db->addDutyHistory($duty_id, $flat_id, $user_id, $value, $duty_name);
+  $response = $db->addDutyHistory($flat_id, $user_id, $value, $duty_name, $completion_date);
   echoRespnse(200, $response);
 });
-*/
+
 
 $app->post('/flat/add_flat', function() use ($app){
   verifyRequiredParams(array('name', 'invitation_code', 'user_id'));
@@ -183,6 +183,14 @@ $app->post('/flat/get_users', function() use($app) {
     $flat_id = $app->request->post('flat_id');
     $db = new DbHandler();
     $response = $db->getUserByFlatId($flat_id);
+    echoRespnse(200, $response);
+});
+
+$app->post('/flat/get_users_points', function() use($app) {
+    verifyRequiredParams(array('flat_id'));
+    $flat_id = $app->request->post('flat_id');
+    $db = new DbHandler();
+    $response = $db->getUserByFlatIdPoints($flat_id);
     echoRespnse(200, $response);
 });
 

@@ -22,6 +22,19 @@
             android:layout_gravity="top|start"
             android:layout_margin="5dp"
             android:layout_weight="1"
+            android:textAlignment="center"
             android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/d_hist_date_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|start"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:textSize="18sp" />
+
+
     </LinearLayout>
 </LinearLayout>

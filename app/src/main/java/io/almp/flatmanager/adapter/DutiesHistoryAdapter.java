@@ -11,7 +11,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import io.almp.flatmanager.R;
-import io.almp.flatmanager.model.DutiesEntity;
+import io.almp.flatmanager.model.DutiesHistoryEntity;
 
 /**
  *  Class containing methods required to create the proper view for history of duties.
@@ -19,10 +19,10 @@ import io.almp.flatmanager.model.DutiesEntity;
 
 public class DutiesHistoryAdapter extends BaseAdapter {
     private final Activity mActivity;
-    private final List<DutiesEntity> mHistory;
+    private final List<DutiesHistoryEntity> mHistory;
     private LayoutInflater inflater;
 
-    public DutiesHistoryAdapter(Activity fragment, List<DutiesEntity> history) {
+    public DutiesHistoryAdapter(Activity fragment, List<DutiesHistoryEntity> history) {
         mActivity = fragment;
         mHistory = history;
     }
@@ -57,9 +57,9 @@ public class DutiesHistoryAdapter extends BaseAdapter {
         TextView itemNameTextView = convertView.findViewById(R.id.d_hist_name_text_view);
         String dutyName = mHistory.get(position).getDuty_name();
         itemNameTextView.setText(dutyName);
-      //  TextView dateTextView = convertView.findViewById(R.id.d_hist_date_text_view);
-     //   String dutyDate = mHistory.get(position).getDa();
-     //   dateTextView.setText(dutyDate);
+        TextView dateTextView = convertView.findViewById(R.id.d_hist_date_text_view);
+        String dutyDate = mHistory.get(position).getCompletion_date();
+        dateTextView.setText(dutyDate);
 
         return convertView;
     }

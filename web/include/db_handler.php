@@ -198,18 +198,18 @@ class DbHandler {
 
   public function addDutyTodo($flat_id, $user_id, $value, $duty_name){
     $stmt = $this->conn->prepare("INSERT INTO duties (flat_id, user_id, value, duty_name) values (?, ?, ?, ?)");
-    $stmt->bind_param("sssss", $flat_id, $user_id, $value, $duty_name);
+    $stmt->bind_param("ssss", $flat_id, $user_id, $value, $duty_name);
     $result = $stmt->execute();
 		$stmt->close();
   }
-/*
-  public function addDutyHistory($duty_id, $flat_id, $user_id, $value, $duty_name){
-      $stmt = $this->conn->prepare("INSERT INTO dutiesCompletions (duty_id, flat_id, user_id, value, duty_name) values (?, ?, ?, ?, ?)");
-      $stmt->bind_param($duty_id, $flat_id, $user_id, $value, $duty_name);
-      $result = $stmt->execute();
-  		$stmt->close();
-    }
-*/
+
+  public function addDutyHistory($flat_id, $duty_name, $user_id, $value, $completion_date){
+    $stmt = $this->conn->prepare("INSERT INTO dutiesCompletions (flat_id, duty_name, user_id, value, completion_date) values (?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssss", $flat_id, $duty_name, $user_id, $value, $completion_date);
+    $result = $stmt->execute();
+		$stmt->close();
+  }
+
   public function setFlatId($user_id, $flat_id){
     $stmt = $this->conn->prepare("UPDATE users SET flat_id = ? WHERE user_id =?");
     $stmt->bind_param("ss", $flat_id, $user_id);
@@ -374,8 +374,22 @@ class DbHandler {
       return $users;
     }
 
+    public function getUserByFlatIdPoints($flat_id){
+      $stmt = $this->conn->prepare("SELECT user_id, flat_id, login, name,
+	  email, balance, points FROM users WHERE flat_id = ? order by points desc");
+      $stmt->bind_param("s", $flat_id);
+      $stmt->execute();
+      $result = $stmt->get_result();
+      $stmt->close();
+      $users = array();
+      while($user = $result->fetch_assoc()){
+        array_push($users, $user);
+      }
+      return $users;
+    }
+
     public function getShoppingHistoryByFlatId($flat_id){
-      $stmt = $this->conn->prepare("SELECT s.item_id, s.flat_id, name, s.item_name, 
+      $stmt = $this->conn->prepare("SELECT s.item_id, s.flat_id, name, s.item_name,
 	  s.price, s.purchase_date FROM shopping s join users using(user_id) WHERE s.flat_id = ? 
 	  order by s.purchase_date desc");
       $stmt->bind_param("s", $flat_id);
@@ -404,7 +418,7 @@ class DbHandler {
         }
 
    public function getDutiesHistoryByFlatId($flat_id){
-          $stmt = $this->conn->prepare("SELECT s.duty_id, s.flat_id, s.duty_name 
+          $stmt = $this->conn->prepare("SELECT s.duty_id, s.flat_id, s.duty_name, s.completion_date
 		  FROM dutiesCompletions s join users using(user_id) WHERE s.flat_id = ?");
           $stmt->bind_param("s", $flat_id);
           $stmt->execute();

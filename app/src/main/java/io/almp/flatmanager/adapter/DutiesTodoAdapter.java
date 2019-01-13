@@ -11,7 +11,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import io.almp.flatmanager.R;
-import io.almp.flatmanager.model.DutiesEntity;
+import io.almp.flatmanager.model.DutiesTodoEntity;
 
 /**
  *  Class containing methods required to create the proper view for duties to do.
@@ -19,10 +19,10 @@ import io.almp.flatmanager.model.DutiesEntity;
 
 public class DutiesTodoAdapter extends BaseAdapter {
     private final Activity mActivity;
-    private final List<DutiesEntity> mTodo;
+    private final List<DutiesTodoEntity> mTodo;
     private LayoutInflater inflater;
 
-    public DutiesTodoAdapter(Activity fragment, List<DutiesEntity> todo) {
+    public DutiesTodoAdapter(Activity fragment, List<DutiesTodoEntity> todo) {
         mActivity = fragment;
         mTodo = todo;
     }

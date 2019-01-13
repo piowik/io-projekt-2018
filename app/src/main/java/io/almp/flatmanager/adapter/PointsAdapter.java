@@ -17,14 +17,18 @@ import io.almp.flatmanager.model.User;
  *  Class containing methods required to create the proper view for points.
  */
 
-class PointsAdapter extends BaseAdapter {
+public class PointsAdapter extends BaseAdapter {
     private final Activity mActivity;
     private final List<User> mUserPoints;
+    private double bestPerson;
+    private double worstPerson;
     private LayoutInflater inflater;
 
     public PointsAdapter(Activity fragment, List<User> userPointsList) {
         mActivity = fragment;
         mUserPoints = userPointsList;
+        bestPerson = mUserPoints.get(0).getPoints();
+        worstPerson = mUserPoints.get(0).getPoints();
     }
 
     @Override
@@ -51,20 +55,33 @@ class PointsAdapter extends BaseAdapter {
             inflater = (LayoutInflater) mActivity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
         if(convertView == null){
-          //  convertView = inflater.inflate(R.layout.points_list_item, parent, false);
+            convertView = inflater.inflate(R.layout.points_list_item, parent, false);
         }
 
         TextView userNameTextView = convertView.findViewById(R.id.user_name_text_view);
         userNameTextView.setText(mUserPoints.get(position).getName());
         userNameTextView.setTextColor(convertView.getResources().getColor(R.color.black));
-       // TextView userPointsTextView = convertView.findViewById(R.id.user_points_text_view);
+        TextView userPointsTextView = convertView.findViewById(R.id.user_points_text_view);
         double points = mUserPoints.get(position).getPoints();
-        if(points >= 0){
-        //    userPointsTextView.setText(new StringBuilder().append("+").append(String.valueOf(points)).toString());
-        //    userPointsTextView.setTextColor(convertView.getResources().getColor(R.color.green));
-        } else {
-        //    userPointsTextView.setText(String.valueOf(points));
-        //    userPointsTextView.setTextColor(convertView.getResources().getColor(R.color.red));
+        userPointsTextView.setText(String.valueOf(points));
+
+        for (User user : mUserPoints){
+            if (bestPerson <= user.getPoints()){
+                bestPerson = user.getPoints();
+            }
+            if(worstPerson >= user.getPoints()){
+                worstPerson = user.getPoints();
+            }
+        }
+
+        if(points == bestPerson){
+            userPointsTextView.setTextColor(convertView.getResources().getColor(R.color.green));
+        }
+        else if(points == worstPerson) {
+            userPointsTextView.setTextColor(convertView.getResources().getColor(R.color.red));
+        }
+        else {
+            userPointsTextView.setTextColor(convertView.getResources().getColor(R.color.black));
         }
 
         return convertView;
