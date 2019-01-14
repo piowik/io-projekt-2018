@@ -34,7 +34,6 @@ public class AddDutyTodoItemFragment extends Fragment {
     private ApiInterface mApiInterface;
     private long user_id;
     private int flat_id;
-    private ArrayAdapter<String> arrayAdapter;
 
     public AddDutyTodoItemFragment() {
         // Required empty public constructor

@@ -90,12 +90,16 @@ public interface ApiInterface {
                                             @Field("value") String value,
                                             @Field("duty_name") String duty_name);
 
+    @POST("/v1/flat/delete_duty_todo")
+    @FormUrlEncoded
+    Call<SimpleErrorAnswer> deleteDutyTodo(@Field("duty_id") int duty_id);
+
     @POST("/v1/flat/add_duty_history")
     @FormUrlEncoded
     Call<SimpleErrorAnswer> addDutyHistory(@Field("flat_id") int flat_id,
+                                           @Field("duty_name") String duty_name,
                                         @Field("user_id") long user_id,
                                         @Field("value") String value,
-                                        @Field("duty_name") String duty_name,
                                         @Field("completion_date") String completion_date);
 
     @POST("/v1/chat/get_messages")
