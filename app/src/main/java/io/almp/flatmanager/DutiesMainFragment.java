@@ -113,11 +113,12 @@ public class DutiesMainFragment extends Fragment {
         String value = duty.getValue();
         String name = duty.getDuty_name();
         mApiInterface.addDutyHistory(flatId, name, user_id, value, date).enqueue(callback);
+        mApiInterface.updateUserPoints(user_id, Integer.valueOf(value)).enqueue(callback);
     }
 
-    public void deleteTodo(DutiesTodoEntity duty) {
+    public void deleteTodo(int flat_id, DutiesTodoEntity duty) {
         Integer duty_id = duty.getDuty_id();
-        mApiInterface.deleteDutyTodo(duty_id);
+        mApiInterface.deleteDutyTodo(flat_id, duty_id);
     }
 
     private final Callback<SimpleErrorAnswer> callback = new Callback<SimpleErrorAnswer>() {
@@ -151,7 +152,7 @@ public class DutiesMainFragment extends Fragment {
             completeDuty(flat_id, user_id, DutiesEntitiesTodoList.get(position));
             mDutiesHistories.deferNotifyDataSetChanged();
             loadDutiesHistory(flat_id);
-            deleteTodo(DutiesEntitiesTodoList.get(position));
+            deleteTodo(flat_id, DutiesEntitiesTodoList.get(position));
             mDutiesTodo.deferNotifyDataSetChanged();
             loadDutiesTodo(flat_id);
         });

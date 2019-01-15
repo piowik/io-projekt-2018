@@ -92,7 +92,8 @@ public interface ApiInterface {
 
     @POST("/v1/flat/delete_duty_todo")
     @FormUrlEncoded
-    Call<SimpleErrorAnswer> deleteDutyTodo(@Field("duty_id") int duty_id);
+    Call<SimpleErrorAnswer> deleteDutyTodo(@Field("flat_id") int flat_id,
+                                            @Field("duty_id") int duty_id);
 
     @POST("/v1/flat/add_duty_history")
     @FormUrlEncoded
@@ -124,6 +125,11 @@ public interface ApiInterface {
     Call<SimpleErrorAnswer> updateUserBalance(@Field("user_id") long user_id,
                                               @Field("cost") double cost);
     Call<List<ShoppingHistoryEntity>> getShoppingHistoryByFlatId(@Field("flat_id") Integer flatId);
+
+    @POST("v1/flat/update_points")
+    @FormUrlEncoded
+    Call<SimpleErrorAnswer> updateUserPoints(@Field("user_id") long user_id,
+                                              @Field("value") int value);
 
     @POST("v1/flat/get_duties_todo")
     @FormUrlEncoded
