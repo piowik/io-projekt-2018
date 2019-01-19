@@ -85,7 +85,7 @@ public interface ApiInterface {
     Call<SimpleErrorAnswer> addShoppingItem(@Field("flat_id") int flat_id,
                                             @Field("user_id") long user_id,
                                             @Field("item_name") String item_name,
-                                            @Field("price") String price,
+                                            @Field("price") double price,
                                             @Field("date") String date);
 
     @POST("/v1/flat/add_duty_todo")

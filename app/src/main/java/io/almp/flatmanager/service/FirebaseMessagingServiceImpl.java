@@ -37,7 +37,7 @@ import retrofit2.Response;
 /**
  * Created by Mateusz Zaremba on 27.11.2018.
  */
-public class FirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
+public class FirebaseMessagingServiceImpl extends com.google.firebase.messaging.FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
 
