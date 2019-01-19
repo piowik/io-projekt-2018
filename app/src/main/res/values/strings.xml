@@ -76,5 +76,7 @@
     <string name="invite_friends">Invite friends</string>
     <string name="add_rent">Add rent</string>
     <string name="extras">Extras</string>
+    <string name="empty_price">Item price cannot be empty</string>
+    <string name="empty_item_name">Item name cannot be empty</string>
 
 </resources>

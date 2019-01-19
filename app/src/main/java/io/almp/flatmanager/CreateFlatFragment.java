@@ -16,6 +16,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import io.almp.flatmanager.model.api.SimpleErrorAnswer;
 import io.almp.flatmanager.rest.ApiInterface;
 import io.almp.flatmanager.rest.ApiUtils;
+import io.almp.flatmanager.service.FirebaseMessagingServiceImpl;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -51,6 +52,8 @@ public class CreateFlatFragment extends Fragment {
             String flatNameString = flatNameEditText.getText().toString();
             String invitationCode = generateInvitationCode();
             mApiInterface.addFlat(flatNameString, invitationCode, uid).enqueue(callback);
+            Intent mainActivity = new Intent(getContext(), MainActivity.class);
+            startActivity(mainActivity);
         }
     };
 
@@ -63,7 +66,7 @@ public class CreateFlatFragment extends Fragment {
         public void onResponse(Call<SimpleErrorAnswer> call, Response<SimpleErrorAnswer> response) {
             Toast.makeText(getContext(), R.string.success, Toast.LENGTH_SHORT).show();
             SharedPreferences sharedPref = getContext().getSharedPreferences("_", MODE_PRIVATE);
-            io.almp.flatmanager.service.FirebaseMessagingService.sendPost(sharedPref.getLong("user_id", 0L),"empty");
+            FirebaseMessagingServiceImpl.sendPost(sharedPref.getLong("user_id", 0L),"empty");
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putLong("user_id", 0L);
             editor.putInt("flat_id", -1);

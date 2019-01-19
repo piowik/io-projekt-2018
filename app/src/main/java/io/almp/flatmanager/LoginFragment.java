@@ -17,7 +17,7 @@ import android.widget.Toast;
 import io.almp.flatmanager.model.api.LoginAnswer;
 import io.almp.flatmanager.rest.ApiInterface;
 import io.almp.flatmanager.rest.ApiUtils;
-import io.almp.flatmanager.service.FirebaseMessagingService;
+import io.almp.flatmanager.service.FirebaseMessagingServiceImpl;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -81,7 +81,7 @@ public class LoginFragment extends Fragment {
                 return;
             }
             signIn.setEnabled(false);
-            String fbToken = FirebaseMessagingService.getToken(getContext());
+            String fbToken = FirebaseMessagingServiceImpl.getToken(getContext());
             sendPost(login.getText().toString(), password.getText().toString(), fbToken);
         });
         return rootView;

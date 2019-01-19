@@ -1,7 +1,7 @@
 package io.almp.flatmanager;
 
 
-import android.os.Bundle;
+import  android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -117,7 +117,6 @@ public class ShoppingMainFragment extends Fragment {
             AddShoppingItemFragment addShoppingItemFragment = new AddShoppingItemFragment();
             FragmentTransaction fragmentTransaction;
             if (getFragmentManager() != null) {
-                Bundle bundle = new Bundle();
                 fragmentTransaction = getFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.shopping_fragment_container, addShoppingItemFragment);
                 fragmentTransaction.addToBackStack(null);

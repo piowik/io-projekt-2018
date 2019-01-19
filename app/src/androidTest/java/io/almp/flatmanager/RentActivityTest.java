@@ -32,10 +32,10 @@ public class RentActivityTest {
     }
 
     @Test
-    public void testCheckPossibilityToWriteValue() {
-        onView(withId(R.id.rentValueEditText)).perform(typeText("255.50"), closeSoftKeyboard());
-        onView(withId(R.id.sendRentButton)).perform(click());
-    }
+//    public void testCheckPossibilityToWriteValue() {
+//        onView(withId(R.id.rentValueEditText)).perform(typeText("255.50"), closeSoftKeyboard());
+//        onView(withId(R.id.sendRentButton)).perform(click());
+//    }
 
     @After
     public void tearDown() throws Exception {

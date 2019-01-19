@@ -14,6 +14,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import io.almp.flatmanager.rest.ApiUtils;
+import io.almp.flatmanager.service.FirebaseMessagingServiceImpl;
 
 /**
  *  Main class for activity in menu.
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.action_logout) {
 
             SharedPreferences sharedPref = getSharedPreferences("_", MODE_PRIVATE);
-            io.almp.flatmanager.service.FirebaseMessagingService.sendPost(getSharedPreferences("_", MODE_PRIVATE).getLong("user_id", 0L),"empty");
+            FirebaseMessagingServiceImpl.sendPost(getSharedPreferences("_", MODE_PRIVATE).getLong("user_id", 0L),"empty");
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putLong("user_id", 0L);
             editor.putInt("flat_id", -1);

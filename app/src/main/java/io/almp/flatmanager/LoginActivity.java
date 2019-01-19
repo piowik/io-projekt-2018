@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import com.google.firebase.messaging.FirebaseMessaging;
 
-import io.almp.flatmanager.service.FirebaseMessagingService;
+import io.almp.flatmanager.service.FirebaseMessagingServiceImpl;
 
 /**
  * Main class for logging.
@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.commit();
-        Log.e("FCMTOKEN", "TOKEN: " + FirebaseMessagingService.getToken(this));
+        Log.e("FCMTOKEN", "TOKEN: " + FirebaseMessagingServiceImpl.getToken(this));
         FirebaseMessaging.getInstance().subscribeToTopic("global")
                 .addOnCompleteListener(task -> {
                     String msg = "subscribed to global";
