@@ -38,6 +38,9 @@
             android:name=".NoFlatActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ManageFlatActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait" />
 

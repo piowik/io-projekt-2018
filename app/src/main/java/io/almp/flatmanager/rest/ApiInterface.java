@@ -61,6 +61,11 @@ public interface ApiInterface {
     Call<JoinFlatAnswer> joinFlat(@Field("uid") long uid,
                                   @Field("code") String code);
 
+    @POST("/v1/flat/remove_person")
+    @FormUrlEncoded
+    Call<SimpleErrorAnswer> removeFromFlat(@Field("uid") long uid,
+                                  @Field("flat") Integer flat);
+
     @POST("/v1/chat/add_message")
     @FormUrlEncoded
     Call<SimpleErrorAnswer> addMessage(@Field("id") Long id,
