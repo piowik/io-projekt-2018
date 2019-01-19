@@ -85,7 +85,7 @@ public class RentAddFragment extends Fragment implements RentCallbackInterface {
                     EditText userEditText = mRootView.findViewWithTag(u.getId());
                     String strValue = userEditText.getText().toString();
                     if (TextUtils.isEmpty(strValue)) {
-                        Toast.makeText(getContext(), u.getName() + " has empty field.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getContext(), R.string.someone_has_empty_field, Toast.LENGTH_LONG).show();
                         valid = false;
                         break;
                     }
