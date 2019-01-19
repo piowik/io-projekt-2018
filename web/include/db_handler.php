@@ -99,6 +99,18 @@ class DbHandler {
     }
 
 
+	public function removeFromFlat($uid, $flat){
+	  $response = array();
+      
+		$stmt = $this->conn->prepare("UPDATE users SET flat_id = 0 WHERE user_id = ? AND flat_id = ?");
+		$stmt->bind_param("is", $uid, $flat);
+		$stmt->execute();
+	    $stmt->close();
+        $response["error"] = false;
+	  return $response;
+    }
+
+
 
 	public function getRents($flat, $uid) {
 		#$stmt = $this->conn->prepare("SELECT rent_value, per_person, rent_date FROM rent_history WHERE flat_id = ? ORDER BY rent_date DESC");

@@ -60,6 +60,18 @@ $app->post('/flat/join', function() use ($app) {
     echoRespnse(200, $response);
 });
 
+$app->post('/flat/remove_person', function() use ($app) {
+    verifyRequiredParams(array('uid', 'flat'));
+    // reading post params
+    $uid = $app->request->post('uid');
+	$flat = $app->request->post('flat');
+
+    $db = new DbHandler();
+    $response = $db->removeFromFlat($uid, $flat);
+    // echo json response
+    echoRespnse(200, $response);
+});
+
 $app->post('/chat/add_message', function() use ($app) {
 // check for required params
 verifyRequiredParams(array('id', 'token', 'message'));
