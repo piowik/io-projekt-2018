@@ -76,5 +76,7 @@
     <string name="invite_friends">Invite friends</string>
     <string name="add_rent">Add rent</string>
     <string name="extras">Extras</string>
+    <string name="back">Back</string>
+    <string name="manage_flat">Manage flat</string>
 
 </resources>
