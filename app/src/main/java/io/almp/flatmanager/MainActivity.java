@@ -74,14 +74,6 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_invite_friends) {
-            Intent intent = new Intent(this, InvitationActivity.class);
-            startActivity(intent);
-        }
-        if (id == R.id.action_manage_flat) {
-            Intent intent = new Intent(this, ManageFlatActivity.class);
-            startActivity(intent);
-        }
         if (id == R.id.action_logout) {
 
             SharedPreferences sharedPref = getSharedPreferences("_", MODE_PRIVATE);
