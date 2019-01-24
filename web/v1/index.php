@@ -116,7 +116,7 @@ $app->post('/flat/add_duty_history', function() use ($app){
   $duty_name = $app->request->post('duty_name');
   $completion_date = $app->request->post('completion_date');
   $db = new DbHandler();
-  $response = $db->addDutyHistory($flat_id, $user_id, $value, $duty_name, $completion_date);
+  $response = $db->addDutyHistory($flat_id, $duty_name, $user_id, $value, $completion_date);
   echoRespnse(200, $response);
 });
 

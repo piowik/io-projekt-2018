@@ -219,6 +219,9 @@ class DbHandler {
     $stmt = $this->conn->prepare("INSERT INTO dutiesCompletions (flat_id, duty_name, user_id, value, completion_date) values (?, ?, ?, ?, ?)");
     $stmt->bind_param("sssss", $flat_id, $duty_name, $user_id, $value, $completion_date);
     $result = $stmt->execute();
+	$stmt = $this->conn->prepare("DELETE FROM duties WHERE duty_name = ?"); // this is temporary workaround, the whole function should be redesigned
+    $stmt->bind_param("s", $duty_name);
+    $result = $stmt->execute();
 		$stmt->close();
   }
 
