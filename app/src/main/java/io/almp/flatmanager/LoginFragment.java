@@ -103,7 +103,7 @@ public class LoginFragment extends Fragment {
                         LoginFragment.this.getContext().getSharedPreferences("_", MODE_PRIVATE).edit().putInt("flat_id", flatId).apply();
                         String invitationCode = response.body().getInvitationCode();
                         LoginFragment.this.getContext().getSharedPreferences("_", MODE_PRIVATE).edit().putString("invitation_code", invitationCode).apply();
-                        Log.e("Invitation code", invitationCode);
+
                         if (flatId == 0) { // no flat
                             Intent intent = new Intent(getContext(), NoFlatActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
